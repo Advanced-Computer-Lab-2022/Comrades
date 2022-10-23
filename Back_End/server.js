@@ -15,22 +15,8 @@ app.use((req,res , next)=>{
 
 })
 //routes
-
-<<<<<<< Updated upstream
-// app.get('/' , (req, res) =>{
-//     res.json({mssg:'Welcome'})
-//     next()  
-// })
 app.use('/api/courses',myCourseRoutes)
 app.use('/api/users',myUserRoutes)
-=======
-app.get('/' , (req, res) =>{
-     res.json({mssg:'Welcome'})
-     next()  
- })
-//app.use('/api/courses', myCourseRoutes)
-app.use('/api/users', myUserRoutes)
->>>>>>> Stashed changes
 
 //connnect to db
 mongoose.connect(process.env.MONGO_URI)
