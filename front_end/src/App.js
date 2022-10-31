@@ -1,23 +1,53 @@
 // import logo from './logo.svg';
 // import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { Component } from 'react';
+
 
 // pages & components
 import Home from './pages/Home'
-import Navbar from './components/Navbar'
+import Naavbar from './components/Navbar'
+import Admin from './pages/Admin';
+import NewCourse from './pages/NewCourse';
+import GetCourses from './pages/GetCourses';
+import GetCoursesByInstructor from './pages/GetCoursesByInstructo';
+import SearchResults from './pages/SearchResults';
+
 
 function App() {
   return (
     <div className="App">
+
+
     <BrowserRouter>
-      <Navbar />
+      
+     
       <div className="pages">
         <Routes>
+        <Route 
+            path="/sr" 
+            element={<SearchResults />} 
+          />
           <Route 
-            path="/" 
-            element={<Home />} 
+            path="/Admin" 
+            element={<Admin />} 
+          />
+          <Route path="/Home"
+                 element= {<Home/>} />
+          <Route 
+            path="/nc" 
+            element={<NewCourse />} 
+          />
+          <Route 
+            path="/gc" 
+            element={<GetCourses />} 
+          />
+           <Route 
+            path="/gci" 
+            element={<GetCoursesByInstructor />} 
           />
         </Routes>
+        
       </div>
     </BrowserRouter>
   </div>
