@@ -11,6 +11,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import Modal from 'react-bootstrap/Modal';
 import "./admin.css"
 import NavbarBrand from 'react-bootstrap/esm/NavbarBrand';
+import { Link } from 'react-router-dom';
 
 
 
@@ -28,8 +29,9 @@ const NewCourse = () => {
     const [hours, setHours] = useState(Number)
     const [error, setError] = useState(null)
     const [msg, setMsg] = useState(null)
+    const [link, setLink] = useState()
 
-    const newSubtitle = { "Name": name, "Exercises": exercises, "Hours": hours }
+    const newSubtitle = { "Name": name, "Exercises": exercises, "Hours": hours, "Link":link}
 
     const handleSubtitles = (x) => {
     
@@ -122,6 +124,16 @@ const NewCourse = () => {
                     <Form.Control  
                     className="input2" type="number" placeholder="Hours"
                         onChange={(x) => setHours(x.target.value)} value={hours}
+                    />
+                </Form.Group>
+                <Form.Group as={Row}
+                    className="mb-3"
+                    controlId="exampleForm.ControlTextarea1"
+                >
+                    <Form.Label column sm="2">Link</Form.Label>
+                    <Form.Control  
+                    className="input2" type="number" placeholder="Link"
+                        onChange={(x) => setLink(x.target.value)} value={link}
                     />
                 </Form.Group>
                 { subtitles && subtitles.map((sub=>(
