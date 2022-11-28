@@ -144,7 +144,7 @@ const NewCourse = () => {
                 >
                     <Form.Label column sm="2">Subtitle Description</Form.Label>
                     <Form.Control  
-                    className="input2" as="textarea" placeholder="Subtitle_descritption"
+                    className="input2" type="text" placeholder="Subtitle descritption"
                         onChange={(x) => setSubtitle_description(x.target.value)} value={subtitle_description}
                     />
                 </Form.Group>
