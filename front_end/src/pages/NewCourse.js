@@ -30,8 +30,9 @@ const NewCourse = () => {
     const [error, setError] = useState(null)
     const [msg, setMsg] = useState(null)
     const [link, setLink] = useState()
+    const [subtitle_description, setSubtitle_description] = useState()
 
-    const newSubtitle = { "Name": name, "Exercises": exercises, "Hours": hours, "Link":link}
+    const newSubtitle = { "Name": name, "Exercises": exercises, "Hours": hours, "Link":link, "Subtitle_description":subtitle_description}
 
     const handleSubtitles = (x) => {
     
@@ -132,8 +133,19 @@ const NewCourse = () => {
                 >
                     <Form.Label column sm="2">Link</Form.Label>
                     <Form.Control  
-                    className="input2" type="number" placeholder="Link"
+                    className="input2" type="text" placeholder="Link"
                         onChange={(x) => setLink(x.target.value)} value={link}
+                    />
+                </Form.Group>
+
+                <Form.Group as={Row}
+                    className="mb-3"
+                    controlId="exampleForm.ControlTextarea1"
+                >
+                    <Form.Label column sm="2">Subtitle_Description</Form.Label>
+                    <Form.Control  
+                    className="input2" type="text" placeholder="Subtitle_descritption"
+                        onChange={(x) => setSubtitle_description(x.target.value)} value={subtitle_description}
                     />
                 </Form.Group>
                 { subtitles && subtitles.map((sub=>(
