@@ -34,9 +34,14 @@ function App() {
             path="/sr" 
             element={<SearchResults />} 
           />
+
           <Route 
             path="/Admin" 
             element={<Admin />} 
+          />
+          <Route 
+            path="/Contract" 
+            element={<Contract />} 
           />
            <Route 
             path="/Profile" 

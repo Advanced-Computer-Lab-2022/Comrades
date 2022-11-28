@@ -47,6 +47,7 @@ const rateInstructor = async (req, res) => {
 const recieveEmailToChangePassword = async (req, res) => {
 
   let token = generate_token(64);
+//  { Email: "req.params.email" },
 
   let doc = await User.findOneAndUpdate(
     { Email: "omarshokeir2@gmail.com" },
