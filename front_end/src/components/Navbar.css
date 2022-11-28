@@ -1,0 +1,8 @@
+.backGround{
+    background-size: cover;
+    background-repeat: no-repeat;
+    /* height: 100vh; */
+    min-height: 100vh;
+    background-attachment: scroll;
+    background-position: center;
+}
