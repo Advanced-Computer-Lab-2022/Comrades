@@ -56,7 +56,7 @@ const courseSchema = new Schema({
                 type: String,
                 required: true
             },
-            CorrectAnswer: {
+            Number: {
                 type: String,
                 required: true
             },

@@ -31,6 +31,7 @@ const NewCourse = () => {
     const [msg, setMsg] = useState(null)
     const [link, setLink] = useState()
     const [subtitle_description, setSubtitle_description] = useState()
+    const [preview, setPreview] = useState()
 
     const newSubtitle = { "Name": name, "Exercises": exercises, "Hours": hours, "Link":link, "Subtitle_description":subtitle_description}
 
@@ -51,7 +52,7 @@ const NewCourse = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-        const newCourse = { "Title": title, "Subject": subject, "Subtitles": subtitles, "Instructor": instructor, "Price": price, "CreditHours": creditHours, "Discount": discount, "Description": description }
+        const newCourse = { "Title": title, "Subject": subject, "Subtitles": subtitles, "Instructor": instructor, "Price": price, "CreditHours": creditHours, "Discount": discount, "Description": description,"Preview":preview }
       
         const response = await fetch('/api/courses/createCourse', {
             method: 'POST',
@@ -90,6 +91,15 @@ const NewCourse = () => {
                     </Form.Label>
                     <Col sm="10">
                         <Form.Control className="input" type="text" placeholder="Title" onChange={(x) => setTitle(x.target.value)} value={title} />
+                    </Col>
+                </Form.Group>
+
+                <Form.Group as={Row}  className="mb-3" controlId="formPlaintextEmail">
+                    <Form.Label column sm="2">
+                        Preview
+                    </Form.Label>
+                    <Col sm="10">
+                        <Form.Control className="input" type="text" placeholder="Preview" onChange={(x) => setPreview(x.target.value)} value={preview} />
                     </Col>
                 </Form.Group>
 
