@@ -61,7 +61,7 @@ const recieveEmailToChangePassword = async (req, res) => {
 
   let options = {
     from: "acl-comrades-team-2022@outlook.com", // sender address
-    to: req.params.email, // list of receivers
+    to: "omarshokeir2@gmail.com", // list of receivers
     subject: "Comrades Password Reset", // Subject line
     text: "Hello world?", // plain text body
     html: "<h2>Click the following link to change your password</h2><h3>" + token + "</h3>", // html body
