@@ -19,7 +19,7 @@ router.post('/changePassword/:query',changePassword)
 router.post('/createUserByAdmin',createUserByAdmin)
 
 //Recieve Email To Change Password
-router.post('/recieveEmailToChangePassword/:email',recieveEmailToChangePassword)
+router.post('/recieveEmailToChangePassword',recieveEmailToChangePassword)
 
 
 module.exports = router

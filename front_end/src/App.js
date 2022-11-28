@@ -13,6 +13,7 @@ import GetCourses from './pages/GetCourses';
 import GetCoursesByInstructor from './pages/GetCoursesByInstructo';
 import SearchResults from './pages/SearchResults';
 import Profile from './pages/Profile';
+import ChangePassword from './pages/ChangePassword';
 
 
 function App() {
@@ -25,6 +26,10 @@ function App() {
      
       <div className="pages">
         <Routes>
+        <Route 
+            path="/cp" 
+            element={<ChangePassword />} 
+          />
         <Route 
             path="/sr" 
             element={<SearchResults />} 
