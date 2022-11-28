@@ -142,9 +142,9 @@ const NewCourse = () => {
                     className="mb-3"
                     controlId="exampleForm.ControlTextarea1"
                 >
-                    <Form.Label column sm="2">Subtitle_Description</Form.Label>
+                    <Form.Label column sm="2">Subtitle Description</Form.Label>
                     <Form.Control  
-                    className="input2" type="text" placeholder="Subtitle_descritption"
+                    className="input2" as="textarea" placeholder="Subtitle_descritption"
                         onChange={(x) => setSubtitle_description(x.target.value)} value={subtitle_description}
                     />
                 </Form.Group>
@@ -208,7 +208,7 @@ const NewCourse = () => {
 
                 <Form.Group as={Row} className="mb-3" controlId="formPlaintextEmail">
                     <Form.Label column sm="2">
-                        Course Discreption
+                        Course Description
                     </Form.Label>
                     <Col sm="10">
                         <Form.Control  className="desc" as="textarea" rows={3} placeholder="discreption" onChange={(e) => setDescription(e.target.value)} value={description} />
