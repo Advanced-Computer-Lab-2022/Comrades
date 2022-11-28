@@ -132,7 +132,7 @@ const NewCourse = () => {
                 >
                     <Form.Label column sm="2">Link</Form.Label>
                     <Form.Control  
-                    className="input2" type="number" placeholder="Link"
+                    className="input2" type="text" placeholder="Link"
                         onChange={(x) => setLink(x.target.value)} value={link}
                     />
                 </Form.Group>
