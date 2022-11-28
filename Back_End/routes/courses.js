@@ -11,7 +11,8 @@ const {
     filterCoursesBySubjectInstructor,
     filterCoursesByPriceInstructor,
     filterCoursesByPrice,
-    filterCoursesBySubjectAndRating
+    filterCoursesBySubjectAndRating,
+    rateCourse
 
   } = require('../controllers/courseController')
 
@@ -22,6 +23,8 @@ router.get('/test', function routeHandler(req, res) {
   res.send('ok');
 });
 
+//Rate course
+router.post('/rateCourse/:query',rateCourse)
 
 //Post a new Data
 router.post('/createCourse',createCourse)

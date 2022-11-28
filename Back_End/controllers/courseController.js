@@ -2,19 +2,39 @@ const Course = require('../models/course')
 const mongoose = require('mongoose')
 
 
+// Rate course
+const rateCourse = async (req, res) => {
+    let query = JSON.parse(req.params.query);
+
+    const courses = await Course.find({ "_id": query.id }, '_id Rating TotalRatings')
+    let newRating = (courses[0].Rating * courses[0].TotalRatings + query.Rating) / (courses[0].TotalRatings + 1);
+    let newTotalRatings = courses[0].TotalRatings + 1;
+
+
+    let doc = await Course.findOneAndUpdate(
+        { _id: query.id },
+        { Rating: newRating, "TotalRatings": newTotalRatings },
+        {
+            new: true
+        }
+    );
+
+    res.status(200).json(doc)
+}
 
 
 // create a new course
 const createCourse = async (req, res) => {
     const { Title, Subject, Subtitles, Instructor, Price, CreditHours, Discount, Description } = req.body
-    const Rating = 5;
+    const Rating = 0;
+    const TotalRatings = 0;
     var TotalHours = 0;
     for (let i = 0; i < Subtitles.length; i++) {
         TotalHours = TotalHours + Subtitles[i].Hours;
     }
 
     try {
-        const data = await Course.create({ Title, Subject, Subtitles, Instructor, Price, TotalHours, CreditHours, Rating, Discount, Description })
+        const data = await Course.create({ Title, Subject, Subtitles, Instructor, Price, TotalHours, CreditHours, Rating, TotalRatings, Discount, Description })
         res.status(200).json(data)
     }
     catch (error) {
@@ -58,7 +78,7 @@ const filterCoursesByPriceInstructor = async (req, res) => {
                 { "Instructor": "ahmedInstructor" },
                 { "Price": { $lt: parseInt(query) + 1 } }
             ],
-            
+
 
         },
         'Title  Instructor  Price  Subject'
@@ -76,7 +96,7 @@ const filterCoursesBySubjectInstructor = async (req, res) => {
                 { "Instructor": "ahmedInstructor" },
                 { "Subject": query }
             ],
-            
+
 
         },
         'Title  Instructor  Price  Subject'
@@ -177,7 +197,8 @@ module.exports = {
     filterCoursesBySubjectInstructor,
     filterCoursesByPriceInstructor,
     filterCoursesBySubjectAndRating,
-    filterCoursesByPrice
+    filterCoursesByPrice,
+    rateCourse
 
 
 }

@@ -92,11 +92,11 @@ const GetCourses = () => {
         fetchCountriesList()
     }, [])
 
-    const getByPrice = async(x) =>{
-        
+    const getByPrice = async (x) => {
+
         x.preventDefault()
-        const response =  await fetch('/api/courses/filterCoursesByPrice/' + price )
-        const json =  await response.json()
+        const response = await fetch('/api/courses/filterCoursesByPrice/' + price)
+        const json = await response.json()
 
         if (response.ok) {
             setCourses(json)
@@ -105,12 +105,12 @@ const GetCourses = () => {
         }
     }
 
-    const getBySubjectandRating = async(z) =>{
-        
+    const getBySubjectandRating = async (z) => {
+
         z.preventDefault()
 
-        const response =  await fetch('/api/courses/filterCoursesBySubjectAndRating/{"subject":'+ subject + ',"rating":'+ rating+'}' )
-        const json =  await response.json()
+        const response = await fetch('/api/courses/filterCoursesBySubjectAndRating/{"subject":' + subject + ',"rating":' + rating + '}')
+        const json = await response.json()
 
         if (response.ok) {
             setCourses(json)
@@ -156,18 +156,18 @@ const GetCourses = () => {
             <h2>&nbsp; &nbsp;Availale Courses:</h2>
 
             <Form>
-                <Form.Group  className="mb-3" controlId="formPlaintextEmail">
-                    
+                <Form.Group className="mb-3" controlId="formPlaintextEmail">
+
                     <Row sm="10">
-                        <Button   style={{ width: '10rem'}} variant="outline-success" placeholder='Price' onClick={getByPrice}>Filter By Price</Button>
+                        <Button style={{ width: '10rem' }} variant="outline-success" placeholder='Price' onClick={getByPrice}>Filter By Price</Button>
                         <Form.Control className="input" type="text" placeholder="Price" onChange={(x) => setPrice(x.target.value)} value={price} />
                     </Row>
                 </Form.Group>
-          
-                <Form.Group  className="mb-3" controlId="formPlaintextEmail">
-                    
+
+                <Form.Group className="mb-3" controlId="formPlaintextEmail">
+
                     <Row sm="10">
-                        <Button   style={{ width: '10rem'}} variant="outline-success" placeholder='Subject' onClick={getBySubjectandRating}>Filter By Subject and Rating</Button>
+                        <Button style={{ width: '10rem' }} variant="outline-success" placeholder='Subject' onClick={getBySubjectandRating}>Filter By Subject and Rating</Button>
                         <Form.Control className="input" type="text" placeholder="Subject" onChange={(z) => setSubject(z.target.value)} value={subject} />
                         <Form.Control className="input" type="text" placeholder="Rating" onChange={(z) => setRating(z.target.value)} value={rating} />
                     </Row>

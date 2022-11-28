@@ -46,7 +46,11 @@ const courseSchema = new Schema({
     Rating: {
         type: Number,
         required: true
-    }, 
+    },
+    TotalRatings: {
+        type: Number,
+        required: true
+    },
     Discount: {
         type: Number,
         required: true
