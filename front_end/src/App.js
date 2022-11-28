@@ -14,6 +14,7 @@ import GetCoursesByInstructor from './pages/GetCoursesByInstructo';
 import SearchResults from './pages/SearchResults';
 import Profile from './pages/Profile';
 import ChangePassword from './pages/ChangePassword';
+import Contract from './pages/Contract';
 
 
 function App() {
