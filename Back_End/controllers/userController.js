@@ -82,8 +82,11 @@ const recieveEmailToChangePassword = async (req, res) => {
 const changePassword = async (req, res) => {
   let query = JSON.parse(req.params.query);
   const Token = query.Token
+  
   let data;
   data = await User.find({ Email: "omarshokeir2@gmail.com" }, 'Password PasswordResetToken')
+  console.log(Token[64])
+  console.log(data[0].PasswordResetToken)
   if (data[0].PasswordResetToken === Token) {
     console.log(data)
     try {
