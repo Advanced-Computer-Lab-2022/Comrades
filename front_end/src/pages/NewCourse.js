@@ -32,8 +32,16 @@ const NewCourse = () => {
     const [link, setLink] = useState()
     const [subtitle_description, setSubtitle_description] = useState()
     const [preview, setPreview] = useState()
+    const [question, setQuestion] = useState()
+    const [Answer1, setAnswer1] = useState()
+    const [Answer2, setAnswer2] = useState()
+    const [Answer3, setAnswer3] = useState()
+    const [Answer4, setAnswer4] = useState()
+    const [CorrectAnswer, setCorrectAnswer] = useState(Number)
+    
+    
 
-    const newSubtitle = { "Name": name, "Exercises": exercises, "Hours": hours, "Link":link, "Subtitle_description":subtitle_description}
+    const newSubtitle = { "Name": name, "Exercises": exercises, "Hours": hours, "Link":link, "Subtitle_description":subtitle_description,"Question":question,"Answer1":Answer1,"Answer2":Answer2,"Answer3":Answer3,"Answer4":Answer4,"CorrectAnswer":CorrectAnswer}
 
     const handleSubtitles = (x) => {
     
@@ -148,6 +156,9 @@ const NewCourse = () => {
                     />
                 </Form.Group>
 
+                
+                
+
                 <Form.Group as={Row}
                     className="mb-3"
                     controlId="exampleForm.ControlTextarea1"
@@ -158,6 +169,74 @@ const NewCourse = () => {
                         onChange={(x) => setSubtitle_description(x.target.value)} value={subtitle_description}
                     />
                 </Form.Group>
+
+                <Form.Group as={Row}
+                    className="mb-3"
+                    controlId="exampleForm.ControlTextarea1"
+                >
+                    <Form.Label column sm="2">Question</Form.Label>
+                    <Form.Control  
+                    className="input2" type="text" placeholder="Question"
+                        onChange={(x) => setQuestion(x.target.value)} value={question}
+                    />
+                </Form.Group>
+
+                <Form.Group as={Row}
+                    className="mb-3"
+                    controlId="exampleForm.ControlTextarea1"
+                >
+                    <Form.Label column sm="2">Answer1</Form.Label>
+                    <Form.Control  
+                    className="input2" type="text" placeholder="First Answer"
+                        onChange={(x) => setAnswer1(x.target.value)} value={Answer1}
+                    />
+                </Form.Group>
+
+                <Form.Group as={Row}
+                    className="mb-3"
+                    controlId="exampleForm.ControlTextarea1"
+                >
+                    <Form.Label column sm="2">Answer2</Form.Label>
+                    <Form.Control  
+                    className="input2" type="text" placeholder="Second Answer"
+                        onChange={(x) => setAnswer2(x.target.value)} value={Answer2}
+                    />
+                </Form.Group>
+
+                <Form.Group as={Row}
+                    className="mb-3"
+                    controlId="exampleForm.ControlTextarea1"
+                >
+                    <Form.Label column sm="2">Answer3</Form.Label>
+                    <Form.Control  
+                    className="input2" type="text" placeholder="Third Answer"
+                        onChange={(x) => setAnswer3(x.target.value)} value={Answer3}
+                    />
+                </Form.Group>
+
+                <Form.Group as={Row}
+                    className="mb-3"
+                    controlId="exampleForm.ControlTextarea1"
+                >
+                    <Form.Label column sm="2">Answer4</Form.Label>
+                    <Form.Control  
+                    className="input2" type="text" placeholder="Fourth Answer"
+                        onChange={(x) => setAnswer4(x.target.value)} value={Answer4}
+                    />
+                </Form.Group>
+
+                <Form.Group as={Row}
+                    className="mb-3"
+                    controlId="exampleForm.ControlTextarea1"
+                >
+                    <Form.Label column sm="2">Correct Answer</Form.Label>
+                    <Form.Control  
+                    className="input2" type="Number" placeholder="Correct Answer"
+                        onChange={(x) => setCorrectAnswer(x.target.value)} value={CorrectAnswer}
+                    />
+                </Form.Group>
+
+
                 { subtitles && subtitles.map((sub=>(
                     <p key={sub.length}> * Name: {sub.Name}  , Exercises: {sub.Exercises} , Hours: {sub.Hours}</p>
                 )))}
