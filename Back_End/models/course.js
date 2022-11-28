@@ -28,11 +28,11 @@ const courseSchema = new Schema({
                 type: Number,
                 required: true
             },
-            YoutubeLink: {
+            Link: {
                 type: String,
                 required: true
             },
-            ShortDesc: {
+            Subtitle_description: {
                 type: String,
                 required: true
             },
