@@ -13,6 +13,7 @@ import GetCourses from './pages/GetCourses';
 import GetCoursesByInstructor from './pages/GetCoursesByInstructo';
 import SearchResults from './pages/SearchResults';
 import Profile from './pages/Profile';
+import Contract from './pages/Contract';
 
 
 function App() {
@@ -29,9 +30,14 @@ function App() {
             path="/sr" 
             element={<SearchResults />} 
           />
+
           <Route 
             path="/Admin" 
             element={<Admin />} 
+          />
+          <Route 
+            path="/Contract" 
+            element={<Contract />} 
           />
            <Route 
             path="/Profile" 
