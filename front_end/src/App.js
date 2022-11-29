@@ -15,6 +15,7 @@ import SearchResults from './pages/SearchResults';
 import Profile from './pages/Profile';
 import ChangePassword from './pages/ChangePassword';
 import Contract from './pages/Contract';
+import Exam from './pages/exam';
 
 
 function App() {
@@ -61,6 +62,10 @@ function App() {
            <Route 
             path="/gci" 
             element={<GetCoursesByInstructor />} 
+          />
+          <Route 
+            path="/exam" 
+            element={<Exam />} 
           />
         </Routes>
         

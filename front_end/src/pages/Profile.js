@@ -36,9 +36,16 @@ const Profile = () => {
         <br></br>
         <br></br>
         <Button href="/sr" size="sm">  Search</Button>
+<<<<<<< Updated upstream
         <br></br>
         <br></br>
         <Button href="/srat" size="sm">  Show Reviews</Button>
+=======
+
+        <br></br>
+        <br></br>
+        <Button href="/exam" size="sm">Exam</Button>  
+>>>>>>> Stashed changes
   
   
   
