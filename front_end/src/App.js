@@ -15,6 +15,7 @@ import SearchResults from './pages/SearchResults';
 import Profile from './pages/Profile';
 import ChangePassword from './pages/ChangePassword';
 import Contract from './pages/Contract';
+import OneCourse from './pages/OneCourse';
 
 
 function App() {
@@ -27,6 +28,10 @@ function App() {
      
       <div className="pages">
         <Routes>
+        <Route 
+            path="/oc" 
+            element={<OneCourse />} 
+          />
         <Route 
             path="/cp" 
             element={<ChangePassword />} 

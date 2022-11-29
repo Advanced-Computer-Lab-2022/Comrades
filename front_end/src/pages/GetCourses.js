@@ -195,6 +195,10 @@ const GetCourses = () => {
 
 
                         </Card.Text>
+                        <Button onClick={() => window.location.href=`/oc?userId=${course._id}`} size="sm">
+                            view Course
+                            </Button>       
+
                     </Card.Body>
                 </Card>
             )))}

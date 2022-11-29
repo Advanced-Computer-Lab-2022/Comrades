@@ -58,7 +58,7 @@ router.get('/filterCoursesByPriceInstructor/:query' , filterCoursesByPriceInstru
 
 
 // get course id
-router.get('/getCourseById/:id' , getCourseById)
+router.get('/getCourseById/:query' , getCourseById)
 
 // get course id
 router.get('/getCountries' , getCountries)
