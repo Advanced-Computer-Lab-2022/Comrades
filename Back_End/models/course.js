@@ -2,6 +2,10 @@ const mongoose = require('mongoose')
 
 const Schema = mongoose.Schema
 const courseSchema = new Schema({
+    Preview: {
+        type: String,
+        required: true 
+    },
     Title: {
         type: String,
         required: true
@@ -23,7 +27,42 @@ const courseSchema = new Schema({
             Hours: {
                 type: Number,
                 required: true
-            }
+            },
+            Link: {
+                type: String,
+                required: true
+            },
+            Subtitle_description: {
+                type: String,
+                required: true
+            },
+            Question: {
+                type: String,
+                required: true
+            },
+            Answer1: {
+                type: String,
+                required: true
+            },
+            Answer2: {
+                type: String,
+                required: true
+            },
+            Answer3: {
+                type: String,
+                required: true
+            },
+            Answer4: {
+                type: String,
+                required: true
+            },
+            CorrectAnswer: {
+                type: Number,
+                required: true
+            },
+
+
+
 
         }
     ],

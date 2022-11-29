@@ -25,7 +25,7 @@ const rateCourse = async (req, res) => {
 
 // create a new course
 const createCourse = async (req, res) => {
-    const { Title, Subject, Subtitles, Instructor, Price, CreditHours, Discount, Description } = req.body
+    const { Preview, Title, Subject, Subtitles, Instructor, Price, CreditHours, Discount, Description } = req.body
     const Rating = 0;
     const TotalRatings = 0;
     var TotalHours = 0;
@@ -34,7 +34,7 @@ const createCourse = async (req, res) => {
     }
 
     try {
-        const data = await Course.create({ Title, Subject, Subtitles, Instructor, Price, TotalHours, CreditHours, Rating, TotalRatings, Discount, Description })
+        const data = await Course.create({ Preview, Title, Subject, Subtitles, Instructor, Price, TotalHours, CreditHours, Rating, TotalRatings, Discount, Description })
         res.status(200).json(data)
     }
     catch (error) {

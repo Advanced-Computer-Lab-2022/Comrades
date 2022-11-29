@@ -19,6 +19,11 @@ const Profile = () => {
         <br></br>
         <br></br>
 
+        <Button href="/Contract" size="sm">Get Contract</Button>      
+        {/* <Button size="sm"><Link to={{ pathname: "/Contract" }}>View Contract</Link></Button>        */} 
+        <br></br>
+        <br></br>
+
         <Button href="/gc" size="sm">Show Courses</Button>       
         <br></br>
         <br></br>
