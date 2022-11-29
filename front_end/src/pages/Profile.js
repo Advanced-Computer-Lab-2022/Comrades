@@ -31,6 +31,9 @@ const Profile = () => {
         <br></br>
         <br></br>
         <Button href="/sr" size="sm">  Search</Button>
+        <br></br>
+        <br></br>
+        <Button href="/srat" size="sm">  Show Reviews</Button>
   
   
   

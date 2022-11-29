@@ -182,6 +182,31 @@ const filterCoursesBySubjectAndRating = async (req, res) => {
     res.status(200).json(courses)
 }
 
+//add or change discount
+const changeDiscount = async (req, res) => {
+    let query = JSON.parse(req.params.query);
+    let newDiscount = query.Discount;
+    let newDiscountDuration = query.DiscountDuration;
+
+    var someDate = new Date();
+    var numberOfDaysToAdd = newDiscountDuration;
+    var result = someDate.setDate(someDate.getDate() + numberOfDaysToAdd);
+    let today = new Date(result)
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+
+    today = mm + '/' + dd + '/' + yyyy;
+    console.log(today);
+    let doc = await Course.findOneAndUpdate(
+        { _id: query.id },
+        { Discount: newDiscount, DiscountDuration: newDiscountDuration},
+        {
+            new: true
+        }
+    )
+};
+
 
 
 
@@ -198,7 +223,8 @@ module.exports = {
     filterCoursesByPriceInstructor,
     filterCoursesBySubjectAndRating,
     filterCoursesByPrice,
-    rateCourse
+    rateCourse,
+    changeDiscount
 
 
 }

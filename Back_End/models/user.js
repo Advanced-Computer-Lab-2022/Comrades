@@ -32,7 +32,11 @@ const userSchema = new Schema({
         required: true
     },
 
-
+    Biography: {
+        type: String,
+        required: false
+    },
+    
     PasswordResetToken: {
         type: String,
         required: false

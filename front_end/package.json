@@ -1,5 +1,4 @@
 {
-  "proxy": "http://localhost:4000",
   "name": "front_end",
   "version": "0.1.0",
   "private": true,
@@ -8,6 +7,7 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "bootstrap": "^5.2.2",
+    "http-proxy-middleware": "^2.0.6",
     "jquery": "^3.6.1",
     "react": "^18.2.0",
     "react-bootstrap": "^2.5.0",
@@ -24,7 +24,6 @@
   },
   "eslintConfig": {
     "extends": [
-    
       "react-app/jest"
     ]
   },

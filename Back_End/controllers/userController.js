@@ -27,7 +27,7 @@ function generate_token(length) {
 // Rate course
 const rateInstructor = async (req, res) => {
   let query = JSON.parse(req.params.query);
-
+  console.log("HEY")
   const courses = await User.find({ "_id": query.id }, '_id Rating TotalRatings')
   let newRating = (courses[0].Rating * courses[0].TotalRatings + query.Rating) / (courses[0].TotalRatings + 1);
   let newTotalRatings = courses[0].TotalRatings + 1;
@@ -106,6 +106,42 @@ const changePassword = async (req, res) => {
 
 }
 
+// get ratings of an instructor
+const getRatingsInstructor =async(req,res)=>{
+  let query = JSON.parse(req.params.query);
+  console.log(query.query);
+  const users = await User.find({ "Username": query.query }, 'Rating')
+  console.log(users[0])
+  res.status(200).json(users)
+}
+
+//change email
+
+const changeEmail = async (req, res) => {
+  let query = JSON.parse(req.params.query);
+  let newEmail = query.email;
+  let doc = await User.findOneAndUpdate(
+    { _id: query.id },
+    { Email: newEmail},
+    {
+      new: true
+    }
+  )};
+
+  
+const changeBio = async (req, res) => {
+  let query = JSON.parse(req.params.query);
+  let newBiography = query.Biography;
+  let doc = await User.findOneAndUpdate(
+    { _id: query.id },
+    { Biography: newBiography},
+    {
+      new: true
+    }
+  )};
+
+
+
 // create a new user by admin
 const createUserByAdmin = async (req, res) => {
   const { Email, Username, Password, UserType } = req.body
@@ -131,5 +167,8 @@ module.exports = {
   createUserByAdmin,
   recieveEmailToChangePassword,
   rateInstructor,
-  changePassword
+  getRatingsInstructor,
+  changePassword,
+  changeEmail,
+  changeBio
 }
