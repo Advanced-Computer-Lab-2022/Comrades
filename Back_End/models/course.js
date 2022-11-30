@@ -94,6 +94,18 @@ const courseSchema = new Schema({
         type: Number,
         required: true
     },
+    DiscountDuration: {
+        type: Number,
+        required: true
+    },
+    DiscountDuration: {
+        type: Number,
+        required: false
+    },
+    DiscountEndDate:{
+        type:String,
+        required: false
+    },
     Description: {
         type: String,
         required :true

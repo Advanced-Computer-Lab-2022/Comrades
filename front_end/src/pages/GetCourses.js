@@ -108,8 +108,7 @@ const GetCourses = () => {
     const getBySubjectandRating = async (z) => {
 
         z.preventDefault()
-
-        const response = await fetch('/api/courses/filterCoursesBySubjectAndRating/{"subject":' + subject + ',"rating":' + rating + '}')
+        const response = await fetch("/api/courses/filterCoursesBySubjectAndRating/{\"subject\": \"" + subject + " \",\"rating\": \""+ rating + "\"}")
         const json = await response.json()
 
         if (response.ok) {

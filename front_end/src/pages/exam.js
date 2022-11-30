@@ -3,17 +3,17 @@ import NavbarBrand from "react-bootstrap/esm/NavbarBrand";
 import Naavbar from "../components/Navbar"
 
 import Button from 'react-bootstrap/Button';
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import SideNav from "../components/SideNavbar/SideNav";
 
 
 
 
-const Home = () => {
+const Exam = () => {
 
   return (
     <div className="home">
@@ -39,15 +39,28 @@ const Home = () => {
                 </Navbar.Collapse>
             </Container>
         </Navbar>
-        <SideNav/>
+
+        
+
+        <div>
+        <div>question</div>
+        <div>Answer 1</div>
+        <div>Answer 2</div>
+        <div>Answer 3</div>
+        <div>Answer 4</div>
+        </div>
 
 
-    
 
 
 
+        
+
+        
+        
     </div>
+    
   )
 }
 
-export default Home
+export default Exam

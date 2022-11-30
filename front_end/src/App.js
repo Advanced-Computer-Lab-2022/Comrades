@@ -7,7 +7,7 @@ import { Component } from 'react';
 // pages & components
 import Home from './pages/Home'
 import Naavbar from './components/Navbar'
-import Admin from './pages/Admin';
+import NewUser from './pages/NewUser';
 import NewCourse from './pages/NewCourse';
 import GetCourses from './pages/GetCourses';
 import GetCoursesByInstructor from './pages/GetCoursesByInstructo';
@@ -16,6 +16,10 @@ import Profile from './pages/Profile';
 import ChangePassword from './pages/ChangePassword';
 import Contract from './pages/Contract';
 import OneCourse from './pages/OneCourse';
+import Exam from './pages/exam';
+import SideNav from './components/SideNavbar/SideNav';
+import Admin from './pages/Admin/Admin';
+import Instructor from './pages/Instructor/Instructor';
 
 
 function App() {
@@ -28,9 +32,22 @@ function App() {
      
       <div className="pages">
         <Routes>
+          
+        <Route 
+            path="/admin" 
+            element={<Admin />} 
+          />
+          <Route 
+            path="/inst" 
+            element={<Instructor/>} 
+          />
         <Route 
             path="/oc" 
             element={<OneCourse />} 
+          />
+          <Route 
+            path="/sn" 
+            element={<SideNav />} 
           />
         <Route 
             path="/cp" 
@@ -42,8 +59,8 @@ function App() {
           />
 
           <Route 
-            path="/Admin" 
-            element={<Admin />} 
+            path="/nu" 
+            element={<NewUser />} 
           />
           <Route 
             path="/Contract" 
@@ -66,6 +83,10 @@ function App() {
            <Route 
             path="/gci" 
             element={<GetCoursesByInstructor />} 
+          />
+          <Route 
+            path="/exam" 
+            element={<Exam />} 
           />
         </Routes>
         

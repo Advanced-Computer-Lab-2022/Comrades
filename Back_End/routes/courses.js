@@ -12,7 +12,9 @@ const {
     filterCoursesByPriceInstructor,
     filterCoursesByPrice,
     filterCoursesBySubjectAndRating,
-    rateCourse
+    rateCourse,
+    changeDiscount
+    
 
   } = require('../controllers/courseController')
 
@@ -38,6 +40,7 @@ router.get('/search/:query',search)
 //Search
 router.get('/searchInstructor/:query',searchInstructor)
 
+
 //get data
 router.get('/getCourses' , getCourses)
 
@@ -49,6 +52,8 @@ router.get('/filterCoursesBySubjectAndRating/:query' , filterCoursesBySubjectAnd
 
 // get course instructor
 router.get('/getCoursesInstructor' , getCoursesInstructor)
+
+
 
 // filter course instructor by subject
 router.get('/filterCoursesBySubjectInstructor/:query' , filterCoursesBySubjectInstructor)
@@ -62,5 +67,16 @@ router.get('/getCourseById/:query' , getCourseById)
 
 // get course id
 router.get('/getCountries' , getCountries)
+
+//change discount
+router.post('/changeDiscount/:query', changeDiscount)
+
+
+
+
+
+
+
+
 
 module.exports = router
