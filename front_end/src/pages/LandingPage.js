@@ -59,7 +59,7 @@ const LandingPage = () => {
                             </h1>
                             <br></br>
                             <p>
-                                <span className="opacity__80">Compared with 21 vendors, </span><span className="pink__text">Comrades</span> <span className="opacity__80">is recognized for creating
+                                <span className="opacity__80">Compared with 22 vendors, </span><span className="pink__text">Comrades</span> <span className="opacity__80">is recognized for creating
                                     job-ready digital talent and delivering measurable business outcomes.</span>
                             </p>
                             <br></br>
@@ -75,6 +75,56 @@ const LandingPage = () => {
                     </Col>
                 </Row>
             </Container>
+            <br></br>
+            <br></br>
+            <br></br>
+            <Container className="partners__wrapping">
+                <Row>
+                    <Col>
+                        <h1 class="text-center partners__text" >
+                            Trusted by our partners
+                        </h1>
+                    </Col>
+                </Row>
+                <br></br>
+                <br></br>
+                <br></br>
+
+                <Row>
+                    <Col>
+                    <img style={{ width: 100}} src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/768px-Google_%22G%22_Logo.svg.png" />
+                    </Col>
+                    <Col>
+                    <img style={{ width: 100}} src="https://1000logos.net/wp-content/uploads/2021/10/logo-Meta.png" />
+                    </Col>
+                    <Col>
+                    <img style={{ width: 100}} src="https://upload.wikimedia.org/wikipedia/commons/f/f4/BMW_logo_%28gray%29.svg" />
+                    </Col>
+                    <Col>
+                    <img style={{ width: 100}} src="https://logos-world.net/wp-content/uploads/2020/04/Airbus-Logo.png" />
+                    </Col>
+                    <Col>
+                    <img style={{ width: 100}} src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Mercedes-Logo.svg/862px-Mercedes-Logo.svg.png" />
+                    </Col>
+                </Row>
+            </Container>
+            <br></br>
+            <br></br>
+            <br></br>
+            <div style={{backgroundColor: "#212529"}}>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+
+            </div>
+
+
 
 
 

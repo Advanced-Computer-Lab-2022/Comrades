@@ -1,8 +1,6 @@
-p{
+.opacity__80{
     color: white;
     font-weight: 400;
-}
-.opacity__80{
     opacity: 80%;
 }
 .landingPageBG{
@@ -22,4 +20,7 @@ p{
 }
 h1{
     color: white;
+}
+.partners__text{
+    color: black;
 }
