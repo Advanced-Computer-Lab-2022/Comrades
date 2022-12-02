@@ -7,6 +7,7 @@ import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import LanguageIcon from '@mui/icons-material/Language';
 import SideNav from "../components/SideNavbar/SideNav";
 
 import Container from 'react-bootstrap/Container';
@@ -92,19 +93,32 @@ const LandingPage = () => {
 
                 <Row>
                     <Col>
-                        <img style={{ width: 100 }} src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/768px-Google_%22G%22_Logo.svg.png" />
+                        <Container className="d-flex justify-content-center">
+
+                            <img style={{ width: 100 }} src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/768px-Google_%22G%22_Logo.svg.png" />
+                        </Container>
                     </Col>
                     <Col>
-                        <img style={{ width: 100 }} src="https://1000logos.net/wp-content/uploads/2021/10/logo-Meta.png" />
+                        <Container className="d-flex justify-content-center">
+                            <img style={{ width: 100 }} src="https://1000logos.net/wp-content/uploads/2021/10/logo-Meta.png" />
+                        </Container>
                     </Col>
                     <Col>
-                        <img style={{ width: 100 }} src="https://upload.wikimedia.org/wikipedia/commons/f/f4/BMW_logo_%28gray%29.svg" />
+                        <Container className="d-flex justify-content-center">
+                            <img style={{ width: 100 }} src="https://upload.wikimedia.org/wikipedia/commons/f/f4/BMW_logo_%28gray%29.svg" />
+                        </Container>
+
                     </Col>
                     <Col>
-                        <img style={{ width: 100 }} src="https://logos-world.net/wp-content/uploads/2020/04/Airbus-Logo.png" />
+                        <Container className="d-flex justify-content-center">
+                            <img style={{ width: 100 }} src="https://logos-world.net/wp-content/uploads/2020/04/Airbus-Logo.png" />
+                        </Container>
+
                     </Col>
                     <Col>
-                        <img style={{ width: 100 }} src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Mercedes-Logo.svg/862px-Mercedes-Logo.svg.png" />
+                        <Container className="d-flex justify-content-center">
+                            <img style={{ width: 100 }} src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Mercedes-Logo.svg/862px-Mercedes-Logo.svg.png" />
+                        </Container>
                     </Col>
                 </Row>
             </Container>
@@ -120,7 +134,9 @@ const LandingPage = () => {
                         <Col>Careers</Col>
                         <Col>Terms</Col>
                         <Col></Col>
-                        <Col>ENGLISH</Col>
+                        <Col>
+                            <LanguageIcon />  ENGLISH
+                        </Col>
                     </Row>
                     <Row>
                         <Col>Teach on Comrades</Col>
