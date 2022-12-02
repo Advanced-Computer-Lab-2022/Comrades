@@ -111,6 +111,7 @@ const NewCourse = () => {
                     </Col>
                 </Form.Group>
 
+                <hr></hr>
 
                 <h4>Add Subtitle</h4>
 

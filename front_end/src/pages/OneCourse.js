@@ -10,6 +10,7 @@ import { useEffect, useState } from "react"
 const OneCourse = () => {
     const params = new URLSearchParams(window.location.search);
     const userId = params.get('userId');
+    const x = params.get('x');
     console.log(userId);
     const [course, setCourse] = useState([]);
 
@@ -44,8 +45,12 @@ const OneCourse = () => {
 
 
             {/* {course.Subtitles} */}
-            {course.Price}
+            Price: {course.Price}
             <br></br>
+
+            DiscountedPrice: {course.DiscountedPrice}
+            <br></br>
+
 
             {course.TotalHours}
             <br></br>
@@ -57,7 +62,12 @@ const OneCourse = () => {
             <br></br>
 
             {course.Discount}
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
 
+            {x}
 
         </p></> 
            

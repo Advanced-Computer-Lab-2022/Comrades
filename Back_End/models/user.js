@@ -41,14 +41,6 @@ const userSchema = new Schema({
         type: String,
         required: false
     },
-
-    TokenCreationDate: {
-        type: Date,
-        required: false
-    }
-
-
-
 }, { timestamps: true })
 
 module.exports = mongoose.model('User', userSchema)

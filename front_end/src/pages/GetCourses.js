@@ -46,8 +46,9 @@ const GetCourses = () => {
     const renderSubtitles = (idx, cid) => {
 
         if (subtitles[idx].id === cid) {
-            return (
+            return (<>
                 <p>{idx + "  " + cid}</p>
+                </>
             )
         }
     }

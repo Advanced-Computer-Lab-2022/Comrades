@@ -21,78 +21,86 @@ import SideNav from './components/SideNavbar/SideNav';
 import Admin from './pages/Admin/Admin';
 import Instructor from './pages/Instructor/Instructor';
 
+import LandingPage from './pages/LandingPage'
+
+
 
 function App() {
   return (
     <div className="App">
 
 
-    <BrowserRouter>
-      
-     
-      <div className="pages">
-        <Routes>
-          
-        <Route 
-            path="/admin" 
-            element={<Admin />} 
-          />
-          <Route 
-            path="/inst" 
-            element={<Instructor/>} 
-          />
-        <Route 
-            path="/oc" 
-            element={<OneCourse />} 
-          />
-          <Route 
-            path="/sn" 
-            element={<SideNav />} 
-          />
-        <Route 
-            path="/cp" 
-            element={<ChangePassword />} 
-          />
-        <Route 
-            path="/sr" 
-            element={<SearchResults />} 
-          />
+      <BrowserRouter>
 
-          <Route 
-            path="/nu" 
-            element={<NewUser />} 
-          />
-          <Route 
-            path="/Contract" 
-            element={<Contract />} 
-          />
-           <Route 
-            path="/Profile" 
-            element={<Profile />} 
-          />
-          <Route path="/"
-                 element= {<Home/>} />
-          <Route 
-            path="/nc" 
-            element={<NewCourse />} 
-          />
-          <Route 
-            path="/gc" 
-            element={<GetCourses />} 
-          />
-           <Route 
-            path="/gci" 
-            element={<GetCoursesByInstructor />} 
-          />
-          <Route 
-            path="/exam" 
-            element={<Exam />} 
-          />
-        </Routes>
-        
-      </div>
-    </BrowserRouter>
-  </div>
+
+        <div className="pages">
+          <Routes>
+
+            <Route
+              path="/admin"
+              element={<Admin />}
+            />
+            <Route
+              path="/inst"
+              element={<Instructor />}
+            />
+            <Route
+              path="/oc"
+              element={<OneCourse />}
+            />
+            <Route
+              path="/sn"
+              element={<SideNav />}
+            />
+            <Route
+              path="/cp"
+              element={<ChangePassword />}
+            />
+            <Route
+              path="/sr"
+              element={<SearchResults />}
+            />
+
+            <Route
+              path="/nu"
+              element={<NewUser />}
+            />
+            <Route
+              path="/Contract"
+              element={<Contract />}
+            />
+            <Route
+              path="/Profile"
+              element={<Profile />}
+            />
+            <Route path="/"
+              element={<Home />} />
+              
+            <Route path="/lp"
+              element={<LandingPage />} />
+
+
+            <Route
+              path="/nc"
+              element={<NewCourse />}
+            />
+            <Route
+              path="/gc"
+              element={<GetCourses />}
+            />
+            <Route
+              path="/gci"
+              element={<GetCoursesByInstructor />}
+            />
+            <Route
+              path="/exam"
+              element={<Exam />}
+            />
+          </Routes>
+
+        </div>
+      </BrowserRouter>
+    </div>
   );
 }
 

@@ -13,7 +13,7 @@ const {
     filterCoursesByPrice,
     filterCoursesBySubjectAndRating,
     rateCourse,
-    changeDiscount
+    changeDiscount,
     
 
   } = require('../controllers/courseController')

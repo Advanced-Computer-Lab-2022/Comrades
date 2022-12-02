@@ -69,25 +69,6 @@ const getCourses = async (req, res) => {
     res.status(200).json(courses)
 }
 
-
-//filter courses of an instructor by Price
-const filterCoursesByPriceInstructor = async (req, res) => {
-    let query = req.params.query;
-    console.log(query.length);
-    const courses = await Course.find(
-        {
-            $and: [
-                { "Instructor": "ahmedInstructor" },
-                { "Price": { $lt: parseInt(query) + 1 } }
-            ],
-
-
-        },
-        'Title  Instructor  Price DiscountedPrice Subject'
-    );
-    res.status(200).json(courses)
-}
-
 //filter courses of an instructor by Subject
 const filterCoursesBySubjectInstructor = async (req, res) => {
     let query = req.params.query;
@@ -98,8 +79,6 @@ const filterCoursesBySubjectInstructor = async (req, res) => {
                 { "Instructor": "ahmedInstructor" },
                 { "Subject": query }
             ],
-
-
         },
         'Title  Instructor  Price DiscountedPrice Subject'
     );
@@ -150,6 +129,7 @@ const getCourseById = async (req, res) => {
     res.status(200).json(courses)
 }
 
+
 const getCountries = async (req, res) => {
     let ret = [];
     for (let i = 0; i < 243; i++) {
@@ -157,11 +137,29 @@ const getCountries = async (req, res) => {
     }
     res.status(200).json(ret)
 }
+
+//filter courses of an instructor by Price
+const filterCoursesByPriceInstructor = async (req, res) => {
+    let query = req.params.query;
+    console.log(query.length);
+    const courses = await Course.find(
+        {
+            $and: [
+                { "Instructor": "ahmedInstructor" },
+                { "DiscountedPrice": { $lte: parseInt(query) } }
+            ],
+
+
+        },
+        'Title  Instructor  Price DiscountedPrice Subject'
+    );
+    res.status(200).json(courses)
+}
 //filter courses by Price
 const filterCoursesByPrice = async (req, res) => {
     let query = req.params.query;
     console.log(query.length);
-    const courses = await Course.find({ "Price": { $lte: query } }, 'Title  Subject  Subtitles  Price DiscountedPrice TotalHours  Rating  CreditHours  Discount');
+    const courses = await Course.find({ "DiscountedPrice": { $lte: query } }, 'Title  Subject  Subtitles  Price DiscountedPrice TotalHours  Rating  CreditHours  Discount');
 
     res.status(200).json(courses)
 }
@@ -228,9 +226,7 @@ module.exports = {
     filterCoursesBySubjectAndRating,
     filterCoursesByPrice,
     rateCourse,
-    changeDiscount
-
-
+    changeDiscount,
 }
 
 
