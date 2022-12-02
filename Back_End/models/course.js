@@ -24,29 +24,29 @@ const courseSchema = new Schema({
                 {
                     Question: {
                         type: String,
-                        required: true
+                        required: false
                     },
                     Answer1: {
                         type: String,
-                        required: true
+                        required: false
                     },
                     Answer2: {
                         type: String,
-                        required: true
+                        required: false
                     },
                     Answer3: {
                         type: String,
-                        required: true
+                        required: false
                     },
                     Answer4: {
                         type: String,
-                        required: true
+                        required: false
                     },
                     CorrectAnswer: {
                         type: Number,
-                        required: true
+                        required: false
                     },
-                }
+                },
             ],
             Hours: {
                 type: Number,

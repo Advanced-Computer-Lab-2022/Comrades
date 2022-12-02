@@ -1,11 +1,30 @@
-body{
+.opacity__80{
+    color: white;
+    font-weight: 400;
+    opacity: 80%;
+}
+.landingPageBG{
     background-color: #212529;
+    height: 100vh;
+}
+.landpage__login__btn{
+    margin-left: 20px;
+}
+.landingpage__story{
+    width: 90%;
+}
+.pink__text{
+    color: #9295E3;
+    opacity: 100%;
+    font-weight: bold;
 }
 h1{
     color: white;
 }
-p{
-    color: #157347;
-    opacity: 100%;
-    font-weight: 400;
+.partners__text{
+    color: black;
+}
+
+.footer__wrapper{
+    color: white;
 }
