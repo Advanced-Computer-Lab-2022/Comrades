@@ -17,7 +17,6 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
-
     UserType: {
         type: String,
         required: true
@@ -36,7 +35,7 @@ const userSchema = new Schema({
         type: String,
         required: false
     },
-    
+
     PasswordResetToken: {
         type: String,
         required: false
