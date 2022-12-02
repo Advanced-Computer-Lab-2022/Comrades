@@ -79,6 +79,8 @@ const LandingPage = () => {
             <br></br>
             <br></br>
             <br></br>
+            <br></br>
+            <br></br>
             <Container className="partners__wrapping">
                 <Row>
                     <Col>
@@ -122,6 +124,8 @@ const LandingPage = () => {
                     </Col>
                 </Row>
             </Container>
+            <br></br>
+            <br></br>
             <br></br>
             <br></br>
             <br></br>
