@@ -25,7 +25,7 @@ const NewCourse = () => {
     const [discount, setDiscount] = useState(Number)
     const [description, setDescription] = useState('')
     const [name, setName] = useState('')
-    const [exercises, setExercises] = useState('')
+    const [exercises, setExercises] = useState([])
     const [hours, setHours] = useState(Number)
     const [error, setError] = useState(null)
     const [msg, setMsg] = useState(null)
@@ -51,7 +51,7 @@ const NewCourse = () => {
         else(
             setSubtitles(current => [... current, newSubtitle])
         )
-
+        setExercises([]);
 
     };
 
@@ -88,7 +88,7 @@ const NewCourse = () => {
         
         
         const handlexercise = async(e) => {
-            if (Exercise.length === 0){
+            if (exercises.length === 0){
                 setExercises([Exercise])
             }
             else(
@@ -249,18 +249,23 @@ const NewCourse = () => {
                 <Button variant="primary" onClick={handlexercise}  >
                     Save Exercise
                 </Button>
+                { exercises && exercises.map((sub=>(
+                    <p key={sub.length}> * Question: {sub.Question}</p>
+                )))}
+
                 <hr></hr>
                 <Button variant="primary" onClick={handleSubtitles}  >
                     Save Changes
                 </Button>
 
                 { subtitles && subtitles.map((sub=>(
-                    <p key={sub.length}> * Name: {sub.Name}  , Exercises: {sub.Exercises} , Hours: {sub.Hours}</p>
+                    <p key={sub.length}> * Name: {sub.Name}</p>
                 )))}
-
-               
-                
                 <hr></hr>
+
+
+
+
 
 
 

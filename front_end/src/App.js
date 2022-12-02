@@ -73,10 +73,10 @@ function App() {
               path="/Profile"
               element={<Profile />}
             />
-            <Route path="/"
+            <Route path="/home"
               element={<Home />} />
               
-            <Route path="/lp"
+            <Route path="/"
               element={<LandingPage />} />
 
 
