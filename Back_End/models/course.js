@@ -109,7 +109,20 @@ const courseSchema = new Schema({
     Description: {
         type: String,
         required: true
+    },
+    Reviews: [
+        {Reviewer: {
+            type: String,
+            required: true
+        },
+        Review: {
+            type: String,
+            required: true
+        },
     }
+]
+       
+
 
 }, { timestamps: true })
 

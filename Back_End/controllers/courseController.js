@@ -88,7 +88,7 @@ const filterCoursesBySubjectInstructor = async (req, res) => {
 
 //get courses of an instructor
 const getCoursesInstructor = async (req, res) => {
-    const courses = await Course.find({ "Instructor": "ahmedInstructor" }, 'Title Instructor Price Subject')
+    const courses = await Course.find({ "Instructor": "ahmedInstructor" }, 'Title Instructor Price Subject Rating')
     res.status(200).json(courses)
 }
 
@@ -155,6 +155,8 @@ const filterCoursesByPriceInstructor = async (req, res) => {
     );
     res.status(200).json(courses)
 }
+
+
 //filter courses by Price
 const filterCoursesByPrice = async (req, res) => {
     let query = req.params.query;
@@ -227,6 +229,7 @@ module.exports = {
     filterCoursesByPrice,
     rateCourse,
     changeDiscount,
+ 
 }
 
 

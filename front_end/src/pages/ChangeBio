@@ -7,7 +7,7 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
 
-const ChangePassword = () => {
+const ChangeBio = () => {
 
     const [token, setToken] = useState('')
     const [password, setPassword] = useState('')
@@ -62,13 +62,8 @@ const ChangePassword = () => {
     <><Naavbar />
 
     <br></br>
-    <Col sm="10">
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <Button type="submit" variant="outline-success" onClick={handleSubmit2}>Recive Token</Button>
+    <Button type="submit" variant="outline-success" onClick={handleSubmit2}>Recive Token</Button>
 
-
-                    </Col>
 
     <br></br>
 
@@ -106,4 +101,4 @@ const ChangePassword = () => {
 }
 
 
-export default ChangePassword;
+export default ChangeBio;

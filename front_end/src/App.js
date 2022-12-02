@@ -20,7 +20,8 @@ import Exam from './pages/exam';
 import SideNav from './components/SideNavbar/SideNav';
 import Admin from './pages/Admin/Admin';
 import Instructor from './pages/Instructor/Instructor';
-
+import ChangeBio from './pages/ChangeBio';
+import ChangeEmail from './pages/ChangeEmail';
 import LandingPage from './pages/LandingPage'
 
 
@@ -57,6 +58,14 @@ function App() {
               element={<ChangePassword />}
             />
             <Route
+              path="/ce"
+              element={<ChangeEmail />}
+            />
+            <Route
+              path="/cb"
+              element={<ChangeBio/>}
+            />
+            <Route
               path="/sr"
               element={<SearchResults />}
             />
@@ -89,7 +98,7 @@ function App() {
               element={<GetCourses />}
             />
             <Route
-              path="/gci"
+              path="/ilp"
               element={<GetCoursesByInstructor />}
             />
             <Route

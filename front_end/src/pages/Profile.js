@@ -28,7 +28,7 @@ const Profile = () => {
         <br></br>
         <br></br>
 
-        <Button href="/gci" size="sm"> Get Courses by Instructor</Button>
+        <Button href="/ilp" size="sm"> Instructor Landing Page</Button>
         <br></br>
         <br></br>
 
