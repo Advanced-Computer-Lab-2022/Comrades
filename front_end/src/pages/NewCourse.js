@@ -32,7 +32,7 @@ const NewCourse = () => {
     const [link, setLink] = useState()
     const [subtitle_description, setSubtitle_description] = useState()
     const [preview, setPreview] = useState()
-    const [question, setQuestion] = useState()
+    const [Question, setQuestion] = useState()
     const [Answer1, setAnswer1] = useState()
     const [Answer2, setAnswer2] = useState()
     const [Answer3, setAnswer3] = useState()
@@ -41,7 +41,7 @@ const NewCourse = () => {
     
     
 
-    const newSubtitle = { "Name": name, "Exercises": exercises, "Hours": hours, "Link":link, "Subtitle_description":subtitle_description,"Question":question,"Answer1":Answer1,"Answer2":Answer2,"Answer3":Answer3,"Answer4":Answer4,"CorrectAnswer":CorrectAnswer}
+    const newSubtitle = { "Name": name, "Exercises": exercises, "Hours": hours, "Link":link, "Subtitle_description":subtitle_description}
 
     const handleSubtitles = (x) => {
     
@@ -84,6 +84,20 @@ const NewCourse = () => {
 
 
     };
+        const Exercise = {"Question": Question, "Answer1":Answer1, "Answer2": Answer2, "Answer3": Answer3, "Answer4": Answer4, "Correct Answer": CorrectAnswer}
+        
+        
+        const handlexercise = async(e) => {
+            if (Exercise.length === 0){
+                setExercises([Exercise])
+            }
+            else(
+                setExercises(current => [... current, Exercise])
+            )
+        }
+
+
+    
 
 
 
@@ -127,15 +141,7 @@ const NewCourse = () => {
                         autoFocus onChange={(x) => setName(x.target.value)} value={name}
                     />
                 </Form.Group>
-                <Form.Group as={Row}
-                    className="mb-3"
-                    controlId="exampleForm.ControlTextarea1"
-                >
-                    <Form.Label column sm="2">Exercise</Form.Label>
-                    <Form.Control  className="input2" type="Exercise" placeholder="Exercise"
-                        onChange={(x) => setExercises(x.target.value)} value={exercises}
-                    />
-                </Form.Group>
+                
                 <Form.Group as={Row}
                     className="mb-3"
                     controlId="exampleForm.ControlTextarea1"
@@ -170,7 +176,11 @@ const NewCourse = () => {
                         onChange={(x) => setSubtitle_description(x.target.value)} value={subtitle_description}
                     />
                 </Form.Group>
-
+                
+                <hr></hr>
+                <h4>
+                    Add Exercise
+                </h4>
                 <Form.Group as={Row}
                     className="mb-3"
                     controlId="exampleForm.ControlTextarea1"
@@ -178,7 +188,7 @@ const NewCourse = () => {
                     <Form.Label column sm="2">Question</Form.Label>
                     <Form.Control  
                     className="input2" type="text" placeholder="Question"
-                        onChange={(x) => setQuestion(x.target.value)} value={question}
+                        onChange={(x) => setQuestion(x.target.value)} value={Question}
                     />
                 </Form.Group>
 
@@ -236,15 +246,20 @@ const NewCourse = () => {
                         onChange={(x) => setCorrectAnswer(x.target.value)} value={CorrectAnswer}
                     />
                 </Form.Group>
-
+                <Button variant="primary" onClick={handlexercise}  >
+                    Save Exercise
+                </Button>
+                <hr></hr>
+                <Button variant="primary" onClick={handleSubtitles}  >
+                    Save Changes
+                </Button>
 
                 { subtitles && subtitles.map((sub=>(
                     <p key={sub.length}> * Name: {sub.Name}  , Exercises: {sub.Exercises} , Hours: {sub.Hours}</p>
                 )))}
 
-                <Button variant="primary" onClick={handleSubtitles}  >
-                    Save Changes
-                </Button>
+               
+                
                 <hr></hr>
 
 
