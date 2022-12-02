@@ -29,15 +29,17 @@ const createCourse = async (req, res) => {
     const Rating = 0;
     const TotalRatings = 0;
     var TotalHours = 0;
+    var DiscountedPrice = Price*(1- Discount/100);
     for (let i = 0; i < Subtitles.length; i++) {
         TotalHours = TotalHours + Subtitles[i].Hours;
     }
-
+console.log(DiscountedPrice)
     try {
-        const data = await Course.create({ Preview, Title, Subject, Subtitles, Instructor, Price, TotalHours, CreditHours, Rating, TotalRatings, Discount, Description })
+        const data = await Course.create({ Preview, Title, Subject, Subtitles, Instructor, Price, DiscountedPrice, TotalHours, CreditHours, Rating, TotalRatings, Discount, Description })
         res.status(200).json(data)
     }
     catch (error) {
+        console.log(error.message);
         res.status(400).json({ error: error.message })
     }
 }
@@ -62,7 +64,7 @@ const getCurrency = async (req, res) => {
 }
 // get all courses
 const getCourses = async (req, res) => {
-    const courses = await Course.find({}, 'Title  Subject  Subtitles  Price  TotalHours  Rating  CreditHours  Discount');
+    const courses = await Course.find({}, 'Title  Subject  Subtitles  Price  DiscountedPrice  TotalHours  Rating  CreditHours  Discount');
 
     res.status(200).json(courses)
 }
@@ -81,7 +83,7 @@ const filterCoursesByPriceInstructor = async (req, res) => {
 
 
         },
-        'Title  Instructor  Price  Subject'
+        'Title  Instructor  Price DiscountedPrice Subject'
     );
     res.status(200).json(courses)
 }
@@ -99,7 +101,7 @@ const filterCoursesBySubjectInstructor = async (req, res) => {
 
 
         },
-        'Title  Instructor  Price  Subject'
+        'Title  Instructor  Price DiscountedPrice Subject'
     );
     res.status(200).json(courses)
 }
@@ -159,7 +161,7 @@ const getCountries = async (req, res) => {
 const filterCoursesByPrice = async (req, res) => {
     let query = req.params.query;
     console.log(query.length);
-    const courses = await Course.find({ "Price": { $lt: query + 1 } }, 'Title  Subject  Subtitles  Price  TotalHours  Rating  CreditHours  Discount');
+    const courses = await Course.find({ "Price": { $lte: query } }, 'Title  Subject  Subtitles  Price DiscountedPrice TotalHours  Rating  CreditHours  Discount');
 
     res.status(200).json(courses)
 }
@@ -168,17 +170,19 @@ const filterCoursesByPrice = async (req, res) => {
 const filterCoursesBySubjectAndRating = async (req, res) => {
     let query = JSON.parse(req.params.query);
     let subject = query.subject;
+    subject = subject.replace(/\s/g, '');
     let rating = query.rating;
+    console.log(rating);
     const courses = await Course.find(
         {
             $and: [
                 { "Subject": subject },
-                { "Rating": { $gt: rating + 1 } }
+                { "Rating": { $gte: rating } }
             ]
         },
         'Title  Subject  Subtitles  Price  TotalHours  Rating  CreditHours  Discount');
 
-
+        console.log(courses);
     res.status(200).json(courses)
 }
 

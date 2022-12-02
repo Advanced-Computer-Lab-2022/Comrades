@@ -23,7 +23,7 @@ const GetCourses = () => {
 
     const [price, setPrice] = useState('');
     const [subject, setSubject] = useState('');
-    const [rating, setRating] = useState('');
+    const [rating, setRating] = useState(Number);
 
 
     const handleSubmit = async (e) => {
@@ -108,7 +108,7 @@ const GetCourses = () => {
     const getBySubjectandRating = async (z) => {
 
         z.preventDefault()
-        const response = await fetch("/api/courses/filterCoursesBySubjectAndRating/{\"subject\": \"" + subject + " \",\"rating\": \""+ rating + "\"}")
+        const response = await fetch("/api/courses/filterCoursesBySubjectAndRating/{\"subject\": \"" + subject + "\",\"rating\": \""+ rating + "\"}")
         const json = await response.json()
 
         if (response.ok) {
@@ -181,7 +181,9 @@ const GetCourses = () => {
                     <Card.Body>
                         {/* <Card.Title>Special title treatment</Card.Title> */}
                         <Card.Text>
-                            Price: {code}   {course.Price * rate * (1 - course.Discount / 100)} ({course.Discount}%)
+                            Original Price: {code}   {course.Price*rate}
+                            <br></br>
+                            Discounted Price: {code}   {course.DiscountedPrice*rate} ({course.Discount}%)
                             <br></br>
                             Total Hours: {course.TotalHours}
                             <br></br>

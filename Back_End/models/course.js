@@ -4,7 +4,7 @@ const Schema = mongoose.Schema
 const courseSchema = new Schema({
     Preview: {
         type: String,
-        required: true 
+        required: true
     },
     Title: {
         type: String,
@@ -20,10 +20,34 @@ const courseSchema = new Schema({
                 type: String,
                 required: true
             },
-            Exercises: {
-                type: String,
-                required: true
-            },
+            Exercises: [
+                {
+                    Question: {
+                        type: String,
+                        required: true
+                    },
+                    Answer1: {
+                        type: String,
+                        required: true
+                    },
+                    Answer2: {
+                        type: String,
+                        required: true
+                    },
+                    Answer3: {
+                        type: String,
+                        required: true
+                    },
+                    Answer4: {
+                        type: String,
+                        required: true
+                    },
+                    CorrectAnswer: {
+                        type: Number,
+                        required: true
+                    },
+                }
+            ],
             Hours: {
                 type: Number,
                 required: true
@@ -34,30 +58,6 @@ const courseSchema = new Schema({
             },
             Subtitle_description: {
                 type: String,
-                required: true
-            },
-            Question: {
-                type: String,
-                required: true
-            },
-            Answer1: {
-                type: String,
-                required: true
-            },
-            Answer2: {
-                type: String,
-                required: true
-            },
-            Answer3: {
-                type: String,
-                required: true
-            },
-            Answer4: {
-                type: String,
-                required: true
-            },
-            CorrectAnswer: {
-                type: Number,
                 required: true
             },
 
@@ -73,6 +73,10 @@ const courseSchema = new Schema({
     Price: {
         type: Number,
         required: true
+    },
+    DiscountedPrice: {
+        type: Number,
+        required: true,
     },
     TotalHours: {
         type: Number,
@@ -96,19 +100,15 @@ const courseSchema = new Schema({
     },
     DiscountDuration: {
         type: Number,
-        required: true
-    },
-    DiscountDuration: {
-        type: Number,
         required: false
     },
-    DiscountEndDate:{
-        type:String,
+    DiscountEndDate: {
+        type: String,
         required: false
     },
     Description: {
         type: String,
-        required :true
+        required: true
     }
 
 }, { timestamps: true })
