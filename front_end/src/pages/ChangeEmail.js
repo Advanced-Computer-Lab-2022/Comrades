@@ -44,7 +44,7 @@ const ChangeEmail = () => {
           <Form.Label column sm="2">
             Enter New Email
           </Form.Label>
-          <Col sm="10">
+          <Col sm="2">
             <Form.Control
               className="input"
               type="text"
@@ -55,8 +55,7 @@ const ChangeEmail = () => {
           </Col>
         </Form.Group>
         <Col sm="10">
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <Button
             type="submit"
             variant="outline-success"

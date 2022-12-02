@@ -63,7 +63,7 @@ function App() {
             />
             <Route
               path="/cb"
-              element={<ChangeBio/>}
+              element={<ChangeBio />}
             />
             <Route
               path="/sr"
