@@ -89,13 +89,15 @@ const GetCoursesByInstructor = (prop) => {
       <Card style={{ width: "40rem" }}>
             <Card.Img variant="top"style={{ width: '8rem' }} src="https://img-c.udemycdn.com/user/200_H/12613608_fae6.jpg" />
             <Card.Body>
-              <Card.Title>ahmedInstructor@gmail.com</Card.Title>
+              <Card.Title>ahmedInstructor@gmail.com &nbsp;  &nbsp;
+              <a href="/c" class="btn btn-primary">Edit email</a>
+              </Card.Title>
               <Card.Text>
               The night is dark and full of terrors. The winds of Winter.
                What is dead may never die. And now his watch is ended. The battle of the redgrass field. Unbowed
                , Unbent, Unbroken. All men must die.
                <br></br>
-               <Button variant="primary">Edit Bio</Button>
+               <a href="/cb" class="btn btn-primary">Edit Bio</a>
               </Card.Text>
             </Card.Body>
           </Card>
@@ -122,6 +124,8 @@ const GetCoursesByInstructor = (prop) => {
                   {mycourse.Review}
                 </Card.Text>
                 <Button variant="primary">View Details</Button>
+                <a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                <a href="/cb" class="btn btn-primary">Add Promotion</a>
               </Card.Body>
             </Card>
           </>
