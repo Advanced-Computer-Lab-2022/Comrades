@@ -226,7 +226,7 @@ const GetCourses = () => {
                     </Col>
                     <Col xs={9}>
                         {courses && courses.map((course => (
-                            <Container className="course__card" key={course._id} onClick={() => window.location.href = `/oc?userId=${course._id}`}>
+                            <Container className="course__card" key={course._id} onClick={() => window.location.href = `/vc?userId=${course._id}`}>
                                 <Row>
                                     <Col sm={3}>
                                         <img style={{ width: "160px" }} src="https://img.youtube.com/vi/rfscVS0vtbw/0.jpg"></img>

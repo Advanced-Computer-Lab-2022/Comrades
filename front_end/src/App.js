@@ -15,7 +15,7 @@ import SearchResults from './pages/SearchResults';
 import Profile from './pages/Profile';
 import ChangePassword from './pages/ChangePassword';
 import Contract from './pages/Contract';
-import OneCourse from './pages/OneCourse';
+import ViewCourse from './pages/ViewCourse';
 import Exam from './pages/exam';
 import SideNav from './components/SideNavbar/SideNav';
 import Admin from './pages/Admin/Admin';
@@ -46,8 +46,8 @@ function App() {
               element={<Instructor />}
             />
             <Route
-              path="/oc"
-              element={<OneCourse />}
+              path="/vc"
+              element={<ViewCourse />}
             />
             <Route
               path="/sn"

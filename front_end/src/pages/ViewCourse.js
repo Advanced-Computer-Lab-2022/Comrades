@@ -19,7 +19,7 @@ import "./Courses.css"
 
 
 
-const OneCourse = () => {
+const ViewCourse = () => {
     const params = new URLSearchParams(window.location.search);
     const userId = params.get('userId');
     const x = params.get('x');
@@ -155,4 +155,4 @@ const OneCourse = () => {
 }
 
 
-export default OneCourse
+export default ViewCourse
