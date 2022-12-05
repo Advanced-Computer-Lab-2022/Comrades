@@ -24,6 +24,16 @@ function generate_token(length) {
 }
 
 
+// Get instructor by ID
+const getInstructorByID =async(req,res)=>{
+  // let query = JSON.parse(req.params.query);
+  // console.log(query.query);
+  const users = await User.find({ "_id": '638dd7f86b5480ed4a1b7518' },);
+  console.log("hi")
+  res.status(200).json(users[0])
+}
+
+
 // Rate course
 const rateInstructor = async (req, res) => {
   let query = JSON.parse(req.params.query);
@@ -50,7 +60,7 @@ const recieveEmailToChangePassword = async (req, res) => {
 //  { Email: "req.params.email" },
 
   let doc = await User.findOneAndUpdate(
-    { Email: "omarshokeir2@gmail.com" },
+    { _id: "638dd7f86b5480ed4a1b7518" },
     { PasswordResetToken: token },
     {
       new: true
@@ -84,14 +94,14 @@ const changePassword = async (req, res) => {
   const Token = query.Token
   
   let data;
-  data = await User.find({ Email: "omarshokeir2@gmail.com" }, 'Password PasswordResetToken')
+  data = await User.find({ _id: "638dd7f86b5480ed4a1b7518" }, 'Password PasswordResetToken')
   console.log(Token[64])
   console.log(data[0].PasswordResetToken)
   if (data[0].PasswordResetToken === Token) {
     console.log(data)
     try {
       let doc = await User.findOneAndUpdate(
-        { Email: "omarshokeir2@gmail.com" },
+        { _id: "638dd7f86b5480ed4a1b7518" },
         { Password: query.Password },
         {
           new: true
@@ -114,10 +124,19 @@ const changePassword = async (req, res) => {
 const getRatingsInstructor =async(req,res)=>{
   let query = JSON.parse(req.params.query);
   console.log(query.query);
-  const users = await User.find({ "Username": query.query }, 'Rating')
+  const users = await User.find({ "_id": query.query }, 'Rating')
   console.log(users[0])
   res.status(200).json(users)
 }
+
+const getReviewsInstructor =async(req,res)=>{
+  // let query = JSON.parse(req.params.query);
+  // console.log(query.query);
+  const reviews = await User.find({ "_id": '638dd7f86b5480ed4a1b7518' }, 'Reviews')
+  console.log(reviews[0].Reviews)
+  res.status(200).json(reviews[0].Reviews)
+}
+
 
 //change email
 
@@ -125,7 +144,7 @@ const changeEmail = async (req, res) => {
   let query = JSON.parse(req.params.query);
   let newEmail = query.Email;
   let doc = await User.findOneAndUpdate(
-    {_id: "6383e73965d940e516e48161"},
+    {_id: "638dd7f86b5480ed4a1b7518"},
     { Email: newEmail},
     {
       new: true
@@ -136,8 +155,9 @@ const changeEmail = async (req, res) => {
 const changeBio = async (req, res) => {
   let query = JSON.parse(req.params.query);
   let newBiography = query.Biography;
+  console.log(newBiography);
   let doc = await User.findOneAndUpdate(
-    {_id: "6383e73965d940e516e48161"},
+    {_id: "638dd7f86b5480ed4a1b7518"},
     { Biography: newBiography},
     {
       new: true
@@ -174,5 +194,7 @@ module.exports = {
   getRatingsInstructor,
   changePassword,
   changeEmail,
-  changeBio
+  changeBio,
+  getInstructorByID,
+  getReviewsInstructor
 }

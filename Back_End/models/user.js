@@ -40,6 +40,18 @@ const userSchema = new Schema({
         type: String,
         required: false
     },
+    Reviews: [
+        {
+            Reviewer: {
+                type: String,
+                required: true
+            },
+            Review: {
+                type: String,
+                required: true
+            },
+        }
+    ]
 }, { timestamps: true })
 
 module.exports = mongoose.model('User', userSchema)

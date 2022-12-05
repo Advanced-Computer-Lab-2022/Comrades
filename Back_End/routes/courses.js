@@ -14,7 +14,7 @@ const {
     filterCoursesBySubjectAndRating,
     rateCourse,
     changeDiscount,
-
+    getCourseReviewsById
     
 
   } = require('../controllers/courseController')
@@ -25,6 +25,10 @@ const router = express.Router()
 router.get('/test', function routeHandler(req, res) {
   res.send('ok');
 });
+
+
+router.get('/getCourseReviewsById/:query',getCourseReviewsById)
+
 
 //Rate course
 router.post('/rateCourse/:query',rateCourse)

@@ -24,8 +24,8 @@ import ChangeBio from './pages/ChangeBio';
 import ChangeEmail from './pages/ChangeEmail';
 import LandingPage from './pages/LandingPage';
 import OneCourse from './pages/OneCourse';
-
-
+import AddDiscount from './pages/addDiscount';
+import CourseReviews from './pages/courseReviews'
 
 
 function App() {
@@ -38,10 +38,19 @@ function App() {
 
         <div className="pages">
           <Routes>
-
+            
             <Route
               path="/admin"
               element={<Admin />}
+            />
+            <Route
+              path="/courseReview"
+              element={<CourseReviews />}
+            />
+
+            <Route
+              path="/addDiscount"
+              element={<AddDiscount />}
             />
             <Route
               path="/inst"
@@ -50,6 +59,10 @@ function App() {
             <Route
               path="/vc"
               element={<ViewCourse />}
+            />
+            <Route
+              path="/c"
+              element={<ChangeEmail />}
             />
             <Route
               path="/oc"
@@ -90,7 +103,7 @@ function App() {
             />
             <Route path="/home"
               element={<Home />} />
-              
+
             <Route path="/"
               element={<LandingPage />} />
 

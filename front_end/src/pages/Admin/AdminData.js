@@ -11,7 +11,7 @@ export const AdminData = [
 id: 0,
 icon: <HomeIcon/>,
 text: "Home",
-link: "/"
+link: "/admin"
 },
 {
 id: 1,

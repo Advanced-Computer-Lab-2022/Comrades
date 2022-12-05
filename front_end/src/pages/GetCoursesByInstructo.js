@@ -18,6 +18,9 @@ import { useEffect, useState } from "react";
 const GetCoursesByInstructor = (prop) => {
   const [myCourses, setMyCourses] = useState(null);
   const [search, setSearch] = useState("");
+  const [instructor, setInstructor] = useState("");
+  const [reviews, setReviews] = useState([]);
+  const [cReviews, setCReviews] = useState([]);
 
   const handleSubmit2 = async (e) => {
     e.preventDefault();
@@ -42,6 +45,30 @@ const GetCoursesByInstructor = (prop) => {
     };
 
     fetchCourses();
+
+    const fetchInstructor = async () => {
+      const response = await fetch("/api/users/getInstructorByID");
+      const json = await response.json();
+      if (response.ok) {
+        setInstructor(json);
+        console.log(json);
+      }
+    };
+
+    fetchInstructor();
+
+    const fetchReviews = async () => {
+      const response = await fetch("/api/users/getReviewsInstructor");
+      const json = await response.json();
+      if (response.ok) {
+        setReviews(json);
+        console.log(json);
+      }
+    };
+
+    fetchReviews();
+
+
   }, []);
 
   return (
@@ -80,32 +107,30 @@ const GetCoursesByInstructor = (prop) => {
         </Container>
       </Navbar>
       <br></br>
-      <h1>
-        &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        Welcome Dr. Ahmed{" "}
-      </h1>
-      <br></br>
-     
+
       <Card style={{ width: "40rem" }}>
-            <Card.Img variant="top"style={{ width: '8rem' }} src="https://img-c.udemycdn.com/user/200_H/12613608_fae6.jpg" />
-            <Card.Body>
-              <Card.Title>ahmedInstructor@gmail.com &nbsp;  &nbsp;
-              <a href="/c" class="btn btn-primary">Edit email</a>
-              </Card.Title>
-              <Card.Text>
-              The night is dark and full of terrors. The winds of Winter.
-               What is dead may never die. And now his watch is ended. The battle of the redgrass field. Unbowed
-               , Unbent, Unbroken. All men must die.
-               <br></br>
-               <a href="/cb" class="btn btn-primary">Edit Bio</a>
-              </Card.Text>
-            </Card.Body>
-          </Card>
-          <br></br>
+        <Card.Img variant="top" style={{ width: '8rem' }} src="https://img-c.udemycdn.com/user/200_H/12613608_fae6.jpg" />
+        <Card.Body>
+          <Card.Title>{instructor.Email} &nbsp;  &nbsp;
+            <a href="/c" class="btn btn-primary">Edit email</a>
+          </Card.Title>
+          <Card.Text>
+            {instructor.Biography}
+            <br></br>
+            <a href="/cb" class="btn btn-primary">Edit Bio</a>
+          </Card.Text>
+          <Card.Text>
+            Rating: {instructor.Rating}
+            <br></br>
+          </Card.Text>
+
+        </Card.Body>
+      </Card>
       <br></br>
       <br></br>
-      
-          <h1>Your Courses</h1>
+      <br></br>
+
+      <h1>Your Courses</h1>
       {myCourses &&
         myCourses.map((mycourse) => (
           <>
@@ -123,9 +148,25 @@ const GetCoursesByInstructor = (prop) => {
                   Review: {mycourse.Reviewer}
                   {mycourse.Review}
                 </Card.Text>
-                <Button variant="primary">View Details</Button>
+                <Button variant="primary" onClick={() => window.location.href = `/courseReview?courseID=${mycourse._id}`}>Course Reviews</Button>
                 <a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
-                <a href="/cb" class="btn btn-primary">Add Promotion</a>
+                <a class="btn btn-primary" onClick={() => window.location.href = `/addDiscount?courseID=${mycourse._id}`} >Add Promotion</a>
+              </Card.Body>
+            </Card>
+          </>
+        ))}
+      <h2> Reviews</h2>
+      {reviews &&
+        reviews.map((review) => (
+          <>
+            <br></br>
+            <Card key={review._id} style={{ width: "40rem" }}>
+              <Card.Body>
+                <Card.Text>
+                  Reviewer: {review.Reviewer}
+                  <br></br>
+                  Review: {review.Review}
+                </Card.Text>
               </Card.Body>
             </Card>
           </>
