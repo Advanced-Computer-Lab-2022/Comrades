@@ -18,6 +18,9 @@ import { useEffect, useState } from "react";
 const GetCoursesByInstructor = (prop) => {
   const [myCourses, setMyCourses] = useState(null);
   const [search, setSearch] = useState("");
+  const [price , setPrice] = useState('')
+  const [subject , setSubject] = useState('')
+
 
   const handleSubmit2 = async (e) => {
     e.preventDefault();
@@ -43,6 +46,35 @@ const GetCoursesByInstructor = (prop) => {
 
     fetchCourses();
   }, []);
+
+  const getByPrice = async(x) =>{
+        
+    x.preventDefault()
+    const response =  await fetch('/api/courses/filterCoursesByPriceInstructor/' + price )
+    const json =  await response.json()
+
+    if (response.ok) {
+        setMyCourses(json)
+        console.log(json)
+
+    }
+
+}
+
+const getBySubject = async(z) =>{
+    
+    z.preventDefault()
+    const response =  await fetch('/api/courses/filterCoursesBySubjectInstructor/' + subject )
+    const json =  await response.json()
+
+    if (response.ok) {
+        setMyCourses(json)
+        console.log(json)
+
+    }
+}
+
+
 
   return (
     <div>
@@ -104,6 +136,24 @@ const GetCoursesByInstructor = (prop) => {
           <br></br>
       <br></br>
       <br></br>
+
+      <Form>
+                <Form.Group  className="mb-3" controlId="formPlaintextEmail">
+                    
+                    <Row sm="10">
+                        <Button   style={{ width: '10rem'}} variant="outline-success" placeholder='Price' onClick={getByPrice}>Filter By Price</Button>
+                        <Form.Control className="input" type="text" placeholder="Price" onChange={(x) => setPrice(x.target.value)} value={price} />
+                    </Row>
+                </Form.Group>
+          
+                <Form.Group  className="mb-3" controlId="formPlaintextEmail">
+                    
+                    <Row sm="10">
+                        <Button   style={{ width: '10rem'}} variant="outline-success" placeholder='Subject' onClick={getBySubject}>Filter By Subject</Button>
+                        <Form.Control className="input" type="text" placeholder="Subject" onChange={(z) => setSubject(z.target.value)} value={subject} />
+                    </Row>
+                </Form.Group>
+            </Form>
       
           <h1>Your Courses</h1>
       {myCourses &&

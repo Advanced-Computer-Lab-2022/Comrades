@@ -43,6 +43,10 @@ function App() {
               path="/admin"
               element={<Admin />}
             />
+             <Route
+              path="/gci"
+              element={<GetCoursesByInstructor />}
+            />
             <Route
               path="/inst"
               element={<Instructor />}
