@@ -22,7 +22,9 @@ import Admin from './pages/Admin/Admin';
 import Instructor from './pages/Instructor/Instructor';
 import ChangeBio from './pages/ChangeBio';
 import ChangeEmail from './pages/ChangeEmail';
-import LandingPage from './pages/LandingPage'
+import LandingPage from './pages/LandingPage';
+import OneCourse from './pages/OneCourse';
+
 
 
 
@@ -48,6 +50,10 @@ function App() {
             <Route
               path="/vc"
               element={<ViewCourse />}
+            />
+            <Route
+              path="/oc"
+              element={<OneCourse />}
             />
             <Route
               path="/sn"
