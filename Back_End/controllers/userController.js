@@ -125,7 +125,7 @@ const changeEmail = async (req, res) => {
   let query = JSON.parse(req.params.query);
   let newEmail = query.email;
   let doc = await User.findOneAndUpdate(
-    { _id: query.id },
+    { _id: "6383e73965d940e516e48161" },
     { Email: newEmail},
     {
       new: true

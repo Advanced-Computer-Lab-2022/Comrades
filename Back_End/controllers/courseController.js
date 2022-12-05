@@ -125,7 +125,7 @@ const searchInstructor = async (req, res) => {
 const getCourseById = async (req, res) => {
     let query = JSON.parse(req.params.query)
     console.log(query.id);
-    const courses = await Course.find({ "_id": query.id}, 'Title  Subject  Subtitles  Price  TotalHours  Rating  CreditHours  Discount')
+    const courses = await Course.find({ "_id": query.id})
     res.status(200).json(courses)
 }
 

@@ -16,6 +16,8 @@ import Col from 'react-bootstrap/Col';
 
 import "./LandingPageStyle.css"
 import story from '../images/course.png'; // with import
+import Footer from "../components/Footer/Footer"
+
 
 
 
@@ -129,65 +131,7 @@ const LandingPage = () => {
             <br></br>
             <br></br>
             <br></br>
-            <div style={{ backgroundColor: "#212529" }}>
-                <br></br>
-                <br></br>
-                <Container className="footer__wrapper">
-                    <Row>
-                        <Col>Comrades Bussiness</Col>
-                        <Col>Careers</Col>
-                        <Col>Terms</Col>
-                        <Col></Col>
-                        <Col>
-                            <LanguageIcon />  ENGLISH
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col>Teach on Comrades</Col>
-                        <Col>Blog</Col>
-                        <Col>Privacy policy</Col>
-                        <Col></Col>
-                        <Col></Col>
-                    </Row>
-                    <Row>
-                        <Col>About us</Col>
-                        <Col>Affilate</Col>
-                        <Col>Sitemap</Col>
-                        <Col></Col>
-                        <Col></Col>
-                    </Row>
-                    <Row>
-                        <Col>Contact us</Col>
-                        <Col>Investors</Col>
-                        <Col>Cookies</Col>
-                        <Col></Col>
-                        <Col></Col>
-                    </Row>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <Row>
-                        <Col>
-                            <h3>
-                                Comrades
-                            </h3>
-                        </Col>
-                        <Col></Col>
-                        <Col></Col>
-                        <Col></Col>
-                        <Col>
-                            <h6>
-                                © 2023 Comrades, Inc.
-                            </h6>
-                        </Col>
-                    </Row>
-
-
-                </Container>
-                <br></br>
-                <br></br>
-            </div>
+            <Footer/>
 
 
 

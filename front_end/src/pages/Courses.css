@@ -1,0 +1,29 @@
+
+.allcourses__wrapper{
+}
+.filters__wrapper{
+    border-right: #C8C9CA solid 1px;
+}
+.btn-dark{
+    border-radius: 0px;
+}
+.course__card:hover{
+    cursor: pointer
+}
+.course__title__wrapper{
+    background-color: #eceb98;
+}
+.row{
+    margin-right:0px
+}
+.course__content{
+    background-color: #212529;
+    color: white;
+}
+.subtitles__wrapper{
+    background-color: white;
+    color: black;
+    margin: 0px 0px;
+    border: 1px solid #212529;
+    padding: 20px;
+}
