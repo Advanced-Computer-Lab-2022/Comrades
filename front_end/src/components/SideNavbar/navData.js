@@ -28,6 +28,6 @@ link: "/inst"
 id: 3,
 icon: <PermIdentityIcon/>,
 text: "User",
-link: "/nc"
+link: "/user"
 }
 ]

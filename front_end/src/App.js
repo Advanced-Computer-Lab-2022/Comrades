@@ -24,6 +24,8 @@ import ChangeBio from './pages/ChangeBio';
 import ChangeEmail from './pages/ChangeEmail';
 import LandingPage from './pages/LandingPage';
 import OneCourse from './pages/OneCourse';
+import User from './pages/User/User';
+import UserCourses from './pages/UserCourse';
 
 
 
@@ -50,6 +52,10 @@ function App() {
             <Route
               path="/inst"
               element={<Instructor />}
+            />
+            <Route
+              path="/user"
+              element={<User />}
             />
             <Route
               path="/vc"
@@ -102,6 +108,10 @@ function App() {
             <Route
               path="/nc"
               element={<NewCourse />}
+            />
+            <Route
+              path="/uc"
+              element={<UserCourses />}
             />
             <Route
               path="/gc"
