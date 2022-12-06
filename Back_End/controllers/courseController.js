@@ -29,11 +29,11 @@ const createCourse = async (req, res) => {
     const Rating = 0;
     const TotalRatings = 0;
     var TotalHours = 0;
-    var DiscountedPrice = Price*(1- Discount/100);
+    var DiscountedPrice = Price * (1 - Discount / 100);
     for (let i = 0; i < Subtitles.length; i++) {
         TotalHours = TotalHours + Subtitles[i].Hours;
     }
-console.log(DiscountedPrice)
+    console.log(DiscountedPrice)
     try {
         const data = await Course.create({ Preview, Title, Subject, Subtitles, Instructor, Price, DiscountedPrice, TotalHours, CreditHours, Rating, TotalRatings, Discount, Description })
         res.status(200).json(data)
@@ -125,9 +125,18 @@ const searchInstructor = async (req, res) => {
 const getCourseById = async (req, res) => {
     let query = JSON.parse(req.params.query)
     console.log(query.id);
-    const courses = await Course.find({ "_id": query.id})
+    const courses = await Course.find({ "_id": query.id })
     res.status(200).json(courses)
 }
+
+const getCourseReviewsById = async (req, res) => {
+    let query = JSON.parse(req.params.query)
+    console.log(query.id);
+    const courses = await Course.find({ "_id": query.id },'Reviews')
+    console.log(courses[0].Reviews);
+    res.status(200).json(courses[0].Reviews)
+}
+
 
 
 const getCountries = async (req, res) => {
@@ -182,7 +191,7 @@ const filterCoursesBySubjectAndRating = async (req, res) => {
         },
         'Title  Subject  Subtitles  Price  TotalHours  Rating  CreditHours  Discount');
 
-        console.log(courses);
+    console.log(courses);
     res.status(200).json(courses)
 }
 
@@ -191,7 +200,7 @@ const changeDiscount = async (req, res) => {
     let query = JSON.parse(req.params.query);
     let newDiscount = query.Discount;
     let newDiscountDuration = query.DiscountDuration;
-
+    console.log(query);
     var someDate = new Date();
     var numberOfDaysToAdd = newDiscountDuration;
     var result = someDate.setDate(someDate.getDate() + numberOfDaysToAdd);
@@ -200,11 +209,17 @@ const changeDiscount = async (req, res) => {
     var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
     var yyyy = today.getFullYear();
 
+    const requiredCourse = await Course.find(
+        {
+            _id: query.id
+        },
+        'Price');
+    let newDiscoutnedPrice = requiredCourse[0].Price*(1-newDiscount/100);
     today = mm + '/' + dd + '/' + yyyy;
     console.log(today);
     let doc = await Course.findOneAndUpdate(
         { _id: query.id },
-        { Discount: newDiscount, DiscountDuration: newDiscountDuration},
+        { Discount: newDiscount, DiscountDuration: newDiscountDuration, DiscountedPrice: newDiscoutnedPrice },
         {
             new: true
         }
@@ -229,7 +244,7 @@ module.exports = {
     filterCoursesByPrice,
     rateCourse,
     changeDiscount,
- 
+    getCourseReviewsById
 }
 
 

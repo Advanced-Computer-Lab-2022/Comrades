@@ -17,7 +17,7 @@ const Home = () => {
 
   return (
     <div className="home">
-      <Navbar bg="light" expand="lg">
+      <Navbar bg="dark" variant="dark" expand="lg">
             <Container>
                 <Navbar.Brand href="/">Comrades</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -33,7 +33,7 @@ const Home = () => {
                     <Nav>
                         <Form className="d-flex" >
                             
-                            <Button  href="/Profile" variant="outline-success" size="sm">View Profile </Button>
+                            <Button  href="/Profile" variant="outline-light" size="sm">View Profile </Button>
                         </Form>
                     </Nav>
                 </Navbar.Collapse>

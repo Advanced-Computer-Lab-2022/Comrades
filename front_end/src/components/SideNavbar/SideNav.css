@@ -2,7 +2,7 @@
     width: 200px;
     transition: width 0.3s ease-in-out;
     height: 100vh;
-    background-color: rgb(2, 60, 169);
+    background-color: #eceb98;
     padding-top: 28px;
     }
     
@@ -19,6 +19,7 @@
     
     .linkText {
     padding-left: 20px;
+
     }
     
     .linkTextClosed {

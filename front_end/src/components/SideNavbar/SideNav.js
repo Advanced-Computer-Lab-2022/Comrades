@@ -18,7 +18,7 @@ const  SideNav=()=> {
         {navData.map((item =>(
              <NavLink className="sideitem"  key={item.id}  to={item.link}>
              {item.icon}
-             <p>{item.text}</p>
+             <p className="linkText">{item.text}</p>
              </NavLink>
              
 

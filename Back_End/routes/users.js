@@ -6,11 +6,21 @@ const {
   getRatingsInstructor,
   changePassword,
   changeEmail,
-  changeBio
+  changeBio,
+  getInstructorByID,
+  getReviewsInstructor
 } = require('../controllers/userController')
 
 
 const router = express.Router()
+
+// Get Reviews of Instructor by ID
+router.get('/getReviewsInstructor',getReviewsInstructor)
+
+
+// Get Instructor by ID
+router.get('/getInstructorByID',getInstructorByID)
+
 
 //Rate instructor
 router.post('/rateInstructor/:query',rateInstructor)

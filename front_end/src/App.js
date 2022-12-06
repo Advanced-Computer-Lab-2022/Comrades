@@ -28,6 +28,8 @@ import User from './pages/User/User';
 import UserCourses from './pages/UserCourse';
 
 
+import AddDiscount from './pages/addDiscount';
+import CourseReviews from './pages/courseReviews'
 
 
 function App() {
@@ -40,7 +42,7 @@ function App() {
 
         <div className="pages">
           <Routes>
-
+            
             <Route
               path="/admin"
               element={<Admin />}
@@ -48,6 +50,15 @@ function App() {
              <Route
               path="/gci"
               element={<GetCoursesByInstructor />}
+            />
+            <Route
+              path="/courseReview"
+              element={<CourseReviews />}
+            />
+
+            <Route
+              path="/addDiscount"
+              element={<AddDiscount />}
             />
             <Route
               path="/inst"
@@ -60,6 +71,10 @@ function App() {
             <Route
               path="/vc"
               element={<ViewCourse />}
+            />
+            <Route
+              path="/c"
+              element={<ChangeEmail />}
             />
             <Route
               path="/oc"
@@ -100,7 +115,7 @@ function App() {
             />
             <Route path="/home"
               element={<Home />} />
-              
+
             <Route path="/"
               element={<LandingPage />} />
 
