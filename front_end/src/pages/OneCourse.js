@@ -24,21 +24,40 @@ const OneCourse = () => {
     const [value, setValue] = useState(Number);
     const [value2, setValue2] = useState(Number);
     const [exercise, setExercise] = useState([]);
+    const [inst , setInst] = useState()
 
 
-
-
+  
 
 
 
     const submitCourseRate = async (event) => {
-        console.log("course", value)
-        console.log(name)
+        const response = await fetch("/api/courses/rateCourse/{\"id\": \"" + userId + "\",\"Rating\":\"" + value + "\"}", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })        
+        const json = await response.json()
+      
 
 
     }
     const submitInsRate = async (event) => {
-        console.log("Ins", value2)
+        
+
+        const response = await fetch("/api/users/rateInstructor/{\"name\":\"" + inst + "\",\"Rating\":\"" + value2 + "\"}", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })    
+        const json = await response.json()
+
+        // console.log("/api/users/rateInstructor/{\"name\":\"" + inst + "\",\"Rating\":\"" + value2 + "\"}")
+        
+
+        
 
 
     }
@@ -81,6 +100,9 @@ const OneCourse = () => {
 
                 setCourse(json[0])
                 console.log(json)
+                 setInst(json[0].Instructor)
+
+
                 let sub = [];
                 let index = 0;
 
@@ -97,10 +119,13 @@ const OneCourse = () => {
 
                 setSubtitle(sub);
                 console.log(subtitle.index)
+                console.log(inst)
+                console.log(value2)
 
 
 
-                let result = json[0].Preview.substr(17)
+
+                let result = json[0].Preview.substr(16)
                 setPrev(result)
             }
         }

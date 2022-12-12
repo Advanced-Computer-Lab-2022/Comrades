@@ -23,7 +23,9 @@ const OpenSubtitle = () => {
     const [exercise, setExercise] = useState([])
     const [link, setLink] = useState([])
     const [sol1, setSol1] = useState()
-    const [msg, setMsg] = useState()
+    const [CorrectAnswer, setCorrectAnswer] = useState()
+    const [counter, setCounter] = useState(0)
+
 
     const [show1, setShow1] = useState(false);
 
@@ -32,7 +34,7 @@ const OpenSubtitle = () => {
   const handleClose = () =>{
     setShow1(false)
     setShow2(false);
-  } 
+  }
 
 
 
@@ -49,17 +51,20 @@ const OpenSubtitle = () => {
 
     const handleSubmit = (ans) => {
 
-        // console.log(typeof sol1) 
+        // console.log(typeof sol1)
 
-        // console.log(typeof ans) 
+        // console.log(typeof ans)
 
         if (sol1 === ans.toString()) {
             setShow1(true)
-            
-          
+            setCounter(counter+10)
+
+
         }
 
         else (
+            setCorrectAnswer(ans),
+
             setShow2(true)
 
 
@@ -67,6 +72,8 @@ const OpenSubtitle = () => {
     }
 
     const renderExercises = (idx, cid) => {
+
+
 
         // if (exercise[idx].id === cid) {
         return (
@@ -106,7 +113,7 @@ const OpenSubtitle = () => {
                                 <br></br>
                                 <br></br>
 
-                                
+
 
 
                             </Card.Text>
@@ -150,7 +157,7 @@ const OpenSubtitle = () => {
 
 
                 setExercise(exe);
-                let result = subtitle.link.substr(17)
+                let result = subtitle.link.substr(16)
                 setLink(result)
 
 
@@ -201,23 +208,29 @@ const OpenSubtitle = () => {
             </Container>
 
             <>
-      
+
       <Modal show={show1} onHide={handleClose}>
         <Modal.Header closeButton>
-     
+
         </Modal.Header>
-        <Modal.Body>  ✔ Your Answer Is Correct!</Modal.Body>
-     
+        <Modal.Body>  ✔ Your Answer Is Correct!
+            <br></br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Your Score : 10/10 .
+        </Modal.Body>
+
       </Modal>
 
     </>
-    
+
     <Modal show={show2} onHide={handleClose}>
         <Modal.Header closeButton>
-     
+
         </Modal.Header>
-        <Modal.Body> ❌ Incorrect Answer!</Modal.Body>
-     
+        <Modal.Body> ❌ Incorrect Answer, The Answer Was Choice Number {CorrectAnswer}.
+        <br></br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Your Score : 0/10 .
+        </Modal.Body>
+
       </Modal>
 
         </div>

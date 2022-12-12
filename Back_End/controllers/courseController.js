@@ -7,8 +7,7 @@ const rateCourse = async (req, res) => {
     let query = JSON.parse(req.params.query);
 
     const courses = await Course.find({ "_id": query.id }, '_id Rating TotalRatings')
-    let newRating = (courses[0].Rating * courses[0].TotalRatings + query.Rating) / (courses[0].TotalRatings + 1);
-    let newTotalRatings = courses[0].TotalRatings + 1;
+let newRating = (parseInt(courses[0].Rating) * parseInt(courses[0].TotalRatings) + parseInt(query.Rating)) / (parseInt(courses[0].TotalRatings) + 1);    let newTotalRatings = courses[0].TotalRatings + 1;
 
 
     let doc = await Course.findOneAndUpdate(
