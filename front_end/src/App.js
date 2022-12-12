@@ -30,6 +30,7 @@ import UserCourses from './pages/UserCourse';
 
 import AddDiscount from './pages/addDiscount';
 import CourseReviews from './pages/courseReviews'
+import OpenSubtitle from './pages/OpenSubtitle'
 
 
 function App() {
@@ -127,6 +128,10 @@ function App() {
             <Route
               path="/uc"
               element={<UserCourses />}
+            />
+            <Route
+              path="/os"
+              element={<OpenSubtitle />}
             />
             <Route
               path="/gc"

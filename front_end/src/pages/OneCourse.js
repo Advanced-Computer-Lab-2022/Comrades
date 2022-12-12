@@ -1,7 +1,9 @@
 
 import Naavbar from '../components/Navbar';
-import Col from 'react-bootstrap/esm/Col';
+import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/esm/Row';
+import Col from 'react-bootstrap/esm/Col';
+
 import Button from 'react-bootstrap/esm/Button';
 import { Rating } from '@mui/material';
 
@@ -21,7 +23,7 @@ const OneCourse = () => {
     const [name, setName] = useState([]);
     const [value, setValue] = useState(Number);
     const [value2, setValue2] = useState(Number);
-    const [exercise , setExercise] = useState([]);
+    const [exercise, setExercise] = useState([]);
 
 
 
@@ -30,19 +32,42 @@ const OneCourse = () => {
 
 
     const submitCourseRate = async (event) => {
-        console.log("course" , value)
+        console.log("course", value)
         console.log(name)
 
 
     }
     const submitInsRate = async (event) => {
-        console.log("Ins" , value2)
+        console.log("Ins", value2)
 
 
     }
+    const renderSubtitles = (idx, cid) => {
 
-    
-    
+        if (subtitle[idx].id === cid) {
+            return (
+                <>
+                    <Container onClick={() => window.location.href = `/os?userId=${course._id}${subtitle[idx].index}`}>
+                        <Card style={{ width: "40rem" }}>
+                            <Card.Body>
+                                <Card.Text>
+                                    <p>{subtitle[idx].index+1}. Subtitle:{subtitle[idx].arr.Name}</p>
+                                    <p>{subtitle[idx].arr.Hours} Hours</p>
+
+
+                                </Card.Text>
+                            </Card.Body>
+                        </Card>
+
+                    </Container>
+                    <br></br>
+                </>
+            )
+        }
+    }
+
+
+
 
 
     useEffect(() => {
@@ -50,32 +75,45 @@ const OneCourse = () => {
             const response = await fetch("/api/courses/getCourseById/{\"id\": \"" + userId + "\"}")
             const json = await response.json()
 
-         
+
 
             if (response.ok) {
+
                 setCourse(json[0])
-                setSubtitle(json[0].Subtitles)
-                setExercise(json[0].Subtitles.Exercises)
-
                 console.log(json)
-               
+                let sub = [];
+                let index = 0;
+
+                for (let j = 0; j < json[0].Subtitles.length; j++) {
+                    sub.push({
+                        "index": index,
+                        "id": json[0]._id,
+                        "arr": json[0].Subtitles[j]
+                    })
+                    index++;
+                }
 
 
-                let result = json[0].Preview.substr(32)
+
+                setSubtitle(sub);
+                console.log(subtitle.index)
+
+
+
+                let result = json[0].Preview.substr(17)
                 setPrev(result)
             }
         }
         getCourses()
-        
+
     }, [])
 
 
 
 
     return (
-        // Title  Subject  Subtitles  Price  TotalHours  Rating  CreditHours  Discount
-        <><Naavbar />
-            <div>
+        <>
+            <Naavbar /><div>
 
                 <h2 style={{ textAlign: "center" }}>{course.Title}</h2>
 
@@ -128,45 +166,43 @@ const OneCourse = () => {
                             <br></br>
 
                         </Col>
-                    
-                            <Col >
+
+                        <Col>
                             <Row>
-                            <Rating
+                                <Rating
                                     name="simple-controlled"
                                     value={value}
                                     onChange={(event, newValue) => {
                                         setValue(newValue);
-                                    }}
-                                />
-                                </Row>
+                                    }} />
+                            </Row>
 
-                                <Row  sm={4}>
+                            <Row sm={4}>
                                 &nbsp;&nbsp;&nbsp;<Button onClick={submitCourseRate}>
                                     Rate Course
                                 </Button>
                             </Row>
                             <br></br>
                             <Row>
-                            <Rating
+                                <Rating
                                     name="simple-controlled"
                                     value={value2}
                                     onChange={(event2, newValue) => {
                                         setValue2(newValue);
-                                    }}
-                                />
-                                </Row>
+                                    }} />
+                            </Row>
 
-                                <Row  sm={4}>
+                            <Row sm={4}>
                                 &nbsp;&nbsp;&nbsp;<Button onClick={submitInsRate}>
                                     Rate Instructor
                                 </Button>
                             </Row>
 
-                                
-                                
-                            </Col>
-                           
-                            
+
+
+                        </Col>
+
+
                     </Row>
                 </Container>
 
@@ -174,26 +210,40 @@ const OneCourse = () => {
 
 
 
-                <Container >
-
-               
-                    
-                    {subtitle && subtitle.map((subtitlee => (
-                        
-                            <><Col xs={11}>
-                            <h5>
-                                {subtitlee.Name}
-                            </h5>
-                        </Col><Col>
-                                {subtitlee.Hours}  
-                            </Col></>
-                    )))}
 
 
 
-               
 
-                </Container>
+                {/* 
+                {subtitle && subtitle.map((subtitlee => (
+
+                    <Container className="course__card" key={subtitlee._id} onClick={() => window.location.href = `/os?userId=${course._id}`}>
+                        <br></br>
+                        <><Card style={{ width: "40rem" }}>
+                            <Card.Body>
+                                <Card.Text>
+                                    {subtitlee.index}.Subtitle: {subtitlee.arr}
+                                    <br></br>
+                                    {subtitlee.Hours} Hours
+                                    
+                                </Card.Text>
+                            </Card.Body>
+                        </Card></>
+
+                    </Container>
+
+                )))} */}
+                
+                <br></br>
+                {subtitle.map((subtitlee => (
+                    renderSubtitles(subtitlee.index, userId)
+                )))}
+
+
+
+
+
+
 
 
 

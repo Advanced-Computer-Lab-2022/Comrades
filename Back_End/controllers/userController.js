@@ -187,6 +187,8 @@ const createUserByAdmin = async (req, res) => {
   }
 }
 
+
+
 module.exports = {
   createUserByAdmin,
   recieveEmailToChangePassword,
@@ -196,5 +198,5 @@ module.exports = {
   changeEmail,
   changeBio,
   getInstructorByID,
-  getReviewsInstructor
+  getReviewsInstructor,
 }

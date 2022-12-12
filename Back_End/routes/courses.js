@@ -14,7 +14,10 @@ const {
     filterCoursesBySubjectAndRating,
     rateCourse,
     changeDiscount,
-    getCourseReviewsById
+    getCourseReviewsById,
+    getSubtitleByIndexAndCourseID
+
+
     
 
   } = require('../controllers/courseController')
@@ -71,6 +74,10 @@ router.get('/getCountries' , getCountries)
 
 //change discount
 router.post('/changeDiscount/:query', changeDiscount)
+
+router.get('/getSubtitleByIndexAndCourseID/:query', getSubtitleByIndexAndCourseID)
+
+
 
 
 
