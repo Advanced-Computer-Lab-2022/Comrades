@@ -7,7 +7,7 @@ const rateCourse = async (req, res) => {
     let query = JSON.parse(req.params.query);
 
     const courses = await Course.find({ "_id": query.id }, '_id Rating TotalRatings')
-    let newRating = (courses[0].Rating * courses[0].TotalRatings + query.Rating) / (courses[0].TotalRatings + 1);
+    let newRating = (parseInt(courses[0].Rating) * parseInt(courses[0].TotalRatings) + parseInt(query.Rating)) / (parseInt(courses[0].TotalRatings) + 1);
     let newTotalRatings = courses[0].TotalRatings + 1;
 
 
@@ -129,6 +129,17 @@ const getCourseById = async (req, res) => {
     res.status(200).json(courses)
 }
 
+
+const getSubtitleByIndexAndCourseID = async (req, res) => {
+    let query = JSON.parse(req.params.query)
+    console.log(query.id);
+    console.log(query.index);
+    const courses = await Course.find({ "_id": query.id })
+    console.log(courses[0].Subtitles[index])
+    res.status(200).json(courses)
+}
+
+
 const getCourseReviewsById = async (req, res) => {
     let query = JSON.parse(req.params.query)
     console.log(query.id);
@@ -244,7 +255,8 @@ module.exports = {
     filterCoursesByPrice,
     rateCourse,
     changeDiscount,
-    getCourseReviewsById
+    getCourseReviewsById,
+    getSubtitleByIndexAndCourseID
 }
 
 

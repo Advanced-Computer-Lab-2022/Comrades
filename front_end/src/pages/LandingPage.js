@@ -43,7 +43,7 @@ const LandingPage = () => {
                         <Nav>
                             <Form className="d-flex" >
 
-                                <Button href="/home" variant="outline-light" >Login </Button>
+                                <Button href="/login" variant="outline-light" >Login </Button>
                             </Form>
                         </Nav>
                     </Navbar.Collapse>
@@ -66,7 +66,7 @@ const LandingPage = () => {
                                     job-ready digital talent and delivering measurable business outcomes.</span>
                             </p>
                             <br></br>
-                            <Button variant="light" size="lg">Sign Up</Button>
+                            <Button href="signup" variant="light" size="lg">Sign Up</Button>
                             <Button href="/gc" variant="outline-light" className="landpage__login__btn" size="lg">View Courses</Button>
                             {/* <Button variant="primary" size="lg">Sign Up</Button>
                             <Button variant="outline-primary" className="landpage__login__btn" size="lg">View Courses</Button> */}

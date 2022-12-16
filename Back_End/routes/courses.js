@@ -14,9 +14,8 @@ const {
     filterCoursesBySubjectAndRating,
     rateCourse,
     changeDiscount,
-    getCourseReviewsById
-    
-
+    getCourseReviewsById,
+    getSubtitleByIndexAndCourseID
   } = require('../controllers/courseController')
 
 
@@ -26,6 +25,8 @@ router.get('/test', function routeHandler(req, res) {
   res.send('ok');
 });
 
+
+router.get('/getSubtitleByIndexAndCourseID/:query', getSubtitleByIndexAndCourseID)
 
 router.get('/getCourseReviewsById/:query',getCourseReviewsById)
 

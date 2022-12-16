@@ -8,6 +8,7 @@ const cors = require('cors');
 const app = express()
 const myCourseRoutes = require('./routes/courses')
 const myUserRoutes = require('./routes/users')
+const myProblemsRoutes = require('./routes/problems')
 
 //MiddleWare
 app.use(express.json())
@@ -21,6 +22,7 @@ app.use(cors());
 //routes
 app.use('/api/courses',myCourseRoutes)
 app.use('/api/users',myUserRoutes)
+app.use('/api/problems',myProblemsRoutes)
 
 app.get('/test', function routeHandler(req, res) {
     res.send('ok');

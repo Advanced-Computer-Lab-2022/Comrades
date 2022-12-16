@@ -18,7 +18,6 @@ import Contract from './pages/Contract';
 import ViewCourse from './pages/ViewCourse';
 import Exam from './pages/exam';
 import SideNav from './components/SideNavbar/SideNav';
-import Admin from './pages/Admin/Admin';
 import Instructor from './pages/Instructor/Instructor';
 import ChangeBio from './pages/ChangeBio';
 import ChangeEmail from './pages/ChangeEmail';
@@ -26,6 +25,11 @@ import LandingPage from './pages/LandingPage';
 import OneCourse from './pages/OneCourse';
 import User from './pages/User/User';
 import UserCourses from './pages/UserCourse';
+import Login from './pages/Login';
+import Signup from './pages/Signup';
+import AdminRefundUser from './pages/AdminRefundUser';
+import AdminViewProblems from './pages/AdminViewProblems';
+
 
 
 import AddDiscount from './pages/addDiscount';
@@ -42,18 +46,22 @@ function App() {
 
         <div className="pages">
           <Routes>
-            
+
             <Route
-              path="/admin"
-              element={<Admin />}
-            />
-             <Route
               path="/gci"
               element={<GetCoursesByInstructor />}
             />
             <Route
               path="/courseReview"
               element={<CourseReviews />}
+            />
+            <Route
+              path="/adminRefundUser"
+              element={<AdminRefundUser />}
+            />
+            <Route
+              path="/adminViewProblems"
+              element={<AdminViewProblems />}
             />
 
             <Route
@@ -118,8 +126,14 @@ function App() {
 
             <Route path="/"
               element={<LandingPage />} />
-
-
+            <Route
+              path="/login"
+              element={<Login />}
+            />
+            <Route
+              path="/signup"
+              element={<Signup />}
+            />
             <Route
               path="/nc"
               element={<NewCourse />}

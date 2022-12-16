@@ -8,11 +8,39 @@ const {
   changeEmail,
   changeBio,
   getInstructorByID,
-  getReviewsInstructor
+  getReviewsInstructor,
+  issueRefund,
+
+  loginUser,
+  signupUser
 } = require('../controllers/userController')
 
 
 const router = express.Router()
+
+// login route
+router.post('/login', loginUser)
+
+// signup route
+router.post('/signup', signupUser)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Issue Refund
+router.post('/issueRefund', issueRefund)
+
 
 // Get Reviews of Instructor by ID
 router.get('/getReviewsInstructor',getReviewsInstructor)

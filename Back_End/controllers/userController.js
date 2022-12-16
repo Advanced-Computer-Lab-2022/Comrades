@@ -2,6 +2,13 @@ const User = require('../models/user')
 const mongoose = require('mongoose')
 const nodemailer = require("nodemailer");
 
+const jwt = require('jsonwebtoken')
+
+const createToken = (_id) => {
+  return jwt.sign({ _id }, process.env.SECRET, { expiresIn: '3d' })
+}
+
+
 let transporter = nodemailer.createTransport({
   host: "smtp.outlook.com",
   port: 587,
@@ -25,7 +32,7 @@ function generate_token(length) {
 
 
 // Get instructor by ID
-const getInstructorByID =async(req,res)=>{
+const getInstructorByID = async (req, res) => {
   // let query = JSON.parse(req.params.query);
   // console.log(query.query);
   const users = await User.find({ "_id": '638dd7f86b5480ed4a1b7518' },);
@@ -34,17 +41,17 @@ const getInstructorByID =async(req,res)=>{
 }
 
 
-// Rate course
+// Rate instructor
 const rateInstructor = async (req, res) => {
   let query = JSON.parse(req.params.query);
   console.log("HEY")
-  const courses = await User.find({ "_id": query.id }, '_id Rating TotalRatings')
-  let newRating = (courses[0].Rating * courses[0].TotalRatings + query.Rating) / (courses[0].TotalRatings + 1);
+  const courses = await User.find({ "Username": query.name }, '_id Rating TotalRatings')
+  let newRating = (parseInt(courses[0].Rating) * parseInt(courses[0].TotalRatings) + parseInt(query.Rating)) / (parseInt(courses[0].TotalRatings) + 1);
   let newTotalRatings = courses[0].TotalRatings + 1;
 
 
   let doc = await User.findOneAndUpdate(
-    { _id: query.id },
+    { "Username": query.name },
     { Rating: newRating, "TotalRatings": newTotalRatings },
     {
       new: true
@@ -57,7 +64,7 @@ const rateInstructor = async (req, res) => {
 const recieveEmailToChangePassword = async (req, res) => {
 
   let token = generate_token(64);
-//  { Email: "req.params.email" },
+  //  { Email: "req.params.email" },
 
   let doc = await User.findOneAndUpdate(
     { _id: "638dd7f86b5480ed4a1b7518" },
@@ -71,7 +78,7 @@ const recieveEmailToChangePassword = async (req, res) => {
 
   let options = {
     from: "acl-comrades-team-2022@outlook.com", // sender address
-    to: "omarshokeir2@gmail.com", // list of receivers
+    to: "omarwael11110@gmail.com", // list of receivers
     subject: "Comrades Password Reset", // Subject line
     text: "Hello world?", // plain text body
     html: "<h2>Click the following link to change your password</h2><h3>" + token + "</h3>", // html body
@@ -92,7 +99,7 @@ const recieveEmailToChangePassword = async (req, res) => {
 const changePassword = async (req, res) => {
   let query = JSON.parse(req.params.query);
   const Token = query.Token
-  
+
   let data;
   data = await User.find({ _id: "638dd7f86b5480ed4a1b7518" }, 'Password PasswordResetToken')
   console.log(Token[64])
@@ -113,7 +120,7 @@ const changePassword = async (req, res) => {
       res.status(400).json({ error: error.message })
     }
   }
-  else{
+  else {
     res.status(400).json({ "error": "Wrong Token" })
 
   }
@@ -121,7 +128,7 @@ const changePassword = async (req, res) => {
 }
 
 // get ratings of an instructor
-const getRatingsInstructor =async(req,res)=>{
+const getRatingsInstructor = async (req, res) => {
   let query = JSON.parse(req.params.query);
   console.log(query.query);
   const users = await User.find({ "_id": query.query }, 'Rating')
@@ -129,7 +136,7 @@ const getRatingsInstructor =async(req,res)=>{
   res.status(200).json(users)
 }
 
-const getReviewsInstructor =async(req,res)=>{
+const getReviewsInstructor = async (req, res) => {
   // let query = JSON.parse(req.params.query);
   // console.log(query.query);
   const reviews = await User.find({ "_id": '638dd7f86b5480ed4a1b7518' }, 'Reviews')
@@ -144,25 +151,51 @@ const changeEmail = async (req, res) => {
   let query = JSON.parse(req.params.query);
   let newEmail = query.Email;
   let doc = await User.findOneAndUpdate(
-    {_id: "638dd7f86b5480ed4a1b7518"},
-    { Email: newEmail},
+    { _id: "638dd7f86b5480ed4a1b7518" },
+    { Email: newEmail },
     {
       new: true
     }
-  )};
+  )
+};
 
-  
+
 const changeBio = async (req, res) => {
   let query = JSON.parse(req.params.query);
   let newBiography = query.Biography;
   console.log(newBiography);
   let doc = await User.findOneAndUpdate(
-    {_id: "638dd7f86b5480ed4a1b7518"},
-    { Biography: newBiography},
+    { _id: "638dd7f86b5480ed4a1b7518" },
+    { Biography: newBiography },
     {
       new: true
     }
-  )};
+  )
+};
+
+const issueRefund = async (req, res) => {
+
+  const { Username, Amount } = req.body
+  try {
+    const users = await User.find({ "Username": Username });
+    console.log(users[0].Wallet);
+
+    let newWallet = parseInt(users[0].Wallet) + parseInt(Amount)
+
+    let doc = await User.findOneAndUpdate(
+      { "Username": Username },
+      { Wallet: newWallet },
+      {
+        new: true
+      }
+    )
+    res.status(200).json({done: "Done"})
+
+  }
+  catch {
+    res.status(400).json({ error: "User not found" })
+  }
+};
 
 
 
@@ -187,6 +220,40 @@ const createUserByAdmin = async (req, res) => {
   }
 }
 
+// signup a user
+const signupUser = async (req, res) => {
+  const { email, username, password, userType, biography } = req.body
+
+  try {
+    const user = await User.signup(email, username, password, userType, biography)
+
+    // create a token
+    const token = createToken(user._id)
+
+    res.status(200).json({ email, token })
+  } catch (error) {
+    res.status(400).json({ error: error.message })
+  }
+}
+
+// login a user
+const loginUser = async (req, res) => {
+  const { email, password } = req.body
+
+  try {
+    const user = await User.login(email, password)
+
+    // create a token
+    const token = createToken(user._id)
+
+    res.status(200).json({ email, token })
+  } catch (error) {
+    res.status(400).json({ error: error.message })
+  }
+}
+
+
+
 module.exports = {
   createUserByAdmin,
   recieveEmailToChangePassword,
@@ -196,5 +263,10 @@ module.exports = {
   changeEmail,
   changeBio,
   getInstructorByID,
-  getReviewsInstructor
+  getReviewsInstructor,
+  issueRefund,
+
+
+  loginUser,
+  signupUser
 }
