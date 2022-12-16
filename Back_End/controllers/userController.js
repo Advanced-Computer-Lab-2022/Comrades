@@ -220,6 +220,8 @@ const createUserByAdmin = async (req, res) => {
   }
 }
 
+
+
 // signup a user
 const signupUser = async (req, res) => {
   const { email, username, password, userType, biography } = req.body

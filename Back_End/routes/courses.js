@@ -16,6 +16,10 @@ const {
     changeDiscount,
     getCourseReviewsById,
     getSubtitleByIndexAndCourseID
+
+
+    
+
   } = require('../controllers/courseController')
 
 
@@ -72,6 +76,10 @@ router.get('/getCountries' , getCountries)
 
 //change discount
 router.post('/changeDiscount/:query', changeDiscount)
+
+router.get('/getSubtitleByIndexAndCourseID/:query', getSubtitleByIndexAndCourseID)
+
+
 
 
 

@@ -37,9 +37,9 @@ const NewCourse = () => {
     const [Answer2, setAnswer2] = useState()
     const [Answer3, setAnswer3] = useState()
     const [Answer4, setAnswer4] = useState()
-    const [CorrectAnswer, setCorrectAnswer] = useState(Number)
-
-
+    const [CorrectAnswer, setCorrectAnswer] = useState()
+    
+    
 
     const newSubtitle = { "Name": name, "Exercises": exercises, "Hours": hours, "Link": link, "Subtitle_description": subtitle_description }
 
@@ -83,17 +83,17 @@ const NewCourse = () => {
 
 
     };
-    const Exercise = { "Question": Question, "Answer1": Answer1, "Answer2": Answer2, "Answer3": Answer3, "Answer4": Answer4, "CorrectAnswer": CorrectAnswer }
-
-
-    const handlexercise = async (e) => {
-        if (exercises.length === 0) {
-            setExercises([Exercise])
+        const Exercise = {"Question": Question, "Answer1":Answer1, "Answer2": Answer2, "Answer3": Answer3, "Answer4": Answer4, "CorrectAnswer": CorrectAnswer}
+        
+        
+        const handlexercise = async(x) => {
+            if (exercises.length === 0){
+                setExercises([Exercise])
+            }
+            else(
+                setExercises(current => [... current, Exercise])
+            )
         }
-        else (
-            setExercises(current => [...current, Exercise])
-        )
-    }
 
 
 
@@ -240,8 +240,8 @@ const NewCourse = () => {
                     controlId="exampleForm.ControlTextarea1"
                 >
                     <Form.Label column sm="2">Correct Answer</Form.Label>
-                    <Form.Control
-                        className="input2" type="Number" placeholder="Correct Answer"
+                    <Form.Control  
+                    className="input2" type="text" placeholder="Correct Answer"
                         onChange={(x) => setCorrectAnswer(x.target.value)} value={CorrectAnswer}
                     />
                 </Form.Group>
