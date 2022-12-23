@@ -28,3 +28,11 @@ h1{
 .footer__wrapper{
     color: white;
 }
+.centered__form__wrapper{
+    background-color: white;
+    width: 400px;
+    align-items: flex-start;
+    border-radius: 5px;
+    padding: 50px;
+    margin:0 auto;
+}

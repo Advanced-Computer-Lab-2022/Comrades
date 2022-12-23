@@ -19,7 +19,6 @@ const userSchema = new Schema({
         required: true,
         unique: true
     },
-
     Password: {
         type: String,
         required: true
@@ -40,7 +39,8 @@ const userSchema = new Schema({
 
     Biography: {
         type: String,
-        required: false
+        required: false,
+        default: "No Bio Yet."
     },
 
     PasswordResetToken: {
@@ -58,14 +58,65 @@ const userSchema = new Schema({
                 required: true
             },
         }
-    ]
+    ],
+    SignedCourses: [
+        {
+            CourseName: {
+                type: String,
+                required: false
+            },
+            CompletedSubtitles: [
+                {
+                    SubtitleID: {
+                        type: String,
+                        required: false
+                    }
+                }
+            ],
+            NumSubtitles: {
+                type: Number,
+                required: false,
+                default: 0
+            },
+            MaxNumSubtitles: {
+                type: Number,
+                required: false,
+                default: 0
+            },
+            IsCompleted: {
+                type: Boolean,
+                required: false,
+                default: false
+            },
+            AmountPaid: {
+                type: Number,
+                required: false,
+                default: 0
+
+            }
+
+        }
+    ],
+    Firstname: {
+        type: String,
+        required: false
+    },
+    Lastname: {
+        type: String,
+        required: false
+    },
+    Gender: {
+        type: String,
+        required: false
+    }
 }, { timestamps: true })
 
 // static signup method
-userSchema.statics.signup = async function (email, username, password, userType, biography) {
+userSchema.statics.signup = async function (email, username, password, firstName, lastName, gender) {
 
 
-
+    console.log(username)
+    console.log(email)
     // validation
     if (!email || !password) {
         throw Error('All fields must be filled')
@@ -84,6 +135,13 @@ userSchema.statics.signup = async function (email, username, password, userType,
         throw Error('Email already in use')
     }
 
+    const exists2 = await this.findOne({ Username: username })
+
+    if (exists2) {
+        throw Error('Username already in use')
+    }
+
+
     const salt = await bcrypt.genSalt(10)
     const hash = await bcrypt.hash(password, salt)
 
@@ -91,26 +149,29 @@ userSchema.statics.signup = async function (email, username, password, userType,
         Email: email,
         Username: username,
         Password: hash,
-        UserType: userType,
+        UserType: "it",
         Rating: 0,
         TotalRatings: 0,
         Reviews: [],
-        Biography: biography
+        Biography: "biography",
+        Firstname: firstName,
+        Lastname: lastName,
+        Gender: gender
     })
 
     return user
 }
 
 // static login method
-userSchema.statics.login = async function (email, password) {
+userSchema.statics.login = async function (username, password) {
 
-    if (!email || !password) {
+    if (!username || !password) {
         throw Error('All fields must be filled')
     }
 
-    const user = await this.findOne({ Email: email })
+    const user = await this.findOne({ Username: username })
     if (!user) {
-        throw Error('Incorrect email')
+        throw Error('Incorrect username')
     }
 
     const match = await bcrypt.compare(password, user.Password)

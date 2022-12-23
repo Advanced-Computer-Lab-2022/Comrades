@@ -12,9 +12,8 @@ import React, {
 
 const callAll = (...fns) => (...args) => fns.forEach((fn) => fn && fn(...args));
 
-let id = ""
 
-const handleSubmit = async (e) => {
+const handleSubmit = async (e, id) => {
     let type = "Resolved"
     e.preventDefault()
     const user = { "ProblemID": id, "NewStatus": type}
@@ -28,9 +27,10 @@ const handleSubmit = async (e) => {
     })
     const json = await response.json()
     console.log(json);
+    location.reload()
 }
 
-const handleSubmit2 = async (e) => {
+const handleSubmit2 = async (e, id) => {
     let type = "Pending"
     console.log(id + " HIII  "  + type)
     e.preventDefault()
@@ -44,6 +44,7 @@ const handleSubmit2 = async (e) => {
         }
     })
     const json = await response.json()
+    location.reload()
 }
 
 const ModalContext = createContext();
@@ -79,7 +80,6 @@ function ModalContentsBase(props) {
 }
 
 function ModalContents({ title, problemID, children, ...props }) {
-    id = problemID;
     return (
         <ModalContentsBase {...props}>
             <div>
@@ -89,12 +89,12 @@ function ModalContents({ title, problemID, children, ...props }) {
                 <Modal.Body>{children}</Modal.Body>
                 <Modal.Footer>
                     <ModalDismissButton>
-                        <Button variant="success" onClick={handleSubmit} >
+                        <Button variant="success" onClick={ (e)=> {handleSubmit(e, problemID)}} >
                             Mark Resolved
                         </Button>
                     </ModalDismissButton>
                     <ModalDismissButton>
-                        <Button variant="danger" onClick={handleSubmit2}>
+                        <Button variant="danger" onClick={ (e)=> {handleSubmit2(e, problemID)}}>
                             Mark Pending
                         </Button>
                     </ModalDismissButton>

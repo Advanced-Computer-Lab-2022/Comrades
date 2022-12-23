@@ -31,7 +31,7 @@ const createCourse = async (req, res) => {
     var TotalHours = 0;
     var DiscountedPrice = Price * (1 - Discount / 100);
     for (let i = 0; i < Subtitles.length; i++) {
-        TotalHours = TotalHours + Subtitles[i].Hours;
+        TotalHours = TotalHours + parseInt(Subtitles[i].Hours);
     }
     console.log(DiscountedPrice)
     try {
@@ -64,7 +64,7 @@ const getCurrency = async (req, res) => {
 }
 // get all courses
 const getCourses = async (req, res) => {
-    const courses = await Course.find({}, 'Title  Subject  Subtitles  Price  DiscountedPrice  TotalHours  Rating  CreditHours  Discount');
+    const courses = await Course.find({}, 'Title Popularity Subject  Subtitles  Price  DiscountedPrice  TotalHours  Rating  CreditHours  Discount');
 
     res.status(200).json(courses)
 }
@@ -124,10 +124,11 @@ const searchInstructor = async (req, res) => {
 
 const getCourseById = async (req, res) => {
     let query = JSON.parse(req.params.query)
-    console.log(query.id);
-    const courses = await Course.find({ "_id": query.id })
+    console.log(query.RequestID);
+    const courses = await Course.find({ "Title": query.RequestID })
     res.status(200).json(courses)
 }
+
 
 
 const getSubtitleByIndexAndCourseID = async (req, res) => {
@@ -135,7 +136,7 @@ const getSubtitleByIndexAndCourseID = async (req, res) => {
     console.log(query.id);
     console.log(query.index);
     const courses = await Course.find({ "_id": query.id })
-    console.log(courses[0].Subtitles[index])
+    console.log(courses[0].Subtitles[query.index])
     res.status(200).json(courses)
 }
 
@@ -143,7 +144,7 @@ const getSubtitleByIndexAndCourseID = async (req, res) => {
 const getCourseReviewsById = async (req, res) => {
     let query = JSON.parse(req.params.query)
     console.log(query.id);
-    const courses = await Course.find({ "_id": query.id },'Reviews')
+    const courses = await Course.find({ "_id": query.id }, 'Reviews')
     console.log(courses[0].Reviews);
     res.status(200).json(courses[0].Reviews)
 }
@@ -225,7 +226,7 @@ const changeDiscount = async (req, res) => {
             _id: query.id
         },
         'Price');
-    let newDiscoutnedPrice = requiredCourse[0].Price*(1-newDiscount/100);
+    let newDiscoutnedPrice = requiredCourse[0].Price * (1 - newDiscount / 100);
     today = mm + '/' + dd + '/' + yyyy;
     console.log(today);
     let doc = await Course.findOneAndUpdate(
@@ -236,16 +237,31 @@ const changeDiscount = async (req, res) => {
         }
     )
 };
-const getSubtitleByIndexAndCourseID = async (req, res) => {
-    let query = JSON.parse(req.params.query)
-    console.log(query.id);
-    console.log(query.index);
-    const courses = await Course.find({ "_id": query.id })
-    console.log(courses[0].Subtitles[query.index])
-    const subtitle = courses[0].Subtitles[query.index]
-    res.status(200).json(subtitle)
+
+
+const incrementPopularity = async (req, res) => {
+    const { CourseID } = req.body;
+
+    const course = await Course.find({ Title: CourseID })
+    let newPop = (parseInt(course[0].Popularity))+1;
+
+    let doc = await Course.findOneAndUpdate(
+        { Title: CourseID },
+        { Popularity: newPop},
+        {
+            new: true
+        }
+    );
+
+    res.status(200).json(doc)
+
 }
 
+const getCourseByName = async (req, res) => {
+    let query = JSON.parse(req.params.query)
+    const courses = await Course.find({ "Title": query.RequestID })
+    res.status(200).json(courses[0])
+}
 
 
 
@@ -265,7 +281,9 @@ module.exports = {
     rateCourse,
     changeDiscount,
     getCourseReviewsById,
-    getSubtitleByIndexAndCourseID
+    getSubtitleByIndexAndCourseID,
+    incrementPopularity,
+    getCourseByName
 }
 
 

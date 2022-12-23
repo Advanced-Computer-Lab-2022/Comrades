@@ -91,7 +91,8 @@ const OneCourse = () => {
 
     useEffect(() => {
         const getCourses = async () => {
-            const response = await fetch("/api/courses/getCourseById/{\"id\": \"" + userId + "\"}")
+            console.log(userId)
+            const response = await fetch("/api/courses/getCourseById/{\"RequestID\": \"" + userId + "\"}")
             const json = await response.json()
 
 

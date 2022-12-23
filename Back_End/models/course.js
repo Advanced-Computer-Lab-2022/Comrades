@@ -6,9 +6,15 @@ const courseSchema = new Schema({
         type: String,
         required: true
     },
+    Popularity: {
+        type: Number,
+        required: false,
+        default: 0
+    },
     Title: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     Subject: {
         type: String,

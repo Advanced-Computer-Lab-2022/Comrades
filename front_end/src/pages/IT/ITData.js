@@ -8,42 +8,33 @@ import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import ReportIcon from '@mui/icons-material/Report';
 import PaidIcon from '@mui/icons-material/Paid';
 import MeetingRoomIcon from '@mui/icons-material/MeetingRoom';
+import ImportContactsIcon from '@mui/icons-material/ImportContacts';
 import DiscountIcon from '@mui/icons-material/Discount';
 
-export const AdminData = [
+export const ITData = [
     {
         id: 0,
-        icon: <PersonAddIcon />,
-        text: "Add User",
-        link: "/nu",
+        icon: <HomeIcon />,
+        text: "Home",
+        link: "/ithome",
         classes: "sideitem__admin"
     },
     {
         id: 1,
-        icon: <ReportIcon />,
-        text: "Reported Problems",
-        link: "/adminViewProblems",
+        icon: <ImportContactsIcon />,
+        text: "My Courses",
+        link: "/ITMyCourses",
         classes: "sideitem__admin"
     },
     {
         id: 2,
-        icon: <PaidIcon />,
-        text: "Refunds",
-        link: "/adminRefundUser",
+        icon: <SettingsIcon />,
+        text: "Settings",
+        link: "/ithome",
         classes: "sideitem__admin"
     },
-    {
-        id: 3,
-        icon: <MeetingRoomIcon />,
-        text: "Corporate Trainees Access",
-        link: "/adminCourseRequests",
-        classes: "sideitem__admin"
-    },
-    {
-        id: 4,
-        icon: <DiscountIcon />,
-        text: "Course Promotions",
-        link: "/nu",
-        classes: "sideitem__admin"
-    },
+
+
+
+
 ]

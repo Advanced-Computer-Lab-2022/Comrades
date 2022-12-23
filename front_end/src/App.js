@@ -1,7 +1,9 @@
 // import logo from './logo.svg';
 // import './App.css';
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { Component } from 'react';
+import { useAuthContext } from './hooks/useAuthContext'
+
 
 
 // pages & components
@@ -29,6 +31,15 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import AdminRefundUser from './pages/AdminRefundUser';
 import AdminViewProblems from './pages/AdminViewProblems';
+import AdminCourseRequests from './pages/AdminCourseRequests';
+import CTHome from './pages/CTHome';
+import ITHome from './pages/ITHome';
+import CTRequestCourseAccess from './pages/CTRequestCourseAccess'
+import ITMyCourses from './pages/ITMyCourses'
+import CTMyCourses from './pages/CTMyCourses'
+import Certificate from './pages/Certificate'
+
+
 
 
 
@@ -38,6 +49,23 @@ import OpenSubtitle from './pages/OpenSubtitle'
 
 
 function App() {
+
+  const { user } = useAuthContext()
+
+  const redirectAfterLogin = () => {
+    console.log(user.UserType)
+    if (user.UserType == "instructor")
+      return "/contract"
+    else if (user.UserType == "admin")
+      return "/adminViewProblems"
+    else if (user.UserType == "ct")
+      return "/cthome"
+    else if (user.UserType == "it")
+      return "/ithome"
+    else
+      return "/home"
+  }
+
   return (
     <div className="App">
 
@@ -48,6 +76,36 @@ function App() {
         <div className="pages">
           <Routes>
 
+
+
+          
+          <Route
+              path="/Certificate"
+              element={<Certificate />}
+            />
+
+
+            <Route
+              path="/CTMyCourses"
+              element={<CTMyCourses />}
+            />
+
+            <Route
+              path="/ITMyCourses"
+              element={<ITMyCourses />}
+            />
+            <Route
+              path="/ithome"
+              element={<ITHome />}
+            />
+            <Route
+              path="/cthome"
+              element={<CTHome />}
+            />
+            <Route
+              path="/ctrequestcourse"
+              element={<CTRequestCourseAccess />}
+            />
             <Route
               path="/gci"
               element={<GetCoursesByInstructor />}
@@ -63,6 +121,10 @@ function App() {
             <Route
               path="/adminViewProblems"
               element={<AdminViewProblems />}
+            />
+            <Route
+              path="/adminCourseRequests"
+              element={<AdminCourseRequests />}
             />
 
             <Route
@@ -123,17 +185,18 @@ function App() {
               element={<Profile />}
             />
             <Route path="/home"
-              element={<Home />} />
+              element={!user ? <Login /> : <Navigate to={redirectAfterLogin()} />}
+            />
 
             <Route path="/"
               element={<LandingPage />} />
             <Route
               path="/login"
-              element={<Login />}
+              element={!user ? <Login /> : <Navigate to={redirectAfterLogin()} />}
             />
             <Route
               path="/signup"
-              element={<Signup />}
+              element={!user ? <Signup /> : <Navigate to={redirectAfterLogin()} />}
             />
             <Route
               path="/nc"

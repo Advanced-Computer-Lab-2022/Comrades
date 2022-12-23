@@ -29,7 +29,7 @@ const NewUser = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        const user = { "Email": email, "Username": name, "Password": password, "UserType": type }
+        const user = { "Email": email, "Username": name.toLowerCase(), "Password": password, "UserType": type }
 
         const response = await fetch('/api/users/createUserByAdmin', {
             method: 'POST',

@@ -22,6 +22,7 @@ import { useEffect, useState } from "react"
 const GetCourses = () => {
     const [subtitles, setSubtitles] = useState([])
     const [courses, setCourses] = useState(null)
+    const [bestCourse, setBestCourse] = useState({})
     const [country, setCountry] = useState()
     const [rate, setRate] = useState(1)
     const [code, setCode] = useState("USD")
@@ -63,8 +64,16 @@ const GetCourses = () => {
             let sub = [];
             let index = 0;
             if (response.ok) {
-                console.log("ok")
                 setCourses(json)
+                let maxidx = 0;
+                let max = json[0].Popularity
+                for (let i = 1; i < json.length; i++) {
+                    if (json[i].Popularity > max) {
+                        max = json[i].Popularity;
+                        maxidx = i
+                    }
+                }
+                setBestCourse(json[maxidx]);
                 for (let i = 0; i < json.length; i++) {
                     for (let j = 0; j < json[i].Subtitles.length; j++) {
                         sub.push({
@@ -171,7 +180,35 @@ const GetCourses = () => {
                 <hr></hr>
                 <br></br>
                 <br></br>
+                <h2>
+                    All time MVP Course
+                </h2>
+                <br></br>
+                <Container className="course__card" key={bestCourse._id} onClick={() => window.location.href = `/vc?userId=${bestCourse._id}`}>
+                    <Row>
+                        <img style={{ width: "300px" }} src="https://img.youtube.com/vi/rfscVS0vtbw/0.jpg"></img>
+                        <Container className="text-align-center" style={{ width: "300px" }}>
+                            <h4>{bestCourse.Title}</h4>
+                            <p style={{ margin: "0px" }}>{bestCourse.TotalHours} Hours</p>
+                            <p style={{ fontWeight: "700" }}>{bestCourse.Rating} 🌟</p>
+                            <p>
+                                {code}   {bestCourse.DiscountedPrice * rate} ({bestCourse.Discount}%)
+                            </p>
+                            <h6>
+                                {bestCourse.Popularity + " Users signed up for this course already!"}
+                            </h6>
+                        </Container>
 
+                    </Row>
+                    <br></br>
+                    <hr></hr>
+                    <br></br>
+                </Container>
+                <br></br>
+                <br></br>
+                <hr></hr>
+                <br></br>
+                <br></br>
                 <Row>
 
                     <Col xs={3} className="filters__wrapper">
@@ -191,7 +228,7 @@ const GetCourses = () => {
                             <Form.Group className="mb-3" controlId="formPlaintextEmail">
 
                                 <Row sm="10">
-                                    <h4 style={{ textAlign: "left", margin: "0px" }}>Subject / Rating</h4>
+                                    <h4 style={{ textAlign: "left", margin: "0px" }}>Subject & Rating</h4>
                                     <p style={{ textAlign: "left" }}>
                                         (Less than or equal)
                                     </p>

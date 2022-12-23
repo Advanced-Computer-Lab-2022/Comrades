@@ -1,8 +1,10 @@
 const User = require('../models/user')
 const mongoose = require('mongoose')
 const nodemailer = require("nodemailer");
+const bcrypt = require('bcrypt')
 
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
+const { distinct } = require('../models/user');
 
 const createToken = (_id) => {
   return jwt.sign({ _id }, process.env.SECRET, { expiresIn: '3d' })
@@ -33,10 +35,9 @@ function generate_token(length) {
 
 // Get instructor by ID
 const getInstructorByID = async (req, res) => {
-  // let query = JSON.parse(req.params.query);
-  // console.log(query.query);
-  const users = await User.find({ "_id": '638dd7f86b5480ed4a1b7518' },);
-  console.log("hi")
+  console.log(JSON.parse(req.params.query))
+  const users = await User.find({ "Username": JSON.parse(req.params.query).RequestID },);
+  console.log(users[0])
   res.status(200).json(users[0])
 }
 
@@ -173,6 +174,127 @@ const changeBio = async (req, res) => {
   )
 };
 
+
+
+const emailCertificate = async (req, res) => {
+  const { Username, Email, CourseID } = req.body
+
+  let options = {
+    from: "acl-comrades-team-2022@outlook.com", // sender address
+    to: Email, // list of receivers
+    subject: "Certificate of Course Completion", // Subject line
+    text: CourseID, // plain text body
+    html: "<h2>Click the following link to </h2>" +
+          "<h3> http://localhost:3000/Certificate?Username=" + Username + "&Course=" + CourseID.replace(/ /g, "%") + "</h3>"
+  }
+
+  transporter.sendMail(options, function (err, info) {
+    if (err) {
+      console.log(err);
+      return;
+    }
+    console.log("Email sent");
+  })
+
+
+
+};
+
+const requestRefund = async (req, res) => {
+  const { Username, CourseID } = req.body
+
+  const users = await User.find({ "Username": Username });
+  let user = users[0]
+  let newSignedCourses = [];
+  let newWallet = user.Wallet;
+  for (let i = 0; i < user.SignedCourses.length; i++) {
+    if (user.SignedCourses[i].CourseName === CourseID) {
+      console.log(user.SignedCourses[i].AmountPaid)
+      newWallet += user.SignedCourses[i].AmountPaid
+    }
+    else {
+      newSignedCourses.push(user.SignedCourses[i])
+    }
+  }
+  let doc = await User.findOneAndUpdate(
+    { "Username": Username },
+    { Wallet: newWallet, SignedCourses: newSignedCourses },
+    {
+      new: true
+    }
+  )
+  res.status(200).json({ done: doc })
+
+};
+
+const userFinishSubtitle = async (req, res) => {
+  const { Username, CourseID, SubtitleID } = req.body
+
+  const users = await User.find({ "Username": Username });
+  let user = users[0]
+  for (let i = 0; i < user.SignedCourses.length; i++) {
+    if (user.SignedCourses[i].CourseName == CourseID) {
+      let isFound = false;
+      for (let j = 0; j < user.SignedCourses[i].CompletedSubtitles.length; j++) {
+        if (user.SignedCourses[i].CompletedSubtitles[j].SubtitleID === SubtitleID) {
+          isFound = true;
+          break;
+        }
+      }
+      if (!isFound) {
+        let course = user.SignedCourses[i];
+        let progress = user.SignedCourses[i].NumSubtitles
+        progress = progress - 1;
+        let isDone = false
+        if (progress == 0)
+          isDone = true;
+        if (course.CompletedSubtitles.includes(SubtitleID))
+          break;
+        else {
+          user.SignedCourses[i].CompletedSubtitles.push(({ SubtitleID }));
+          user.SignedCourses[i].NumSubtitles--;
+          user.SignedCourses[i].IsCompleted = isDone;
+
+          let doc = await User.findOneAndUpdate(
+            { "Username": Username },
+            { SignedCourses: user.SignedCourses[i] },
+            {
+              new: true
+            }
+          )
+          res.status(200).json({ done: doc })
+          break;
+        }
+      }
+      break;
+    }
+  }
+  res.status(200).json({ error: "Already exist" })
+};
+
+const addCourseToUser = async (req, res) => {
+
+  const { Username, CourseName, NumSubtitles } = req.body
+  try {
+    const users = await User.find({ "Username": Username });
+
+    let courses = users[0].SignedCourses
+    courses.push({ CourseName: CourseName, NumSubtitles: NumSubtitles, MaxNumSubtitles: NumSubtitles })
+    let doc = await User.findOneAndUpdate(
+      { "Username": Username },
+      { SignedCourses: courses },
+      {
+        new: true
+      }
+    )
+    res.status(200).json({ done: "Done" })
+
+  }
+  catch {
+    res.status(400).json({ error: "User not found" })
+  }
+};
+
 const issueRefund = async (req, res) => {
 
   const { Username, Amount } = req.body
@@ -189,7 +311,7 @@ const issueRefund = async (req, res) => {
         new: true
       }
     )
-    res.status(200).json({done: "Done"})
+    res.status(200).json({ done: "Done" })
 
   }
   catch {
@@ -202,7 +324,6 @@ const issueRefund = async (req, res) => {
 // create a new user by admin
 const createUserByAdmin = async (req, res) => {
   const { Email, Username, Password, UserType } = req.body
-  console.log(req.body);
   const Rating = 0;
   const TotalRatings = 0;
   if (UserType != "admin" && UserType != "instructor" && UserType != "ct") {
@@ -210,7 +331,9 @@ const createUserByAdmin = async (req, res) => {
   }
   else {
     try {
-      const data = await User.create({ Email, Username, Password, UserType, Rating, TotalRatings })
+      const salt = await bcrypt.genSalt(10)
+      const hash = await bcrypt.hash(Password, salt)
+      const data = await User.create({ Email, Username, Password: hash, UserType, Rating, TotalRatings })
       res.status(200).json(data)
     }
     catch (error) {
@@ -232,7 +355,7 @@ const signupUser = async (req, res) => {
     // create a token
     const token = createToken(user._id)
 
-    res.status(200).json({ email, token })
+    res.status(200).json({ username, token })
   } catch (error) {
     res.status(400).json({ error: error.message })
   }
@@ -240,16 +363,18 @@ const signupUser = async (req, res) => {
 
 // login a user
 const loginUser = async (req, res) => {
-  const { email, password } = req.body
+  const { username, password } = req.body
 
   try {
-    const user = await User.login(email, password)
+    const user = await User.login(username, password)
 
     // create a token
     const token = createToken(user._id)
 
-    res.status(200).json({ email, token })
+    console.log({ username, token })
+    res.status(200).json({ UserType: user.UserType, username, token })
   } catch (error) {
+    console.log(error.message)
     res.status(400).json({ error: error.message })
   }
 }
@@ -267,7 +392,10 @@ module.exports = {
   getInstructorByID,
   getReviewsInstructor,
   issueRefund,
-
+  addCourseToUser,
+  userFinishSubtitle,
+  requestRefund,
+  emailCertificate,
 
   loginUser,
   signupUser

@@ -1,12 +1,11 @@
-const Problem = require('../models/problem')
+const CourseRequest = require('../models/courseRequest')
 const mongoose = require('mongoose')
 
-
-const createTestProblem = async (req, res) => {
+const createCourseRequest = async (req, res) => {
     console.log(req.body);
-    const { ProblemVal, ProblemType } = req.body
+    const { CourseID, UserID, Status } = req.body
     try {
-        const data = await Problem.create({ Problem: ProblemVal, ProblemType: ProblemType })
+        const data = await CourseRequest.create({ CourseID, UserID, Status })
         res.status(200).json(data)
     }
     catch (error) {
@@ -15,16 +14,12 @@ const createTestProblem = async (req, res) => {
     }
 }
 
-const updateProblemStatus = async (req, res) => {
+const updateRequestStatus = async (req, res) => {
     console.log(req.body);
-    const { ProblemID, NewStatus } = req.body
+    const { RequestID } = req.body
     try {
-        let doc = await Problem.findOneAndUpdate(
-            { _id: ProblemID },
-            { Status: NewStatus },
-            {
-                new: true
-            }
+        let doc = await CourseRequest.findOneAndDelete(
+            { _id: RequestID },
         );
         console.log(doc)
         res.status(200).json(doc)
@@ -36,10 +31,10 @@ const updateProblemStatus = async (req, res) => {
 }
 
 
-const getAllProblems = async (req, res) => {
+const getAllRequests = async (req, res) => {
 
     try {
-        const data = await Problem.find({})
+        const data = await CourseRequest.find({})
         res.status(200).json(data)
     }
     catch (error) {
@@ -50,8 +45,10 @@ const getAllProblems = async (req, res) => {
 
 
 
+
+
 module.exports = {
-    createTestProblem,
-    getAllProblems,
-    updateProblemStatus
+    createCourseRequest,
+    getAllRequests,
+    updateRequestStatus
 }

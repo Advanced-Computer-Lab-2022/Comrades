@@ -1,4 +1,5 @@
 const express =require ('express')
+
 const {
   createUserByAdmin,
   recieveEmailToChangePassword,
@@ -10,6 +11,10 @@ const {
   getInstructorByID,
   getReviewsInstructor,
   issueRefund,
+  addCourseToUser,
+  userFinishSubtitle,
+  requestRefund,
+  emailCertificate,
 
   loginUser,
   signupUser
@@ -17,6 +22,8 @@ const {
 
 
 const router = express.Router()
+
+
 
 // login route
 router.post('/login', loginUser)
@@ -29,13 +36,17 @@ router.post('/signup', signupUser)
 
 
 
+router.post('/emailCertificate', emailCertificate)
+
+
+router.post('/requestRefund', requestRefund)
+
+router.post('/userFinishSubtitle', userFinishSubtitle)
 
 
 
-
-
-
-
+// Add course to user signed up list.
+router.post('/addCourseToUser', addCourseToUser)
 
 
 // Issue Refund
@@ -47,7 +58,7 @@ router.get('/getReviewsInstructor',getReviewsInstructor)
 
 
 // Get Instructor by ID
-router.get('/getInstructorByID',getInstructorByID)
+router.get('/getInstructorByID/:query',getInstructorByID)
 
 
 //Rate instructor

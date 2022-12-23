@@ -15,20 +15,29 @@ const {
     rateCourse,
     changeDiscount,
     getCourseReviewsById,
-    getSubtitleByIndexAndCourseID
+    getSubtitleByIndexAndCourseID,
+    incrementPopularity,
+    getCourseByName
 
 
     
 
   } = require('../controllers/courseController')
+  const requireAuth = require('../middleware/requireAuth')
 
 
 const router = express.Router()
+
+// // require auth for all routes
+// router.use(requireAuth)
+
 
 router.get('/test', function routeHandler(req, res) {
   res.send('ok');
 });
 
+
+router.post('/incrementPopularity', incrementPopularity)
 
 router.get('/getSubtitleByIndexAndCourseID/:query', getSubtitleByIndexAndCourseID)
 
@@ -70,6 +79,9 @@ router.get('/filterCoursesByPriceInstructor/:query' , filterCoursesByPriceInstru
 
 // get course id
 router.get('/getCourseById/:query' , getCourseById)
+router.get('/getCourseByName/:query' , getCourseByName)
+
+
 
 // get course id
 router.get('/getCountries' , getCountries)

@@ -8,42 +8,40 @@ import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import ReportIcon from '@mui/icons-material/Report';
 import PaidIcon from '@mui/icons-material/Paid';
 import MeetingRoomIcon from '@mui/icons-material/MeetingRoom';
+import ImportContactsIcon from '@mui/icons-material/ImportContacts';
 import DiscountIcon from '@mui/icons-material/Discount';
 
-export const AdminData = [
+export const CTData = [
     {
         id: 0,
-        icon: <PersonAddIcon />,
-        text: "Add User",
-        link: "/nu",
+        icon: <HomeIcon />,
+        text: "Home",
+        link: "/cthome",
         classes: "sideitem__admin"
     },
     {
         id: 1,
-        icon: <ReportIcon />,
-        text: "Reported Problems",
-        link: "/adminViewProblems",
+        icon: <MeetingRoomIcon />,
+        text: "Request Course Access",
+        link: "/ctrequestcourse",
         classes: "sideitem__admin"
     },
     {
         id: 2,
-        icon: <PaidIcon />,
-        text: "Refunds",
-        link: "/adminRefundUser",
+        icon: <ImportContactsIcon />,
+        text: "My Courses",
+        link: "/CTMyCourses",
         classes: "sideitem__admin"
     },
     {
         id: 3,
-        icon: <MeetingRoomIcon />,
-        text: "Corporate Trainees Access",
-        link: "/adminCourseRequests",
+        icon: <SettingsIcon />,
+        text: "Settings",
+        link: "/cthome",
         classes: "sideitem__admin"
     },
-    {
-        id: 4,
-        icon: <DiscountIcon />,
-        text: "Course Promotions",
-        link: "/nu",
-        classes: "sideitem__admin"
-    },
+
+
+
+
 ]
