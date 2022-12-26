@@ -32,28 +32,28 @@ function Naavbar  (prop)  {
         fetchSearch()
     }
     return (
-        <Navbar bg="light" expand="lg">
-            <Container>
-                <Navbar.Brand href="/">Comrades{prop.name}</Navbar.Brand>
-                <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="me-auto">
-                        <NavDropdown title="Courses" id="basic-nav-dropdown">
-                            <NavDropdown.Item href="#action/3.1">Math</NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.2">Computer</NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.3">Marketing</NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.4">Business</NavDropdown.Item>
-                        </NavDropdown>
-                    </Nav>
-                    <Nav>
-                        <Form className="d-flex" onSubmit={handleSubmit}>
-                            
-                            <Button type="submit" variant="outline-success">Sign in </Button>
-                        </Form>
-                    </Nav>
-                </Navbar.Collapse>
-            </Container>
-        </Navbar>
+        <Navbar bg="dark" variant="dark" expand="lg">
+        <Container>
+            <Navbar.Brand href="/">Comrades</Navbar.Brand>
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse id="basic-navbar-nav">
+                <Nav className="me-auto">
+                    <NavDropdown title="Courses" id="basic-nav-dropdown">
+                        <NavDropdown.Item href="#action/3.1">Math</NavDropdown.Item>
+                        <NavDropdown.Item href="#action/3.2">Computer</NavDropdown.Item>
+                        <NavDropdown.Item href="#action/3.3">Marketing</NavDropdown.Item>
+                        <NavDropdown.Item href="#action/3.4">Business</NavDropdown.Item>
+                    </NavDropdown>
+                </Nav>
+                <Nav>
+                    <Form className="d-flex" >
+
+                        <Button href="/" variant="outline-light" size="sm">Log Out </Button>
+                    </Form>
+                </Nav>
+            </Navbar.Collapse>
+        </Container>
+    </Navbar>
 
     );
 }

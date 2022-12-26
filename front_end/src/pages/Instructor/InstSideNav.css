@@ -1,37 +1,46 @@
 .sidenav {
     width: 200px;
     transition: width 0.3s ease-in-out;
-    height: 100vh;
-    background-color: rgb(2, 60, 169);
-    padding-top: 28px;
-    }
-    
-   
-    
-    .sideitem {
+    min-height: 100vh;
+    height: 100%;
+    background-color: #2c3238;
+    padding-top: 10px;
+}
+
+
+
+.sideitem {
     display: flex;
     align-items: center;
-    padding: 40px 20px;
+    padding: 30px 20px;
     cursor: pointer;
     color: #B2BAC2;
     text-decoration: none;
-    }
-    
-    .linkText {
-    padding-left: 20px;
-    }
-    
-    .linkTextClosed {
+}
+
+.linkText {
+    padding: 0px;
+    padding-top: 15px;
+    padding-left: 5px;
+}
+
+.linkTextClosed {
     /* composes: linkText; */
     visibility: hidden;
-    }
-    
-    .sideitem:hover {
-    background-color: #244f7d1c;
-    
-    }
-    
-    .menuBtn {
+}
+
+.sideitem:hover {
+    background-color: #343a3f;
+    color: white;
+}
+
+.current__item {
+    background-color: #343a3f;
+    color: white;
+}
+
+
+.menuBtn {
     align-self: center;
     align-self: flex-start;
     justify-self: flex-end;
@@ -40,4 +49,4 @@
     border: none;
     cursor: pointer;
     padding-left: 20px;
-    }
+}
