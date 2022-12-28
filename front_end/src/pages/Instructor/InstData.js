@@ -23,11 +23,6 @@ text: "Add Course",
 link: "/nc"
 },
 
-{
-id: 3,
-icon: <GavelSharpIcon/>,
-text: "Show Contract",
-link: "/contract"
-},
+
 
 ]

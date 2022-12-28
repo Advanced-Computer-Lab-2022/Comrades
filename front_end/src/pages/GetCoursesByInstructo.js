@@ -18,7 +18,6 @@ import { useEffect, useState } from "react";
 const GetCoursesByInstructor = (prop) => {
   const [myCourses, setMyCourses] = useState(null);
   const [search, setSearch] = useState("");
-  const [instructor, setInstructor] = useState("");
   const [reviews, setReviews] = useState([]);
   const [cReviews, setCReviews] = useState([]);
   const [price , setPrice] = useState('')
@@ -105,59 +104,10 @@ const getBySubject = async(z) =>{
 
   return (
     <div>
-      <Navbar bg="light" expand="lg">
-        <Container>
-          <Navbar.Brand href="/">Comrades{prop.name}</Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="me-auto">
-              <NavDropdown title="Courses" id="basic-nav-dropdown">
-                <NavDropdown.Item href="#action/3.1">Math</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">Computer</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3">
-                  Marketing
-                </NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.4">Business</NavDropdown.Item>
-              </NavDropdown>
-            </Nav>
-            <Nav>
-              <Form className="d-flex" onSubmit={handleSubmit2}>
-                <Form.Control
-                  type="search"
-                  placeholder="Search"
-                  className="me-2"
-                  aria-label="Search"
-                  onChange={(e) => setSearch(e.target.value)}
-                  value={search}
-                />
-                <Button type="submit" variant="outline-success">
-                  Search
-                </Button>
-              </Form>
-            </Nav>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
+     <Naavbar/>
       <br></br>
 
-      <Card style={{ width: "40rem" }}>
-        <Card.Img variant="top" style={{ width: '8rem' }} src="https://img-c.udemycdn.com/user/200_H/12613608_fae6.jpg" />
-        <Card.Body>
-          <Card.Title>{instructor.Email} &nbsp;  &nbsp;
-            <a href="/c" class="btn btn-primary">Edit email</a>
-          </Card.Title>
-          <Card.Text>
-            {instructor.Biography}
-            <br></br>
-            <a href="/cb" class="btn btn-primary">Edit Bio</a>
-          </Card.Text>
-          <Card.Text>
-            Rating: {instructor.Rating}
-            <br></br>
-          </Card.Text>
-
-        </Card.Body>
-      </Card>
+     
       <br></br>
       <br></br>
 
