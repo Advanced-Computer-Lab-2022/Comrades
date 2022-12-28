@@ -80,7 +80,7 @@ const filterCoursesBySubjectInstructor = async (req, res) => {
                 { "Subject": query }
             ],
         },
-        'Title  Instructor  Price DiscountedPrice Subject'
+        'Title Popularity Subject  Subtitles  Price  DiscountedPrice  TotalHours  Rating  CreditHours  Discount'
     );
     res.status(200).json(courses)
 }
@@ -99,7 +99,8 @@ const search = async (req, res) => {
     const courses = await Course.find(
         { $or: [{ "Instructor": query }, { "Title": query }, { "Subject": query }] },
         // { "Instructor": query },
-        'Title  Subject  Subtitles  Price  TotalHours  Rating  CreditHours  Discount');
+        'Title Popularity Subject  Subtitles  Price  DiscountedPrice  TotalHours  Rating  CreditHours  Discount'
+        );
 
     res.status(200).json(courses)
 }
@@ -172,7 +173,7 @@ const filterCoursesByPriceInstructor = async (req, res) => {
 
 
         },
-        'Title  Instructor  Price DiscountedPrice Subject'
+        'Title Popularity Subject  Subtitles  Price  DiscountedPrice  TotalHours  Rating  CreditHours  Discount'
     );
     res.status(200).json(courses)
 }
@@ -182,7 +183,9 @@ const filterCoursesByPriceInstructor = async (req, res) => {
 const filterCoursesByPrice = async (req, res) => {
     let query = req.params.query;
     console.log(query.length);
-    const courses = await Course.find({ "DiscountedPrice": { $lte: query } }, 'Title  Subject  Subtitles  Price DiscountedPrice TotalHours  Rating  CreditHours  Discount');
+    const courses = await Course.find({ "DiscountedPrice": { $lte: query } },
+        'Title Popularity Subject  Subtitles  Price  DiscountedPrice  TotalHours  Rating  CreditHours  Discount'
+    );
 
     res.status(200).json(courses)
 }
@@ -193,15 +196,29 @@ const filterCoursesBySubjectAndRating = async (req, res) => {
     let subject = query.subject;
     subject = subject.replace(/\s/g, '');
     let rating = query.rating;
-    console.log(rating);
-    const courses = await Course.find(
-        {
-            $and: [
-                { "Subject": subject },
-                { "Rating": { $gte: rating } }
-            ]
-        },
-        'Title  Subject  Subtitles  Price  TotalHours  Rating  CreditHours  Discount');
+    console.log("Rating: " + rating);
+    console.log("Subject " + subject.length);
+    let courses;
+    if (subject == "") {
+        courses = await Course.find(
+            {
+                "Rating": { $gte: rating }
+            },
+            'Title Popularity Subject  Subtitles  Price  DiscountedPrice  TotalHours  Rating  CreditHours  Discount'
+        );
+    }
+    else {
+        courses = await Course.find(
+            {
+                $and: [
+                    { "Subject": subject },
+                    { "Rating": { $gte: rating } }
+                ]
+            },
+            'Title Popularity Subject  Subtitles  Price  DiscountedPrice  TotalHours  Rating  CreditHours  Discount'
+        );
+    }
+
 
     console.log(courses);
     res.status(200).json(courses)
@@ -243,11 +260,11 @@ const incrementPopularity = async (req, res) => {
     const { CourseID } = req.body;
 
     const course = await Course.find({ Title: CourseID })
-    let newPop = (parseInt(course[0].Popularity))+1;
+    let newPop = (parseInt(course[0].Popularity)) + 1;
 
     let doc = await Course.findOneAndUpdate(
         { Title: CourseID },
-        { Popularity: newPop},
+        { Popularity: newPop },
         {
             new: true
         }

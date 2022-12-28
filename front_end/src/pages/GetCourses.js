@@ -27,15 +27,20 @@ const GetCourses = () => {
     const [rate, setRate] = useState(1)
     const [code, setCode] = useState("USD")
 
+
+    const [search, setSearch] = useState('')
+
+
     const [countries, setCountries] = useState([]);
 
     const [open, setOpen] = useState([]);
 
     const [price, setPrice] = useState('');
     const [subject, setSubject] = useState('');
-    const [rating, setRating] = useState(Number);
+    const [rating, setRating] = useState(0);
 
     const [show, setShow] = useState([]);
+
 
 
 
@@ -56,6 +61,20 @@ const GetCourses = () => {
         console.log(subtitles);
         // console.log("Rate: " + rate)
     }
+
+    const handleSubmit2 = async (e) => {
+        e.preventDefault()
+        const fetchSearch = async () => {
+            const response = await fetch('/api/courses/Search/' + search)
+            const json = await response.json()
+
+            if (response.ok) {
+                setCourses(json)
+            }
+        }
+        fetchSearch()
+    }
+
 
     useEffect(() => {
         const fetchCourses = async () => {
@@ -200,10 +219,30 @@ const GetCourses = () => {
                         </Container>
 
                     </Row>
-                    <br></br>
-                    <hr></hr>
-                    <br></br>
                 </Container>
+                <br></br>
+                <hr></hr>
+                <br></br>
+                <h2>
+                    Looking for something specific?
+                </h2>
+                <p>
+                    If you are feeling lucky, you can search using
+                    <span style={{ fontWeight: "500" }}>
+                        Course title, Subject or Instructor
+                    </span>
+                    .
+                </p>
+                <Form className="d-flex" onSubmit={handleSubmit2}>
+                    <Form.Control
+                        type="search"
+                        placeholder="Search"
+                        className="me-2"
+                        aria-label="Search"
+                        onChange={(e) => setSearch(e.target.value)} value={search}
+                    />
+                    <Button type="submit" variant="dark">Search</Button>
+                </Form>
                 <br></br>
                 <br></br>
                 <hr></hr>
@@ -230,7 +269,7 @@ const GetCourses = () => {
                                 <Row sm="10">
                                     <h4 style={{ textAlign: "left", margin: "0px" }}>Subject & Rating</h4>
                                     <p style={{ textAlign: "left" }}>
-                                        (Less than or equal)
+                                        (Greater than or equal)
                                     </p>
                                     <Form.Control style={{ marginLeft: "10px", width: "120px", marginRight: "50px", marginBottom: "5px" }} className="input" type="text" placeholder="Subject" onChange={(z) => setSubject(z.target.value)} value={subject} />
                                     <Form.Control style={{ marginLeft: "10px", width: '120px', marginRight: "70px", marginBottom: "5px" }} className="input" type="text" placeholder="Rating" onChange={(z) => setRating(z.target.value)} value={rating} />
