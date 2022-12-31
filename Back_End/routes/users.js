@@ -15,6 +15,7 @@ const {
   userFinishSubtitle,
   requestRefund,
   emailCertificate,
+  changePasswordNoToken,
 
   loginUser,
   signupUser
@@ -70,6 +71,11 @@ router.post('/changeEmail/:query',changeEmail)
 //Change Bio
 router.post('/changeBio/:query',changeBio)
 
+
+
+//Change password
+router.post('/changePasswordNoToken/:query', changePasswordNoToken)
+
 //Change password
 router.post('/changePassword/:query',changePassword)
 
@@ -80,7 +86,7 @@ router.get('/getRatingsInstructor/:query',getRatingsInstructor)
 router.post('/createUserByAdmin',createUserByAdmin)
 
 //Recieve Email To Change Password
-router.post('/recieveEmailToChangePassword',recieveEmailToChangePassword)
+router.post('/recieveEmailToChangePassword/:query',recieveEmailToChangePassword)
 
 
 

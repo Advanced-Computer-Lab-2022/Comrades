@@ -35,9 +35,10 @@ function generate_token(length) {
 
 // Get instructor by ID
 const getInstructorByID = async (req, res) => {
-  console.log(JSON.parse(req.params.query))
-  const users = await User.find({ "Username": JSON.parse(req.params.query).RequestID },);
-  console.log(users[0])
+  let json = JSON.parse(req.params.query);
+
+  const users = await User.find({ "Username": json.query },);
+  console.log(users[0]);
   res.status(200).json(users[0])
 }
 
@@ -64,25 +65,29 @@ const rateInstructor = async (req, res) => {
 
 const recieveEmailToChangePassword = async (req, res) => {
 
+  let query = JSON.parse(req.params.query);
   let token = generate_token(64);
   //  { Email: "req.params.email" },
 
   let doc = await User.findOneAndUpdate(
-    { _id: "638dd7f86b5480ed4a1b7518" },
+    { Email: query.Email },
     { PasswordResetToken: token },
     {
       new: true
     }
   );
 
+  console.log(doc)
 
 
   let options = {
     from: "acl-comrades-team-2022@outlook.com", // sender address
-    to: "omarwael11110@gmail.com", // list of receivers
+    to: doc.Email, // list of receivers
     subject: "Comrades Password Reset", // Subject line
     text: "Hello world?", // plain text body
-    html: "<h2>Click the following link to change your password</h2><h3>" + token + "</h3>", // html body
+    html: "<h2>Click the following link to change your password</h2><h3>"
+      + "localhost:3000/cp?token=" + token
+      + "</h3>", // html body
   }
 
   transporter.sendMail(options, function (err, info) {
@@ -97,20 +102,49 @@ const recieveEmailToChangePassword = async (req, res) => {
 
 // Change password
 
+const changePasswordNoToken = async (req, res) => {
+  let query = JSON.parse(req.params.query);
+  const Token = query.Token
+  console.log("Password: " + query.Password);
+  console.log("Token: " + query.Token);
+  let data;
+  data = await User.find({ Username: Token }, 'Password PasswordResetToken')
+  console.log(data[0]);
+
+  const salt = await bcrypt.genSalt(10)
+  const hash = await bcrypt.hash(query.Password, salt)
+
+  try {
+    let doc = await User.findOneAndUpdate(
+      { Username: Token },
+      { Password: hash },
+      {
+        new: true
+      }
+    );
+    res.status(200).json(doc)
+  }
+  catch (error) {
+    res.status(400).json({ error: error.message })
+  }
+}
+
 const changePassword = async (req, res) => {
   let query = JSON.parse(req.params.query);
   const Token = query.Token
-
+  console.log("Password: " + query.Password);
   let data;
-  data = await User.find({ _id: "638dd7f86b5480ed4a1b7518" }, 'Password PasswordResetToken')
-  console.log(Token[64])
-  console.log(data[0].PasswordResetToken)
+  data = await User.find({ PasswordResetToken: Token }, 'Password PasswordResetToken')
+  console.log(data[0]);
+
+  const salt = await bcrypt.genSalt(10)
+  const hash = await bcrypt.hash(query.Password, salt)
+
   if (data[0].PasswordResetToken === Token) {
-    console.log(data)
     try {
       let doc = await User.findOneAndUpdate(
-        { _id: "638dd7f86b5480ed4a1b7518" },
-        { Password: query.Password },
+        { PasswordResetToken: Token },
+        { Password: hash },
         {
           new: true
         }
@@ -140,7 +174,8 @@ const getRatingsInstructor = async (req, res) => {
 const getReviewsInstructor = async (req, res) => {
   // let query = JSON.parse(req.params.query);
   // console.log(query.query);
-  const reviews = await User.find({ "_id": '638dd7f86b5480ed4a1b7518' }, 'Reviews')
+  const reviews = await User.find({ "Username": 'xx' }, 'Reviews')
+  console.log(reviews);
   console.log(reviews[0].Reviews)
   res.status(200).json(reviews[0].Reviews)
 }
@@ -150,10 +185,9 @@ const getReviewsInstructor = async (req, res) => {
 
 const changeEmail = async (req, res) => {
   let query = JSON.parse(req.params.query);
-  let newEmail = query.Email;
   let doc = await User.findOneAndUpdate(
-    { _id: "638dd7f86b5480ed4a1b7518" },
-    { Email: newEmail },
+    { Username: query.User },
+    { Email: query.Email },
     {
       new: true
     }
@@ -163,11 +197,9 @@ const changeEmail = async (req, res) => {
 
 const changeBio = async (req, res) => {
   let query = JSON.parse(req.params.query);
-  let newBiography = query.Biography;
-  console.log(newBiography);
   let doc = await User.findOneAndUpdate(
-    { _id: "638dd7f86b5480ed4a1b7518" },
-    { Biography: newBiography },
+    { Username: query.User },
+    { Biography: query.Bio },
     {
       new: true
     }
@@ -185,7 +217,7 @@ const emailCertificate = async (req, res) => {
     subject: "Certificate of Course Completion", // Subject line
     text: CourseID, // plain text body
     html: "<h2>Click the following link to </h2>" +
-          "<h3> http://localhost:3000/Certificate?Username=" + Username + "&Course=" + CourseID.replace(/ /g, "%") + "</h3>"
+      "<h3> http://localhost:3000/Certificate?Username=" + Username + "&Course=" + CourseID.replace(/ /g, "%") + "</h3>"
   }
 
   transporter.sendMail(options, function (err, info) {
@@ -275,6 +307,7 @@ const userFinishSubtitle = async (req, res) => {
 const addCourseToUser = async (req, res) => {
 
   const { Username, CourseName, NumSubtitles } = req.body
+  console.log(CourseName);
   try {
     const users = await User.find({ "Username": Username });
 
@@ -287,6 +320,7 @@ const addCourseToUser = async (req, res) => {
         new: true
       }
     )
+    console.log(doc);
     res.status(200).json({ done: "Done" })
 
   }
@@ -396,6 +430,7 @@ module.exports = {
   userFinishSubtitle,
   requestRefund,
   emailCertificate,
+  changePasswordNoToken,
 
   loginUser,
   signupUser

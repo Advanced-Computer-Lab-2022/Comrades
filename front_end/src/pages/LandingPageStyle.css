@@ -1,38 +1,46 @@
-.opacity__80{
+.opacity__80 {
     color: white;
     font-weight: 400;
     opacity: 80%;
 }
-.landingPageBG{
-    background-color: #212529;
-    height: 100vh;
+
+.landingPageBG {
+    background: rgb(33,37,41);
+    background: linear-gradient(180deg, rgba(33,37,41,1) 15%, rgba(0,0,0,1) 82%);
+        height: 100vh;
 }
-.landpage__login__btn{
+
+.landpage__login__btn {
     margin-left: 20px;
 }
-.landingpage__story{
+
+.landingpage__story {
     width: 90%;
 }
-.pink__text{
+
+.pink__text {
     color: #9295E3;
     opacity: 100%;
     font-weight: bold;
 }
-h1{
+
+h1 {
     color: white;
 }
-.partners__text{
+
+.partners__text {
     color: black;
 }
 
-.footer__wrapper{
+.footer__wrapper {
     color: white;
 }
-.centered__form__wrapper{
+
+.centered__form__wrapper {
     background-color: white;
     width: 400px;
     align-items: flex-start;
     border-radius: 5px;
     padding: 50px;
-    margin:0 auto;
+    margin: 0 auto;
 }

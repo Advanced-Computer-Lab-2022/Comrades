@@ -11,6 +11,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import CTSideNav from "./CT/CTSideNav";
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
+import Modal from 'react-bootstrap/Modal';
 
 
 import { useEffect, useState } from 'react'
@@ -32,11 +33,12 @@ const CTHome = () => {
     const { user } = useAuthContext()
 
     const [data, setData] = useState({});
+    const [password, setPassword] = useState("");
 
     useEffect(() => {
         const fetchUser = async () => {
             const data = { "Username": user.username }
-            const response = await fetch("/api/users/getInstructorByID/{\"RequestID\": \"" + user.username + "\"}")
+            const response = await fetch("/api/users/getInstructorByID/{\"query\": \"" + user.username + "\"}")
 
             const json = await response.json()
             setData(json);
@@ -49,11 +51,33 @@ const CTHome = () => {
 
     }, [user])
 
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        const response = await fetch("/api/users/changePasswordNoToken/{\"Token\": \"" + user.username + "\",\"Password\": \"" + password + "\"}", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+
+        const json = await response.json()
+
+        if (response.ok) {
+            console.log(json)
+        }
+    }
+
+
     const { logout } = useLogout()
 
     const handleClickLogout = () => {
         logout()
     }
+
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
 
     return (
@@ -93,16 +117,48 @@ const CTHome = () => {
                         <h2>
                             {"👋 " + data.Username + ", Enjoy your stay!"}
                         </h2>
+
                     </Row>
+                    <br></br>
+                    <Button variant="dark" onClick={handleShow}>
+                        Change Password
+                    </Button>
+
                 </Col>
             </Row>
+            <Modal show={show} onHide={handleClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Change Password</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Form>
+                        <Container>
+
+                            <Form.Group controlId="formPlaintextEmail">
+                                <Form.Label>
+                                    Enter New Password
+                                </Form.Label>
+                                <br></br>
+                                <Form.Control className="input" type="text" placeholder="New Password" onChange={(e) => setPassword(e.target.value)} value={password} />
+                            </Form.Group>
+                        </Container>
+                    </Form>
+
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="danger" onClick={handleClose}>
+                        Close
+                    </Button>
+                    <Button variant="success" onClick={handleSubmit}>
+                        Save Changes
+                    </Button>
+                </Modal.Footer>
+            </Modal>
 
 
 
 
-
-
-        </div>
+        </div >
     )
 }
 

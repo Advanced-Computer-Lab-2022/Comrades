@@ -3,6 +3,7 @@ import { useLogin } from "../hooks/useLogin"
 
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import Modal from 'react-bootstrap/Modal';
 import Container from 'react-bootstrap/Container';
 
 
@@ -16,15 +17,35 @@ const Login = () => {
     e.preventDefault()
 
     await login(username.toLowerCase(), password)
-   
-  
-
-
-
-
-
 
   }
+
+  const handleSubmit2 = async (e) => {
+    e.preventDefault()
+    handleClose()
+    const response = await fetch(`/api/users/recieveEmailToChangePassword/{"Email": "${email}"}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+
+    if (response.ok) {
+      console.log("ok")
+
+
+    }
+  }
+
+
+
+  const [email, setEmail] = useState("");
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
 
 
 
@@ -51,6 +72,10 @@ const Login = () => {
             <Form.Label>Password</Form.Label>
             <Form.Control type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} value={password} />
           </Form.Group>
+          <Button onClick={handleShow} variant="link" style={{ marginLeft: "-10px" }}>
+            Forgot your password?
+          </Button>
+          <br></br>
           <br></br>
           <Button disabled={isLoading} variant="dark" type="submit">
             Login
@@ -61,6 +86,34 @@ const Login = () => {
           {error && <div className="error">{error}</div>}
         </Form>
       </div>
+
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Reset Password</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form.Label>
+            Enter Email
+          </Form.Label>
+          <Form.Control style={{ marginLeft: "0px" }}
+            className="input"
+            type="text"
+            placeholder="New Email"
+            onChange={(e) => setEmail(e.target.value)}
+            value={email}
+          />
+
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="danger" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="success" onClick={handleSubmit2}>
+            Send Email
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
     </div>
   );
 }

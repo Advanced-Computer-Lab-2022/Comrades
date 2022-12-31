@@ -13,7 +13,11 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import Card from 'react-bootstrap/Card';
+import Modal from 'react-bootstrap/Modal';
+import Alert from 'react-bootstrap/Alert';
 
+
+import ReportProblemIcon from '@mui/icons-material/ReportProblem';
 
 
 import { useEffect, useState } from 'react'
@@ -37,6 +41,7 @@ const CTMyCourses = () => {
 
     const [data, setData] = useState({});
 
+
     const [coursesInProgress, setCoursesInProgress] = useState([]);
     const [coursesCompleted, setCoursesCompleted] = useState([]);
 
@@ -49,7 +54,7 @@ const CTMyCourses = () => {
 
         const fetchUser = async () => {
             const data = { "Username": user.username }
-            const response = await fetch("/api/users/getInstructorByID/{\"RequestID\": \"" + user.username + "\"}")
+            const response = await fetch("/api/users/getInstructorByID/{\"query\": \"" + user.username + "\"}")
 
             const json = await response.json()
             setData(json);
@@ -66,7 +71,8 @@ const CTMyCourses = () => {
 
 
             const getCourseByName = async (name) => {
-                const response = await fetch("/api/courses/getCourseByName/{\"RequestID\": \"" + name + "\"}")
+                console.log(name);
+                const response = await fetch("/api/courses/getCourseByName/{\"id\": \"" + name + "\"}")
                 const json = await response.json()
                 return json
             }
@@ -109,6 +115,69 @@ const CTMyCourses = () => {
         logout()
     }
 
+
+
+    const [reportedCourseName, setReportedCourseName] = useState("");
+
+    
+    const handleSubmit = (e, course) => {
+        e.preventDefault();
+        setReportedCourseName(course);
+        handleShow();
+
+    }
+
+    const handleSubmit2 = async (e) => {
+        e.preventDefault();
+
+        const data = { "ProblemVal": details, "UserID": user.username, "ProblemType": type, "CourseID": reportedCourseName }
+
+        const response = await fetch('/api/problems/createTestProblem', {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        const json = await response.json()
+
+        if (response.ok) {
+            handleClose();
+            handleShow2(true);    
+        }
+    }
+
+    const [type, setType] = useState("Financial")
+    const [details, setDetails] = useState("Details")
+
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
+
+    const [show2, setShow2] = useState(false);
+
+    const handleClose2 = () => setShow2(false);
+    const handleShow2 = () => setShow2(true);
+
+
+    function AlertDismissibleExample() {
+
+        if (show2) {
+            return (
+                <Alert variant="success" onClose={() => setShow2(false)} dismissible>
+                    <Alert.Heading>Problem have been reported!</Alert.Heading>
+                    <p>
+                        Sorry for the pain, hope it gets resolved too quick.
+                    </p>
+                </Alert>
+            );
+        }
+    }
+
+
+
     return (
         <div className="home">
             <Navbar bg="dark" variant="dark" expand="lg">
@@ -140,6 +209,7 @@ const CTMyCourses = () => {
                 <Col>
                     <br></br>
                     <br></br>
+                    <AlertDismissibleExample />
                     <br></br>
 
                     <Row>
@@ -154,13 +224,16 @@ const CTMyCourses = () => {
                         </h3>
                         {coursesCompleted && coursesCompleted.map((course => (
                             <Container className="course__card" key={course._id} >
-                                <Card style={{ marginTop: "20px" }} className="course__card" key={course._id} onClick={() => window.location.href = `/vc?userId=${course._id}`}>
+                                <Card style={{ marginTop: "20px" }} className="course__card" key={course._id} >
                                     <Card.Header as="h6">
                                         {course.Title}
                                     </Card.Header>
                                     <Card.Body>
-                                        <Button style={{marginRight:"10px"}} variant="dark" onClick={() => window.location.href = `/vc?userId=${course._id}`} >View Course</Button>
+                                        <Button style={{ marginRight: "10px" }} variant="dark" onClick={() => window.location.href = `/vc?userId=${course._id}`} >View Course</Button>
                                         <Button variant="dark" onClick={() => window.location.href = `/vc?userId=${course._id}`} >Recieve Certificate Via Email </Button>
+
+                                        <Button style={{ float: "right" }} variant="danger" onClick={(e) => handleSubmit(e, course.Title)} > <ReportProblemIcon></ReportProblemIcon>  </Button>
+
                                     </Card.Body>
                                 </Card>
                             </Container>
@@ -179,8 +252,11 @@ const CTMyCourses = () => {
                                 <Card.Body>
                                     <ProgressBar striped variant="success" now={course.Progress} label={`${course.Progress}%`} />
                                     <br></br>
-                                    <Button  style={{marginRight:"10px"}} variant="dark" onClick={() => window.location.href = `/vc?userId=${course._id}`} >Continue Learning</Button>
-                                    { CheckEligable(course.Title) }
+                                    <Button style={{ marginRight: "10px" }} variant="dark" onClick={() => window.location.href = `/vc?userId=${course._id}`} >Continue Learning</Button>
+
+                                    <Button style={{ float: "right" }} variant="danger" onClick={(e) => handleSubmit(e, course.Title)} > <ReportProblemIcon></ReportProblemIcon> </Button>
+
+                                    {CheckEligable(course.Title)}
                                 </Card.Body>
                             </Card>
                         )))}
@@ -189,6 +265,43 @@ const CTMyCourses = () => {
 
                 </Col>
             </Row>
+            <Modal show={show} onHide={handleClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Report Problem with Course: {reportedCourseName}</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Form>
+                        <Form.Group style={{ textAlign: "left" }} className="mb-3" controlId="exampleForm.ControlInput1">
+                            <h5>
+                                Select your problem type.
+                            </h5>
+                            <p> Financial, Technical or Other </p>
+                            <Form.Select aria-label="Default select example" onChange={(x) => setType(x.target.value)}>
+                                <option value="Financial">Financial</option>
+                                <option value="Technical">Technical</option>
+                                <option value="Other">Other</option>
+                            </Form.Select>
+                        </Form.Group>
+                        <Form.Group style={{ textAlign: "left" }} className="mb-3" controlId="exampleForm.ControlTextarea1">
+                            <h5>
+                                Problem Details
+                            </h5>
+                            <p> Write in details as possible, make it easier for our admins. </p>
+                            <Form.Control as="textarea" rows={3} onChange={(x) => setDetails(x.target.value)} />
+                        </Form.Group>
+                    </Form>
+
+
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                        Close
+                    </Button>
+                    <Button variant="success" onClick={(e) => handleSubmit2(e)}>
+                        Report
+                    </Button>
+                </Modal.Footer>
+            </Modal>
 
 
 

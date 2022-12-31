@@ -69,7 +69,7 @@ router.get('/filterCoursesByPrice/:query' , filterCoursesByPrice)
 router.get('/filterCoursesBySubjectAndRating/:query' , filterCoursesBySubjectAndRating)
 
 // get course instructor
-router.get('/getCoursesInstructor' , getCoursesInstructor)
+router.get('/getCoursesInstructor/:query' , getCoursesInstructor)
 
 // filter course instructor by subject
 router.get('/filterCoursesBySubjectInstructor/:query' , filterCoursesBySubjectInstructor)

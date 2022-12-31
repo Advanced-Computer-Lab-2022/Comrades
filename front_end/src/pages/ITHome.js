@@ -5,6 +5,7 @@ import Naavbar from "../components/Navbar"
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import Modal from 'react-bootstrap/Modal';
 
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
@@ -24,6 +25,7 @@ const ITHome = () => {
     const { user } = useAuthContext()
 
     const [data, setData] = useState({});
+    const [password, setPassword] = useState("");
 
 
 
@@ -31,7 +33,7 @@ const ITHome = () => {
         let userCourses = [];
         const fetchUser = async () => {
             const data = { "Username": user.username }
-            const response = await fetch("/api/users/getInstructorByID/{\"RequestID\": \"" + user.username + "\"}")
+            const response = await fetch("/api/users/getInstructorByID/{\"query\": \"" + user.username + "\"}")
 
             const json = await response.json()
             setData(json);
@@ -50,10 +52,31 @@ const ITHome = () => {
     const { logout } = useLogout()
 
     const handleClickLogout = () => {
-      logout()
+        logout()
     }
-  
 
+
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
+
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        const response = await fetch("/api/users/changePasswordNoToken/{\"Token\": \"" + user.username + "\",\"Password\": \"" + password + "\"}", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+
+        const json = await response.json()
+
+        if (response.ok) {
+            console.log(json)
+        }
+    }
 
 
     return (
@@ -85,25 +108,60 @@ const ITHome = () => {
                     <ITSideNav />
                 </Col>
                 <Col>
-                <br></br>
-                <br></br>
-                <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
 
                     <Row>
                         <h2>
                             {"👋 " + data.Username + ", Enjoy your stay!"}
                         </h2>
                     </Row>
-                    <Row style={{paddingLeft:"48px", marginTop:"40px"}}>
+                    <Row style={{ paddingLeft: "48px", marginTop: "40px" }}>
                         <h4>
                             {"Your Wallet: $" + data.Wallet}
                         </h4>
-                        <p style={{fontStyle:"italic"}}>
+                        <p style={{ fontStyle: "italic" }}>
                             Note: We always issue refunds in USD!
                         </p>
                     </Row>
+                    <br></br>
+                    <Button variant="dark" onClick={handleShow}>
+                        Change Password
+                    </Button>
+
+
                 </Col>
             </Row>
+            <Modal show={show} onHide={handleClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Change Password</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Form>
+                        <Container>
+
+                            <Form.Group controlId="formPlaintextEmail">
+                                <Form.Label>
+                                    Enter New Password
+                                </Form.Label>
+                                <br></br>
+                                <Form.Control className="input" type="text" placeholder="New Password" onChange={(e) => setPassword(e.target.value)} value={password} />
+                            </Form.Group>
+                        </Container>
+                    </Form>
+
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="danger" onClick={handleClose}>
+                        Close
+                    </Button>
+                    <Button variant="success" onClick={handleSubmit}>
+                        Save Changes
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
 
 
 

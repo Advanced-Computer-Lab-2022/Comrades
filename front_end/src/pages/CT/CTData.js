@@ -10,6 +10,7 @@ import PaidIcon from '@mui/icons-material/Paid';
 import MeetingRoomIcon from '@mui/icons-material/MeetingRoom';
 import ImportContactsIcon from '@mui/icons-material/ImportContacts';
 import DiscountIcon from '@mui/icons-material/Discount';
+import ReportProblemIcon from '@mui/icons-material/ReportProblem';
 
 export const CTData = [
     {
@@ -35,9 +36,9 @@ export const CTData = [
     },
     {
         id: 3,
-        icon: <SettingsIcon />,
-        text: "Settings",
-        link: "/cthome",
+        icon: <ReportProblemIcon />,
+        text: "Reported Problems",
+        link: "/ctreport",
         classes: "sideitem__admin"
     },
 

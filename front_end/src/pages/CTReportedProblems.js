@@ -4,10 +4,8 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
-import Alert from 'react-bootstrap/Alert';
 
-
-import AdminSideNav from "./Admin/AdminSideNav"
+import CTSideNav from "./CT/CTSideNav"
 
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
@@ -15,83 +13,47 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Table from 'react-bootstrap/Table';
 
+import { useEffect, useState } from 'react'
+import { useAuthContext } from "../hooks/useAuthContext"
+import { useLogout } from '../hooks/useLogout'
 
-import { useEffect, useState } from "react"
-
-import "./admin.css"
 import { ProblemModal, ModalOpenButton, ModalContents } from '../components/ProblemModal'
 
-const AdminCourseRequests = () => {
+
+// import { ProblemModal, ModalOpenButton, ModalContents } from '../components/ProblemModal'
+
+const CTReportedProblems = () => {
 
     const [problems, setProblems] = useState([])
-    const [show, setShow] = useState(false);
+    const { user } = useAuthContext()
+
 
 
     useEffect(() => {
         const fetchProblems = async () => {
-            const response = await fetch('/api/courseRequests/getAllRequests')
+            const response = await fetch('/api/problems/getAllProblems')
             const json = await response.json()
-            setProblems(json)
+            let json2 = [];
+            for (let i = 0; i < json.length; i++) {
+                if (json[i].UserID == user.username) {
+                    json2.push(json[i])
+                }
+            }
+            setProblems(json2)
         }
-        fetchProblems()
-    }, [problems])
 
-    const handleSubmit = async (e, id, CourseID, UserID) => {
-        console.log(CourseID);
-        const response0 = await fetch("/api/courses/getCourseByName/{\"id\": \"" + CourseID + "\"}")
-        const json = await response0.json()
-
-
-        const data = { "Username": UserID, "CourseName": CourseID, "NumSubtitles": json.Subtitles.length }
-
-        const response1 = await fetch('/api/users/addCourseToUser', {
-            method: 'POST',
-            body: JSON.stringify(data),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-
-        const data2 = { "RequestID": id }
-
-        const response2 = await fetch('/api/courseRequests/updateRequestStatus', {
-            method: 'POST',
-            body: JSON.stringify(data2),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-
-        const data3 = { "CourseID": CourseID }
-
-        const response3 = await fetch('/api/courses/incrementPopularity', {
-            method: 'POST',
-            body: JSON.stringify(data3),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-
-
-        setShow(true);
-
-    }
-
-    function AlertDismissibleExample() {
-
-        if (show) {
-            return (
-                <Alert variant="success" onClose={() => setShow(false)} dismissible>
-                    <Alert.Heading>Access was granted!</Alert.Heading>
-                </Alert>
-            );
+        if (user !== null) {
+            if (user.username !== null)
+                fetchProblems()
         }
-    }
+
+    }, [user])
 
 
     return (
 
         <div className="home">
+
             <Navbar bg="dark" variant="dark" expand="lg">
                 <Container>
                     <Navbar.Brand href="/">Comrades</Navbar.Brand>
@@ -117,18 +79,16 @@ const AdminCourseRequests = () => {
 
             <Row>
                 <Col xs={2}>
-                    <AdminSideNav id={1} />
+                    <CTSideNav id={1} />
                 </Col>
                 <Col className="d-flex align-items-center">
-
                     <Col>
-                        <AlertDismissibleExample />
                         <Row>
                             <h3 style={{ margin: "30px 0px 0px 6px" }}>
-                                Corporate Trainee Course Requests
+                                All Problems
                             </h3>
                             <h6 style={{ margin: "6px 0px 0px 6px", opacity: "90%" }}>
-                                Click on a <span style={{ fontWeight: "bold", fontStyle: "italic" }}>Grant Access</span> to give user access to this course.
+                                Click on a <span style={{ fontWeight: "bold", fontStyle: "italic" }}>View Details</span> for more details or to edit status.
                             </h6>
                         </Row>
                         <Row>
@@ -137,7 +97,7 @@ const AdminCourseRequests = () => {
                                     <thead>
                                         <tr>
                                             <th>Course Name</th>
-                                            <th>User Name</th>
+                                            <th>Problem Type</th>
                                             <th>Status</th>
                                             <th>Actions</th>
                                         </tr>
@@ -149,13 +109,27 @@ const AdminCourseRequests = () => {
                                                     {problem.CourseID}
                                                 </td>
                                                 <td>
-                                                    {problem.UserID}
+                                                    {problem.ProblemType}
                                                 </td>
                                                 <td>
                                                     {problem.Status}
                                                 </td>
                                                 <td>
-                                                    <Button variant="success" onClick={(e) => handleSubmit(e, problem._id, problem.CourseID, problem.UserID)}>Grant Access</Button>
+                                                    <ProblemModal>
+                                                        <ModalOpenButton>
+                                                            <Button variant="dark">Follow Up</Button>
+                                                        </ModalOpenButton>
+                                                        <ModalContents isAdmin={false} title={"Course: " + problem.CourseID} problemID={problem._id}>
+                                                            <h6>
+                                                                Problem statement:
+                                                            </h6>
+                                                            {problem.Problem}
+                                                            <hr></hr>
+                                                            <p>
+                                                                If you feel unsatisfied so far, follow up by reporting again at <span style={{fontWeight:"bold"}}>My Courses</span> page.
+                                                            </p>
+                                                        </ModalContents>
+                                                    </ProblemModal>
                                                 </td>
                                             </tr>
                                         )))}
@@ -173,4 +147,4 @@ const AdminCourseRequests = () => {
 }
 
 
-export default AdminCourseRequests
+export default CTReportedProblems

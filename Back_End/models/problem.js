@@ -18,6 +18,11 @@ const problemSchema = new Schema({
         type: String,
         required: true,
     },
+    AdminResponse: {
+        type: String,
+        required: false,
+        default: "None Yet"
+    },
     ProblemType: {
         type: String,
         required: true,

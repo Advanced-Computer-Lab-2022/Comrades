@@ -40,10 +40,11 @@ export const AdminData = [
         classes: "sideitem__admin"
     },
     {
-        id: 4,
+        id: 3,
         icon: <DiscountIcon />,
         text: "Course Promotions",
-        link: "/nu",
+        link: "/adminpromo",
         classes: "sideitem__admin"
     },
+
 ]

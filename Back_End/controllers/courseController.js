@@ -69,26 +69,14 @@ const getCourses = async (req, res) => {
     res.status(200).json(courses)
 }
 
-//filter courses of an instructor by Subject
-const filterCoursesBySubjectInstructor = async (req, res) => {
-    let query = req.params.query;
-    console.log(query.length);
-    const courses = await Course.find(
-        {
-            $and: [
-                { "Instructor": "ahmedInstructor" },
-                { "Subject": query }
-            ],
-        },
-        'Title Popularity Subject  Subtitles  Price  DiscountedPrice  TotalHours  Rating  CreditHours  Discount'
-    );
-    res.status(200).json(courses)
-}
 
 
 //get courses of an instructor
 const getCoursesInstructor = async (req, res) => {
-    const courses = await Course.find({ "Instructor": "ahmedInstructor" }, 'Title Instructor Price Subject Rating')
+    let query = req.params.query
+    console.log(query);
+    const courses = await Course.find({ "Instructor": query }, 'Title Instructor Price DiscountedPrice Subject Rating')
+    console.log(courses)
     res.status(200).json(courses)
 }
 
@@ -100,35 +88,28 @@ const search = async (req, res) => {
         { $or: [{ "Instructor": query }, { "Title": query }, { "Subject": query }] },
         // { "Instructor": query },
         'Title Popularity Subject  Subtitles  Price  DiscountedPrice  TotalHours  Rating  CreditHours  Discount'
-        );
+    );
 
     res.status(200).json(courses)
 }
 
-//Search Instructor
-const searchInstructor = async (req, res) => {
-    let query = JSON.stringify(req.params.query)
-    query = query.substring(1, query.length - 1)
-    const courses = await Course.find(
-        {
-            $and: [
-                { "Instructor": "ahmedInstructor" },
-                { $or: [{ "Title": query }, { "Subject": query }] }
-            ]
 
-        },
-        // { "Instructor": query },
-        'Title  Subject  Subtitles  Instructor  Price  TotalHours  Rating  CreditHours  Discount');
-
-    res.status(200).json(courses)
-}
 
 const getCourseById = async (req, res) => {
     let query = JSON.parse(req.params.query)
-    console.log(query.RequestID);
-    const courses = await Course.find({ "Title": query.RequestID })
+    console.log(query);
+    const courses = await Course.find({ "_id": query.id })
+    console.log(courses);
     res.status(200).json(courses)
 }
+const getCourseByName = async (req, res) => {
+    let query = JSON.parse(req.params.query)
+    console.log(query);
+    const courses = await Course.find({ "Title": query.id })
+    console.log(courses[0])
+    res.status(200).json(courses[0])
+}
+
 
 
 
@@ -160,15 +141,66 @@ const getCountries = async (req, res) => {
     res.status(200).json(ret)
 }
 
-//filter courses of an instructor by Price
-const filterCoursesByPriceInstructor = async (req, res) => {
-    let query = req.params.query;
-    console.log(query.length);
+
+//Search Instructor
+const searchInstructor = async (req, res) => {
+    let query = JSON.parse(req.params.query);
+    console.log(req.params.query)
     const courses = await Course.find(
         {
             $and: [
-                { "Instructor": "ahmedInstructor" },
-                { "DiscountedPrice": { $lte: parseInt(query) } }
+                { "Instructor": query.Instructor },
+                { $or: [{ "Title": query.Search }, { "Subject": query.Search }] }
+            ]
+
+        },
+        // { "Instructor": query },
+        'Title  Subject  Subtitles  Instructor  Price  TotalHours  Rating  CreditHours  Discount DiscountedPrice');
+
+    console.log(courses);
+    res.status(200).json(courses)
+}
+
+//filter courses of an instructor by Subject
+const filterCoursesBySubjectInstructor = async (req, res) => {
+    let query = JSON.parse(req.params.query);
+    console.log(req.params.query)
+    console.log(query.Subject);
+    if (query.Subject.length == 0) {
+        const courses = await Course.find(
+            {
+                "Instructor": query.Instructor
+            },
+            'Title Popularity Subject  Subtitles  Price  DiscountedPrice  TotalHours  Rating  CreditHours  Discount'
+        );
+        res.status(200).json(courses)
+
+    }
+    else {
+        const courses = await Course.find(
+            {
+                $and: [
+                    { "Instructor": query.Instructor },
+                    { "Subject": query.Subject }
+                ],
+            },
+            'Title Popularity Subject  Subtitles  Price  DiscountedPrice  TotalHours  Rating  CreditHours  Discount'
+        );
+        res.status(200).json(courses)
+    }
+}
+
+
+//filter courses of an instructor by Price
+const filterCoursesByPriceInstructor = async (req, res) => {
+    let query = JSON.parse(req.params.query);
+    console.log(req.params.query)
+    console.log(query.Price);
+    const courses = await Course.find(
+        {
+            $and: [
+                { "Instructor": query.Instructor },
+                { "DiscountedPrice": { $lte: parseInt(query.Price) } }
             ],
 
 
@@ -240,19 +272,22 @@ const changeDiscount = async (req, res) => {
 
     const requiredCourse = await Course.find(
         {
-            _id: query.id
+            Title: query.id
         },
         'Price');
     let newDiscoutnedPrice = requiredCourse[0].Price * (1 - newDiscount / 100);
     today = mm + '/' + dd + '/' + yyyy;
     console.log(today);
     let doc = await Course.findOneAndUpdate(
-        { _id: query.id },
+        { Title: query.id },
         { Discount: newDiscount, DiscountDuration: newDiscountDuration, DiscountedPrice: newDiscoutnedPrice },
         {
             new: true
         }
     )
+
+    res.status(200).json(doc)
+
 };
 
 
@@ -274,11 +309,6 @@ const incrementPopularity = async (req, res) => {
 
 }
 
-const getCourseByName = async (req, res) => {
-    let query = JSON.parse(req.params.query)
-    const courses = await Course.find({ "Title": query.RequestID })
-    res.status(200).json(courses[0])
-}
 
 
 

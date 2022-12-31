@@ -10,6 +10,7 @@ import PaidIcon from '@mui/icons-material/Paid';
 import MeetingRoomIcon from '@mui/icons-material/MeetingRoom';
 import ImportContactsIcon from '@mui/icons-material/ImportContacts';
 import DiscountIcon from '@mui/icons-material/Discount';
+import ReportProblemIcon from '@mui/icons-material/ReportProblem';
 
 export const ITData = [
     {
@@ -31,6 +32,13 @@ export const ITData = [
         icon: <SettingsIcon />,
         text: "Settings",
         link: "/ithome",
+        classes: "sideitem__admin"
+    },
+    {
+        id: 3,
+        icon: <ReportProblemIcon />,
+        text: "Reported Problems",
+        link: "/itreport",
         classes: "sideitem__admin"
     },
 

@@ -35,6 +35,14 @@ import AdminCourseRequests from './pages/AdminCourseRequests';
 import CTHome from './pages/CTHome';
 import ITHome from './pages/ITHome';
 import CTRequestCourseAccess from './pages/CTRequestCourseAccess'
+import CTReportedProblems from './pages/CTReportedProblems'
+import ITReportedProblems from './pages/ITReportedProblems'
+import InstReportedProblems from './pages/InstReportedProblems'
+import InstPromotion from './pages/InstPromotion'
+import AdminPromotion from './pages/AdminPromotion'
+
+
+
 import ITMyCourses from './pages/ITMyCourses'
 import CTMyCourses from './pages/CTMyCourses'
 import Certificate from './pages/Certificate'
@@ -78,8 +86,18 @@ function App() {
 
 
 
-          
-          <Route
+
+            <Route
+              path="/AdminPromo"
+              element={<AdminPromotion />}
+            />
+
+            <Route
+              path="/instpromo"
+              element={<InstPromotion />}
+            />
+
+            <Route
               path="/Certificate"
               element={<Certificate />}
             />
@@ -98,6 +116,21 @@ function App() {
               path="/ithome"
               element={<ITHome />}
             />
+
+            <Route
+              path="/itreport"
+              element={<ITReportedProblems />}
+            />
+
+            <Route
+              path="/ctreport"
+              element={<CTReportedProblems />}
+            />
+            <Route
+              path="/instreport"
+              element={<InstReportedProblems />}
+            />
+
             <Route
               path="/cthome"
               element={<CTHome />}

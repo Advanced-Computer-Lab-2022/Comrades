@@ -1,19 +1,27 @@
 import Naavbar from "../../components/Navbar.js"
 import InstSideNav from "./InstSideNav.js"
 import { useEffect, useState } from "react"
+import { useAuthContext } from "../../hooks/useAuthContext"
 import Card from "react-bootstrap/Card";
-import Button from "react-bootstrap/esm/Button";
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
+
 import Col from 'react-bootstrap/Col';
+import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 
 
 const Instructor = () => {
+  const { user } = useAuthContext()
+
   const [instructor, setInstructor] = useState("");
+  const [password, setPassword] = useState("");
+
   useEffect(() => {
 
     const fetchInstructor = async () => {
-      const response = await fetch("/api/users/getInstructorByID");
+      const response = await fetch("/api/users/getInstructorByID/{\"query\": \"" + user.username + "\"}");
       const json = await response.json();
       if (response.ok) {
         setInstructor(json);
@@ -21,12 +29,97 @@ const Instructor = () => {
       }
     };
 
-    fetchInstructor();
+    if (user !== null) {
+      if (user.username !== null)
+        fetchInstructor();
+    }
 
-    ;
 
 
-  }, []);
+
+
+  }, [user, instructor]);
+
+
+
+
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    const response = await fetch("/api/users/changePasswordNoToken/{\"Token\": \"" + user.username + "\",\"Password\": \"" + password + "\"}", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+
+    const json = await response.json()
+
+    if (response.ok) {
+      console.log(json)
+    }
+  }
+
+
+  const handleSubmit1 = async (e) => {
+    e.preventDefault();
+    handleClose1();
+    const response = await fetch(
+      `/api/users/changeEmail/{"Email":"${email}","User":"${user.username}"}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    const json = await response.json();
+
+    if (response.ok) {
+      console.log(json);
+    }
+  };
+
+  const handleSubmit2 = async (e) => {
+    e.preventDefault();
+    handleClose2();
+
+    const response = await fetch(
+      `/api/users/changeBio/{"Bio":"${bio}","User":"${user.username}"}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    const json = await response.json();
+
+    if (response.ok) {
+      console.log(json);
+    }
+  };
+
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  
+  const [email, setEmail] = useState("");
+  const [show1, setShow1] = useState(false);
+
+  const handleClose1 = () => setShow1(false);
+  const handleShow1 = () => setShow1(true);
+
+
+  const [bio, setBio] = useState("");
+  const [show2, setShow2] = useState(false);
+
+  const handleClose2 = () => setShow2(false);
+  const handleShow2 = () => setShow2(true);
 
 
 
@@ -38,32 +131,130 @@ const Instructor = () => {
       <Naavbar />
       <Row>
         <Col xs={2}>
-        <InstSideNav />
-
+          <InstSideNav />
         </Col>
         <Col className="d-flex align-items-left">
-        <Card style={{ width: "40rem" }}>
-        <Card.Img variant="top" style={{ width: '8rem' }} src="https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg?20200418092106" />
-        <Card.Body>
-          <Card.Title>{instructor.Email} &nbsp;  &nbsp;
-            <a href="/c" class="btn btn-primary">Edit email</a>
-          </Card.Title>
-          <Card.Text>
-            {instructor.Biography}
-            <br></br>
-            <a href="/cb" class="btn btn-primary">Edit Bio</a>
-          </Card.Text>
-          <Card.Text>
-            Rating: {instructor.Rating}
-            <br></br>
-          </Card.Text>
+          <br></br>
+          <Row>
+            <Container>
+              <br></br>
+              <h2>
+                {"👋 " + instructor.Username + ", Enjoy your stay!"}
+              </h2>
+              <br></br>
+              <h5>
+                {"Wallet: " + instructor.Wallet}
+              </h5>
+              <p>This is 50% from the sales of the current month, You can cash out at the end of the month.</p>
+              <br></br>
+              <h5>
+                Email: {instructor.Email} <span onClick={handleShow1}> ✎ </span>
+              </h5>
+              <br></br>
+              <h5>
+                Bio: {instructor.Biography} <span onClick={handleShow2}> ✎ </span>
+              </h5>
+              <br></br>
+                    <Button variant="dark" onClick={handleShow}>
+                        Change Password
+                    </Button>
 
-        </Card.Body>
-      </Card>
+            </Container>
+          </Row>
         </Col>
       </Row>
 
-      
+
+      <Modal show={show1} onHide={handleClose1}>
+        <Modal.Header closeButton>
+          <Modal.Title>Change Email</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+
+          <Form.Group as={Row} className="mb-3" controlId="formPlaintextEmail">
+            <Form.Label>
+              Enter New Email
+            </Form.Label>
+            <Form.Control style={{ marginLeft: "50px" }}
+              className="input"
+              type="text"
+              placeholder="New Email"
+              onChange={(e) => setEmail(e.target.value)}
+              value={email}
+            />
+          </Form.Group>
+
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="danger" onClick={handleClose1}>
+            Close
+          </Button>
+          <Button variant="success" onClick={handleSubmit1}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+      <Modal show={show2} onHide={handleClose2}>
+        <Modal.Header closeButton>
+          <Modal.Title>Change Bio</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+
+          <Form.Group as={Row} className="mb-3" controlId="formPlaintextEmail">
+            <Form.Label>
+              Enter New Bio
+            </Form.Label>
+            <Form.Control style={{ marginLeft: "50px" }}
+              className="input"
+              type="text"
+              placeholder="New Bio"
+              onChange={(e) => setBio(e.target.value)}
+              value={bio}
+            />
+          </Form.Group>
+
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="danger" onClick={handleClose2}>
+            Close
+          </Button>
+          <Button variant="success" onClick={handleSubmit2}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
+      <Modal show={show} onHide={handleClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Change Password</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Form>
+                        <Container>
+
+                            <Form.Group controlId="formPlaintextEmail">
+                                <Form.Label>
+                                    Enter New Password
+                                </Form.Label>
+                                <br></br>
+                                <Form.Control className="input" type="text" placeholder="New Password" onChange={(e) => setPassword(e.target.value)} value={password} />
+                            </Form.Group>
+                        </Container>
+                    </Form>
+
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="danger" onClick={handleClose}>
+                        Close
+                    </Button>
+                    <Button variant="success" onClick={handleSubmit}>
+                        Save Changes
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
+
+
 
 
     </div>

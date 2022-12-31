@@ -9,36 +9,32 @@ import Button from 'react-bootstrap/Button';
 
 const ChangePassword = () => {
 
+    const params = new URLSearchParams(window.location.search);
+    const tokenNew = params.get('token');
+
     const [token, setToken] = useState('')
     const [password, setPassword] = useState('')
 
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        
-            
-            
-            const response = await fetch("/api/users/changePassword/{\"Token\": \""+token+"\",\"Password\": \""+ password +"\"}", {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
-    
-            const json =  await response.json()
-    
-            if (response.ok) {
-                console.log(json)
-    
+        const response = await fetch("/api/users/changePassword/{\"Token\": \"" + tokenNew + "\",\"Password\": \"" + password + "\"}", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
             }
-    
-  
+        })
 
+        const json = await response.json()
+
+        if (response.ok) {
+            console.log(json)
+        }
     }
 
-    const handleSubmit2 = async(e) =>{
+    const handleSubmit2 = async (e) => {
         e.preventDefault()
-        const response = await fetch("/api/users/recieveEmailToChangePassword", {
+        const response = await fetch("/api/users/recieveEmailToChangePassword/", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -47,41 +43,25 @@ const ChangePassword = () => {
 
         if (response.ok) {
             console.log("ok")
-            
-           
+
+
         }
     }
 
 
-    
-    
+
+
     return (
 
 
 
-    <><Naavbar />
+        <><Naavbar />
 
-    <br></br>
-    <Col sm="10">
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <Button type="submit" variant="outline-success" onClick={handleSubmit2}>Recive Token</Button>
+            <br></br>
 
+            <br></br>
 
-                    </Col>
-
-    <br></br>
-
-    <Form>
-    <Form.Group as={Row} className="mb-3" controlId="formPlaintextEmail">
-                    <Form.Label column sm="2">
-                        Enter Token
-                    </Form.Label>
-                    <Col sm="10">
-                        <Form.Control className="input" type="text" placeholder="Token" onChange={(e) => setToken(e.target.value)} value={token} />
-
-                    </Col>
-                </Form.Group>
+            <Form>
                 <Form.Group as={Row} className="mb-3" controlId="formPlaintextEmail">
                     <Form.Label column sm="2">
                         Enter New Password
@@ -92,16 +72,16 @@ const ChangePassword = () => {
                     </Col>
                 </Form.Group>
                 <Col sm="10">
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <Button type="submit" variant="outline-success" onClick={handleSubmit}>Save Password</Button>
 
 
-                    </Col>
+                </Col>
 
 
-        </Form></>
-           
+            </Form></>
+
     )
 }
 

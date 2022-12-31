@@ -16,7 +16,7 @@ const callAll = (...fns) => (...args) => fns.forEach((fn) => fn && fn(...args));
 const handleSubmit = async (e, id) => {
     let type = "Resolved"
     e.preventDefault()
-    const user = { "ProblemID": id, "NewStatus": type}
+    const user = { "ProblemID": id, "NewStatus": type }
 
     const response = await fetch('/api/problems/updateProblemStatus', {
         method: 'POST',
@@ -32,9 +32,9 @@ const handleSubmit = async (e, id) => {
 
 const handleSubmit2 = async (e, id) => {
     let type = "Pending"
-    console.log(id + " HIII  "  + type)
+    console.log(id + " HIII  " + type)
     e.preventDefault()
-    const user = { "ProblemID": id, "NewStatus": type}
+    const user = { "ProblemID": id, "NewStatus": type }
 
     const response = await fetch('/api/problems/updateProblemStatus', {
         method: 'POST',
@@ -79,7 +79,33 @@ function ModalContentsBase(props) {
     );
 }
 
-function ModalContents({ title, problemID, children, ...props }) {
+function Buttons(isAdmin) {
+    if (isAdmin) {
+        return (
+            <Modal.Footer>
+                <ModalDismissButton>
+                    <Button variant="success" onClick={(e) => { handleSubmit(e, problemID) }} >
+                        Mark Resolved
+                    </Button>
+                </ModalDismissButton>
+                <ModalDismissButton>
+                    <Button variant="danger" onClick={(e) => { handleSubmit2(e, problemID) }}>
+                        Mark Pending
+                    </Button>
+                </ModalDismissButton>
+            </Modal.Footer>
+
+        )
+    }
+    else {
+        return (
+            <>
+            </>
+        )
+    }
+}
+
+function ModalContents({ isAdmin, title, problemID, children, ...props }) {
     return (
         <ModalContentsBase {...props}>
             <div>
@@ -87,18 +113,7 @@ function ModalContents({ title, problemID, children, ...props }) {
                     <Modal.Title>{title}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>{children}</Modal.Body>
-                <Modal.Footer>
-                    <ModalDismissButton>
-                        <Button variant="success" onClick={ (e)=> {handleSubmit(e, problemID)}} >
-                            Mark Resolved
-                        </Button>
-                    </ModalDismissButton>
-                    <ModalDismissButton>
-                        <Button variant="danger" onClick={ (e)=> {handleSubmit2(e, problemID)}}>
-                            Mark Pending
-                        </Button>
-                    </ModalDismissButton>
-                </Modal.Footer>
+                {Buttons(isAdmin)}
             </div>
         </ModalContentsBase>
     );

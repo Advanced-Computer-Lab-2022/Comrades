@@ -108,7 +108,7 @@ const AdminViewProblems = () => {
                                                         <ModalOpenButton>
                                                             <Button variant="dark">View Details</Button>
                                                         </ModalOpenButton>
-                                                        <ModalContents title={"Course: " + problem.CourseID} problemID = {problem._id}>
+                                                        <ModalContents isAdmin={true} title={"Course: " + problem.CourseID} problemID = {problem._id}>
                                                             <h6>
                                                                 Problem statement:
                                                             </h6>
