@@ -49,6 +49,12 @@ const InstReportedProblems = () => {
 
     }, [user])
 
+    const { logout } = useLogout()
+
+    const handleClickLogout = () => {
+        logout()
+    }
+
 
     return (
 
@@ -70,7 +76,7 @@ const InstReportedProblems = () => {
                         <Nav>
                             <Form className="d-flex" >
 
-                                <Button href="/" variant="outline-light" size="sm">Log Out </Button>
+                                <Button href="/" variant="outline-light" size="sm" onClick={handleClickLogout}>Logout </Button>
                             </Form>
                         </Nav>
                     </Navbar.Collapse>
@@ -126,7 +132,7 @@ const InstReportedProblems = () => {
                                                             {problem.Problem}
                                                             <hr></hr>
                                                             <p>
-                                                                If you feel unsatisfied so far, follow up by reporting again at <span style={{fontWeight:"bold"}}>My Courses</span> page.
+                                                                If you feel unsatisfied so far, follow up by reporting again at <span style={{ fontWeight: "bold" }}>My Courses</span> page.
                                                             </p>
                                                         </ModalContents>
                                                     </ProblemModal>

@@ -14,6 +14,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 
+import { useLogout } from '../hooks/useLogout'
 
 
 import "./admin.css"
@@ -61,6 +62,11 @@ const AdminRefundUser = () => {
     const handleShow = () => setShow(true);
 
 
+    const { logout } = useLogout()
+
+    const handleClickLogout = () => {
+        logout()
+    }
 
     return (
 
@@ -83,7 +89,7 @@ const AdminRefundUser = () => {
                             <Nav>
                                 <Form className="d-flex" >
 
-                                    <Button href="/" variant="outline-light" size="sm">Log Out </Button>
+                                    <Button href="/" variant="outline-light" size="sm" onClick={handleClickLogout}>Logout </Button>
                                 </Form>
                             </Nav>
                         </Navbar.Collapse>
@@ -92,7 +98,7 @@ const AdminRefundUser = () => {
 
                 <Row>
                     <Col xs={2}>
-                        <AdminSideNav id={2}/>
+                        <AdminSideNav id={2} />
                     </Col>
                     <Col className="d-flex align-items-center">
                         <Container className="d-flex justify-content-center">
@@ -113,7 +119,7 @@ const AdminRefundUser = () => {
                                     <Form.Label style={{ paddingLeft: "0px" }}>
                                         Amount
                                     </Form.Label>
-                                    <Form.Control className="input" type="number"  onChange={(e) => setAmount(e.target.value)} value={amount} />
+                                    <Form.Control className="input" type="number" onChange={(e) => setAmount(e.target.value)} value={amount} />
                                 </Form.Group>
                                 <br></br>
                                 <Button style={{ marginLeft: "-10px" }} type="submit" variant="dark" onClick={handleShow}>Issue Refund</Button>

@@ -17,7 +17,7 @@ import Alert from 'react-bootstrap/Alert';
 
 import { useEffect, useState } from "react"
 import { useAuthContext } from "../hooks/useAuthContext"
-
+import { useLogout } from '../hooks/useLogout'
 
 
 
@@ -109,6 +109,9 @@ const CTRequestCourseAccess = () => {
         }
     }
 
+    const handleClickLogout = () => {
+        logout()
+    }
 
     return (
         <div className="home">
@@ -127,7 +130,8 @@ const CTRequestCourseAccess = () => {
                         </Nav>
                         <Nav>
                             <Form className="d-flex" >
-                                <Button href="/Profile" variant="outline-light" size="sm">View Profile </Button>
+
+                                <Button href="/" variant="outline-light" size="sm" onClick={handleClickLogout}>Logout </Button>
                             </Form>
                         </Nav>
                     </Navbar.Collapse>

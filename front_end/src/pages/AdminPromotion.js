@@ -106,14 +106,14 @@ const AdminPromotion = () => {
 
 
         if (course === "all") {
-            for(let i = 0 ; i < myCourses.length;i++){
+            for (let i = 0; i < myCourses.length; i++) {
                 const response = await fetch("/api/courses/changeDiscount/{\"id\": \"" + myCourses[i].Title + "\",\"Discount\": \"" + percentage + "\",\"DiscountDuration\": \"" + duration + "\"}", {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
                     }
                 })
-    
+
             }
         }
         else {
@@ -135,6 +135,11 @@ const AdminPromotion = () => {
     }
 
 
+    const { logout } = useLogout()
+
+    const handleClickLogout = () => {
+        logout()
+    }
 
     return (
 
@@ -156,7 +161,7 @@ const AdminPromotion = () => {
                         <Nav>
                             <Form className="d-flex" >
 
-                                <Button href="/" variant="outline-light" size="sm">Log Out </Button>
+                                <Button href="/" variant="outline-light" size="sm" onClick={handleClickLogout}>Logout </Button>
                             </Form>
                         </Nav>
                     </Navbar.Collapse>

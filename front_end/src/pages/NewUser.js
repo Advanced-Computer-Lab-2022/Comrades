@@ -14,7 +14,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 
-
+import { useLogout } from '../hooks/useLogout'
 
 import "./admin.css"
 
@@ -45,10 +45,10 @@ const NewUser = () => {
             console.log(json.error)
             if (json.error.includes("Email_1 dup key")) {
                 setError("Email already exists")
-            } 
+            }
             else if (json.error.includes("Username_1 dup key")) {
                 setError("Username already exists")
-            } 
+            }
             else {
                 setError("Please make sure you fill all boxes!")
             }
@@ -78,6 +78,12 @@ const NewUser = () => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
+    const { logout } = useLogout()
+
+    const handleClickLogout = () => {
+        logout()
+    }
+
 
 
     return (
@@ -101,7 +107,7 @@ const NewUser = () => {
                             <Nav>
                                 <Form className="d-flex" >
 
-                                    <Button href="/" variant="outline-light" size="sm">Log Out </Button>
+                                    <Button href="/" variant="outline-light" size="sm" onClick={handleClickLogout}>Logout </Button>
                                 </Form>
                             </Nav>
                         </Navbar.Collapse>
@@ -110,7 +116,7 @@ const NewUser = () => {
 
                 <Row>
                     <Col xs={2}>
-                        <AdminSideNav id={0}/>
+                        <AdminSideNav id={0} />
                     </Col>
                     <Col className="d-flex align-items-center">
                         <Container className="d-flex justify-content-center">

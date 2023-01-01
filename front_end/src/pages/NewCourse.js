@@ -15,7 +15,8 @@ import { Link } from 'react-router-dom';
 import InstSideNav from "./Instructor/InstSideNav"
 import NavDropdown from 'react-bootstrap/NavDropdown';
 
-
+import { useAuthContext } from "../hooks/useAuthContext"
+import { useLogout } from '../hooks/useLogout'
 
 
 const NewCourse = () => {
@@ -99,6 +100,11 @@ const NewCourse = () => {
     }
 
 
+    const { logout } = useLogout()
+
+const handleClickLogout = () => {
+    logout()
+}
 
 
 
@@ -121,7 +127,7 @@ const NewCourse = () => {
                         <Nav>
                             <Form className="d-flex" >
 
-                                <Button href="/" variant="outline-light" size="sm">Log Out </Button>
+                                <Button href="/" variant="outline-light" size="sm" onClick={handleClickLogout}>Logout </Button>
                             </Form>
                         </Nav>
                     </Navbar.Collapse>

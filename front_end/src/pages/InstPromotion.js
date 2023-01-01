@@ -95,7 +95,7 @@ const InstPromotion = () => {
             return (
                 <Alert variant="success" onClose={() => setShow2(false)} dismissible>
                     <Alert.Heading>Promotion have been applied</Alert.Heading>
-                    <p>For: {value2.diff(value,'day')} Days</p>
+                    <p>For: {value2.diff(value, 'day')} Days</p>
                 </Alert>
             );
         }
@@ -103,28 +103,33 @@ const InstPromotion = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        let duration = value2.diff(value,'day');
-        const response = await fetch("/api/courses/changeDiscount/{\"id\": \""+course+"\",\"Discount\": \""+percentage+"\",\"DiscountDuration\": \""+ duration +"\"}", {
+        let duration = value2.diff(value, 'day');
+        const response = await fetch("/api/courses/changeDiscount/{\"id\": \"" + course + "\",\"Discount\": \"" + percentage + "\",\"DiscountDuration\": \"" + duration + "\"}", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             }
         })
 
-            handleShow2();
-    
+        handleShow2();
 
 
-        
+
+
     }
 
+    const { logout } = useLogout()
+
+    const handleClickLogout = () => {
+        logout()
+    }
 
 
     return (
 
         <div className="home">
 
-            <Navbar bg="dark" variant="dark" expand="lg">
+<Navbar bg="dark" variant="dark" expand="lg">
                 <Container>
                     <Navbar.Brand href="/">Comrades</Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -140,7 +145,7 @@ const InstPromotion = () => {
                         <Nav>
                             <Form className="d-flex" >
 
-                                <Button href="/" variant="outline-light" size="sm">Log Out </Button>
+                                <Button href="/" variant="outline-light" size="sm" onClick={handleClickLogout}>Logout </Button>
                             </Form>
                         </Nav>
                     </Navbar.Collapse>

@@ -15,6 +15,7 @@ import Table from 'react-bootstrap/Table';
 
 
 import { useEffect, useState } from "react"
+import { useLogout } from '../hooks/useLogout'
 
 import "./admin.css"
 import { ProblemModal, ModalOpenButton, ModalContents } from '../components/ProblemModal'
@@ -34,6 +35,11 @@ const AdminViewProblems = () => {
         console.log(problems);
     }, [])
 
+    const { logout } = useLogout()
+
+    const handleClickLogout = () => {
+        logout()
+    }
 
     return (
 
@@ -55,7 +61,7 @@ const AdminViewProblems = () => {
                         <Nav>
                             <Form className="d-flex" >
 
-                                <Button href="/" variant="outline-light" size="sm">Log Out </Button>
+                                <Button href="/" variant="outline-light" size="sm" onClick={handleClickLogout}>Logout </Button>
                             </Form>
                         </Nav>
                     </Navbar.Collapse>
@@ -72,8 +78,8 @@ const AdminViewProblems = () => {
                             <h3 style={{ margin: "30px 0px 0px 6px" }}>
                                 All Problems
                             </h3>
-                            <h6 style={{ margin: "6px 0px 0px 6px", opacity:"90%" }}>
-                                Click on a <span style={{fontWeight:"bold",fontStyle:"italic"}}>View Details</span> for more details or to edit status.
+                            <h6 style={{ margin: "6px 0px 0px 6px", opacity: "90%" }}>
+                                Click on a <span style={{ fontWeight: "bold", fontStyle: "italic" }}>View Details</span> for more details or to edit status.
                             </h6>
                         </Row>
                         <Row>
@@ -108,7 +114,7 @@ const AdminViewProblems = () => {
                                                         <ModalOpenButton>
                                                             <Button variant="dark">View Details</Button>
                                                         </ModalOpenButton>
-                                                        <ModalContents isAdmin={true} title={"Course: " + problem.CourseID} problemID = {problem._id}>
+                                                        <ModalContents isAdmin={true} title={"Course: " + problem.CourseID} problemID={problem._id}>
                                                             <h6>
                                                                 Problem statement:
                                                             </h6>

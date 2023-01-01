@@ -19,6 +19,7 @@ import ReportProblemIcon from '@mui/icons-material/ReportProblem';
 import Naavbar from "../components/Navbar";
 import { useEffect, useState } from "react";
 import { useAuthContext } from "../hooks/useAuthContext"
+import { useLogout } from '../hooks/useLogout'
 import InstSideNav from "../pages/Instructor/InstSideNav"
 
 const GetCoursesByInstructor = (prop) => {
@@ -183,11 +184,37 @@ const GetCoursesByInstructor = (prop) => {
 
 
 
+  const { logout } = useLogout()
+
+  const handleClickLogout = () => {
+    logout()
+  }
 
   return (
     <div>
       <div className="home">
-        <Naavbar />
+        <Navbar bg="dark" variant="dark" expand="lg">
+          <Container>
+            <Navbar.Brand href="/">Comrades</Navbar.Brand>
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse id="basic-navbar-nav">
+              <Nav className="me-auto">
+                <NavDropdown title="Courses" id="basic-nav-dropdown">
+                  <NavDropdown.Item href="#action/3.1">Math</NavDropdown.Item>
+                  <NavDropdown.Item href="#action/3.2">Computer</NavDropdown.Item>
+                  <NavDropdown.Item href="#action/3.3">Marketing</NavDropdown.Item>
+                  <NavDropdown.Item href="#action/3.4">Business</NavDropdown.Item>
+                </NavDropdown>
+              </Nav>
+              <Nav>
+                <Form className="d-flex" >
+
+                  <Button href="/" variant="outline-light" size="sm" onClick={handleClickLogout}>Logout </Button>
+                </Form>
+              </Nav>
+            </Navbar.Collapse>
+          </Container>
+        </Navbar>
         <Row>
           <Col xs={2}>
             <InstSideNav />
@@ -254,7 +281,7 @@ const GetCoursesByInstructor = (prop) => {
                 {myCourses && myCourses.map((course => (
                   <Container className="course__card" key={course._id} >
                     <Card style={{ marginTop: "20px" }} className="course__card" key={course._id} >
-                      <Card.Header style={{backgroundColor: "#212529", color:"White"}} as="h6">
+                      <Card.Header style={{ backgroundColor: "#212529", color: "White" }} as="h6">
                         {course.Title} - {course.Rating}🌟
                       </Card.Header>
                       <Card.Body>

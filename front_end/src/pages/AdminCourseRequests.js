@@ -17,6 +17,7 @@ import Table from 'react-bootstrap/Table';
 
 
 import { useEffect, useState } from "react"
+import { useLogout } from '../hooks/useLogout'
 
 import "./admin.css"
 import { ProblemModal, ModalOpenButton, ModalContents } from '../components/ProblemModal'
@@ -88,6 +89,11 @@ const AdminCourseRequests = () => {
         }
     }
 
+    const { logout } = useLogout()
+
+    const handleClickLogout = () => {
+        logout()
+    }
 
     return (
 
@@ -108,7 +114,7 @@ const AdminCourseRequests = () => {
                         <Nav>
                             <Form className="d-flex" >
 
-                                <Button href="/" variant="outline-light" size="sm">Log Out </Button>
+                                <Button href="/" variant="outline-light" size="sm" onClick={handleClickLogout}>Logout </Button>
                             </Form>
                         </Nav>
                     </Navbar.Collapse>
