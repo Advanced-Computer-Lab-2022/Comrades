@@ -12,6 +12,12 @@ Comarades is a online Learning Website where you can subscribe to many Intrestin
 - [@Youssef Ibrahim]
 
 
+## Motivation
+
+The project was built as a capstone for "Advanced Computer Lab" Course at the GUC.
+The idea was to offer Intersting and helpfull courses to any body who want to develop his skills.
+You can Easily watch your lessons, solve exercises and reieve your certificate after finishing your course without any need to schools or colleges.  
+
 ## Build status
 
 The Code is in Perfect Status as we invested a lot of time in erros solving and explainning our functions and concepts which makes
@@ -19,10 +25,7 @@ The Code is in Perfect Status as we invested a lot of time in erros solving and 
  the code and reshape it in the way they are willing too.
 
 
-## Motivation
 
-The idea was to offer Intersting and helpfull courses to any body who want to develop his skills.
-You can Easily watch your lessons, solve exercises and reieve your certificate after finishing your course without any need to schools or colleges.  
 ## Code Style
 The Style we followed in this website was a simple white and black mix that looks good.
 ## Tech Stack
@@ -42,6 +45,10 @@ The Style we followed in this website was a simple white and black mix that look
 
 
 ## API Reference
+
+
+#### Course
+
 
 #### Get all items
 
