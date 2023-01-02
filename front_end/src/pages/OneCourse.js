@@ -1,15 +1,29 @@
 
-import Naavbar from '../components/Navbar';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Col from 'react-bootstrap/Col';
+import Form from 'react-bootstrap/Form';
+import Row from 'react-bootstrap/Row';
 import Card from 'react-bootstrap/Card';
-import Row from 'react-bootstrap/esm/Row';
-import Col from 'react-bootstrap/esm/Col';
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
+import Breadcrumb from 'react-bootstrap/Breadcrumb';
 
-import Button from 'react-bootstrap/esm/Button';
+
+import AdminSideNav from "./Admin/AdminSideNav"
+
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
+
+
+
 import { Rating } from '@mui/material';
 
-import { useEffect, useState } from "react"
-import { Container } from '@mui/system';
 
+
+import { useEffect, useState } from "react"
+import { useLogout } from '../hooks/useLogout'
 
 
 
@@ -24,10 +38,10 @@ const OneCourse = () => {
     const [value, setValue] = useState(Number);
     const [value2, setValue2] = useState(Number);
     const [exercise, setExercise] = useState([]);
-    const [inst , setInst] = useState()
+    const [inst, setInst] = useState()
 
 
-  
+
 
 
 
@@ -37,27 +51,27 @@ const OneCourse = () => {
             headers: {
                 'Content-Type': 'application/json'
             }
-        })        
+        })
         const json = await response.json()
-      
+
 
 
     }
     const submitInsRate = async (event) => {
-        
+
 
         const response = await fetch("/api/users/rateInstructor/{\"name\":\"" + inst + "\",\"Rating\":\"" + value2 + "\"}", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             }
-        })    
+        })
         const json = await response.json()
 
         // console.log("/api/users/rateInstructor/{\"name\":\"" + inst + "\",\"Rating\":\"" + value2 + "\"}")
-        
 
-        
+
+
 
 
     }
@@ -65,34 +79,53 @@ const OneCourse = () => {
 
         if (subtitle[idx].id === cid) {
             return (
-                <>
-                    <Container onClick={() => window.location.href = `/os?userId=${course._id}${subtitle[idx].index}`}>
-                        <Card style={{ width: "40rem" }}>
-                            <Card.Body>
-                                <Card.Text>
-                                    <p>{subtitle[idx].index+1}. Subtitle:{subtitle[idx].arr.Name}</p>
-                                    <p>{subtitle[idx].arr.Hours} Hours</p>
 
 
-                                </Card.Text>
-                            </Card.Body>
-                        </Card>
 
-                    </Container>
-                    <br></br>
-                </>
+                <Card style={{ margin: "20px 0px 0px 0px", width: "700px" }} className="course__card" key={course._id} >
+                    <Card.Header as="h6">
+                        {subtitle[idx].index + 1 + " ◍ "}  {subtitle[idx].arr.Name}
+                    </Card.Header>
+                    <Card.Body>
+                        <Button style={{ marginRight: "10px" }} variant="dark" onClick={() => window.location.href = `os?userId=${course._id}${subtitle[idx].index}`} >View Subtitle</Button>
+                    </Card.Body>
+                </Card>
+
+                // <>
+                //     <Container onClick={() => window.location.href = `/os?userId=${course._id}${subtitle[idx].index}`}>
+                //         <Card style={{ marginLeft:"-10px", width: "40rem" }}>
+                //             <Card.Body>
+                //                 <Card.Text>
+                //                     <p>{subtitle[idx].index + 1}. Subtitle:{subtitle[idx].arr.Name}</p>
+                //                     <p>{subtitle[idx].arr.Hours} Hours</p>
+
+
+                //                 </Card.Text>
+                //             </Card.Body>
+                //         </Card>
+
+                //     </Container>
+                //     <br></br>
+                // </>
             )
         }
     }
 
 
+    const { logout } = useLogout()
+
+
+
+    const handleClickLogout = () => {
+        logout()
+    }
 
 
 
     useEffect(() => {
         const getCourses = async () => {
             console.log(userId)
-            const response = await fetch("/api/courses/getCourseById/{\"RequestID\": \"" + userId + "\"}")
+            const response = await fetch("/api/courses/getCourseById/{\"id\": \"" + userId + "\"}")
             const json = await response.json()
 
 
@@ -101,7 +134,7 @@ const OneCourse = () => {
 
                 setCourse(json[0])
                 console.log(json)
-                 setInst(json[0].Instructor)
+                setInst(json[0].Instructor)
 
 
                 let sub = [];
@@ -139,131 +172,96 @@ const OneCourse = () => {
 
     return (
         <>
-            <Naavbar /><div>
-
-                <h2 style={{ textAlign: "center" }}>{course.Title}</h2>
-
-
-
-
-
-
-
-                <Container className="d-flex justify-content-center">
-                    <br></br>
-                    <h1 style={{ textAlign: "center" }}>{course.Title}</h1>
-                    <br></br>
-                    <br></br>
-                    <iframe width="560" height="315" src={`https://www.youtube.com/embed/${prev}`} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-                </Container>
-
-
-                <br></br>
+            <Navbar bg="dark" variant="dark" expand="lg">
                 <Container>
-                    <Row>
-                        <Col>
-                            &nbsp;&nbsp;&nbsp;Subject : {course.Subject}
-                            <br></br>
+                    <Navbar.Brand href="/">Comrades</Navbar.Brand>
+                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                    <Navbar.Collapse id="basic-navbar-nav">
+                        <Nav className="me-auto">
+                            <NavDropdown title="Courses" id="basic-nav-dropdown">
+                                <NavDropdown.Item href="#action/3.1">Math</NavDropdown.Item>
+                                <NavDropdown.Item href="#action/3.2">Computer</NavDropdown.Item>
+                                <NavDropdown.Item href="#action/3.3">Marketing</NavDropdown.Item>
+                                <NavDropdown.Item href="#action/3.4">Business</NavDropdown.Item>
+                            </NavDropdown>
+                        </Nav>
+                        <Nav>
+                            <Form className="d-flex" >
+
+                                <Button href="/" variant="outline-light" size="sm" onClick={handleClickLogout}>Logout </Button>
+                            </Form>
+                        </Nav>
+                    </Navbar.Collapse>
+                </Container>
+            </Navbar>
+            <div>
+                <Breadcrumb style={{margin:"10px 0px 0px 10px"}}>
+                    <Breadcrumb.Item href="/home">
+                        My Courses
+                    </Breadcrumb.Item>
+                    <Breadcrumb.Item active>{course.Title}</Breadcrumb.Item>
+                </Breadcrumb>
 
 
-                            &nbsp;&nbsp;&nbsp;Instructor : {course.Instructor}
-                            <br></br>
+                <h2 style={{ margin: "30px 0px 0px 300px" }}>{course.Title}</h2>
+
+                <br></br>
+                <hr style={{ margin: "0px 300px" }}></hr>
 
 
-                            &nbsp;&nbsp;&nbsp;Credit Hours : {course.CreditHours}
-                            <br></br>
+                <Container style={{ margin: "30px 0px 0px 290px", width: "600px" }}>
+                    <Col>
+                        <Row>
+                            <Rating
+                                name="simple-controlled"
+                                value={value}
+                                onChange={(event, newValue) => {
+                                    setValue(newValue);
+                                }} />
+                        </Row>
 
-                            &nbsp;&nbsp;&nbsp;Total Hours : {course.TotalHours}
-                            <br></br>
+                        <Row sm={4}>
+                            &nbsp;&nbsp;&nbsp;<Button onClick={submitCourseRate} variant="dark">
+                                Rate Course
+                            </Button>
+                        </Row>
+                        <br></br>
+                        <Row>
+                            <Rating
+                                name="simple-controlled"
+                                value={value2}
+                                onChange={(event2, newValue) => {
+                                    setValue2(newValue);
+                                }} />
+                        </Row>
 
-                            &nbsp;&nbsp;&nbsp;Price : {course.Price}
-                            <br></br>
+                        <Row sm={4}>
+                            &nbsp;&nbsp;&nbsp;<Button onClick={submitInsRate} variant="dark">
+                                Rate Instructor
+                            </Button>
+                        </Row>
+                    </Col>
 
-                            &nbsp;&nbsp;&nbsp;Discount : {course.Discount}%
-                            <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <h4>
+                        Curriculum:
+                    </h4>
 
-                            &nbsp;&nbsp;&nbsp;Rating : {course.Rating}
-                            <br></br>
+                    <br></br>
 
-                            &nbsp;&nbsp;&nbsp;Description : {course.Description}
-                            <br></br>
-                            <br></br>
-                            <br></br>
-
-                        </Col>
-
-                        <Col>
-                            <Row>
-                                <Rating
-                                    name="simple-controlled"
-                                    value={value}
-                                    onChange={(event, newValue) => {
-                                        setValue(newValue);
-                                    }} />
-                            </Row>
-
-                            <Row sm={4}>
-                                &nbsp;&nbsp;&nbsp;<Button onClick={submitCourseRate}>
-                                    Rate Course
-                                </Button>
-                            </Row>
-                            <br></br>
-                            <Row>
-                                <Rating
-                                    name="simple-controlled"
-                                    value={value2}
-                                    onChange={(event2, newValue) => {
-                                        setValue2(newValue);
-                                    }} />
-                            </Row>
-
-                            <Row sm={4}>
-                                &nbsp;&nbsp;&nbsp;<Button onClick={submitInsRate}>
-                                    Rate Instructor
-                                </Button>
-                            </Row>
+                    {subtitle.map((subtitlee => (
+                        renderSubtitles(subtitlee.index, userId)
+                    )))}
 
 
-
-                        </Col>
-
-
-                    </Row>
                 </Container>
 
-
-
-
-
-
-
-
-
-                {/* 
-                {subtitle && subtitle.map((subtitlee => (
-
-                    <Container className="course__card" key={subtitlee._id} onClick={() => window.location.href = `/os?userId=${course._id}`}>
-                        <br></br>
-                        <><Card style={{ width: "40rem" }}>
-                            <Card.Body>
-                                <Card.Text>
-                                    {subtitlee.index}.Subtitle: {subtitlee.arr}
-                                    <br></br>
-                                    {subtitlee.Hours} Hours
-                                    
-                                </Card.Text>
-                            </Card.Body>
-                        </Card></>
-
-                    </Container>
-
-                )))} */}
-                
                 <br></br>
-                {subtitle.map((subtitlee => (
-                    renderSubtitles(subtitlee.index, userId)
-                )))}
+                <br></br>
+                <br></br>
 
 
 
@@ -275,8 +273,8 @@ const OneCourse = () => {
 
 
 
-
-            </div></>
+            </div>
+        </>
 
 
     )

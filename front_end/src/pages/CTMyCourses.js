@@ -229,7 +229,7 @@ const CTMyCourses = () => {
                                         {course.Title}
                                     </Card.Header>
                                     <Card.Body>
-                                        <Button style={{ marginRight: "10px" }} variant="dark" onClick={() => window.location.href = `/vc?userId=${course._id}`} >View Course</Button>
+                                        <Button style={{ marginRight: "10px" }} variant="dark" onClick={() => window.location.href = `/oc?userId=${course._id}`} >View Course</Button>
                                         <Button variant="dark" onClick={() => window.location.href = `/vc?userId=${course._id}`} >Recieve Certificate Via Email </Button>
 
                                         <Button style={{ float: "right" }} variant="danger" onClick={(e) => handleSubmit(e, course.Title)} > <ReportProblemIcon></ReportProblemIcon>  </Button>
@@ -252,7 +252,7 @@ const CTMyCourses = () => {
                                 <Card.Body>
                                     <ProgressBar striped variant="success" now={course.Progress} label={`${course.Progress}%`} />
                                     <br></br>
-                                    <Button style={{ marginRight: "10px" }} variant="dark" onClick={() => window.location.href = `/vc?userId=${course._id}`} >Continue Learning</Button>
+                                    <Button style={{ marginRight: "10px" }} variant="dark" onClick={() => window.location.href = `/oc?userId=${course._id}`} >Continue Learning</Button>
 
                                     <Button style={{ float: "right" }} variant="danger" onClick={(e) => handleSubmit(e, course.Title)} > <ReportProblemIcon></ReportProblemIcon> </Button>
 
