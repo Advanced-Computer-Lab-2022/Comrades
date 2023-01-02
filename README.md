@@ -40,6 +40,9 @@ Spaces are not used rather than tabs.
 
 ## Screenshots
 
+![Alt vmware](https://github.com/liangxiao3/redhat_note/raw/master/pic/basic_vmware.jpg)
+
+
 
 
 ## Tech Stack
