@@ -141,6 +141,7 @@ const OpenSubtitle = () => {
             if (response.ok) {
 
                 setSubtitle(json)
+                console.log(subtitle);
 
                 let exe = [];
                 let indexx = 0;

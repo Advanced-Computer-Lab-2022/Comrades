@@ -147,6 +147,10 @@ const CTMyCourses = () => {
         }
     }
 
+    const handleSubmit3 = async (e) => {
+        e.preventDefault();
+    }
+
     const [type, setType] = useState("Financial")
     const [details, setDetails] = useState("Details")
 
@@ -175,6 +179,37 @@ const CTMyCourses = () => {
             );
         }
     }
+
+    const [show3, setShow3] = useState(false);
+
+    function AlertDismissibleExample3() {
+
+        if (show3) {
+            return (
+                <Alert variant="success" onClose={() => setShow3(false)} dismissible>
+                    <Alert.Heading>Certificate was emailed to your email address.</Alert.Heading>
+                </Alert>
+            );
+        }
+    }
+
+    const sendCertificate = async (e, cid) => {
+        e.preventDefault();
+
+        const data = { Username: user.username, CourseID: cid }
+
+        const response = await fetch('/api/users/emailCertificate', {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+
+        setShow3(true);
+
+    }
+
 
 
 
@@ -210,6 +245,7 @@ const CTMyCourses = () => {
                     <br></br>
                     <br></br>
                     <AlertDismissibleExample />
+                    <AlertDismissibleExample3 />
                     <br></br>
 
                     <Row>
@@ -230,7 +266,7 @@ const CTMyCourses = () => {
                                     </Card.Header>
                                     <Card.Body>
                                         <Button style={{ marginRight: "10px" }} variant="dark" onClick={() => window.location.href = `/oc?userId=${course._id}`} >View Course</Button>
-                                        <Button variant="dark" onClick={() => window.location.href = `/vc?userId=${course._id}`} >Recieve Certificate Via Email </Button>
+                                        <Button variant="dark" onClick={(e) => sendCertificate(e, course.Title)} >Recieve Certificate Via Email </Button>
 
                                         <Button style={{ float: "right" }} variant="danger" onClick={(e) => handleSubmit(e, course.Title)} > <ReportProblemIcon></ReportProblemIcon>  </Button>
 

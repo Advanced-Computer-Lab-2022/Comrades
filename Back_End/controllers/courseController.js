@@ -119,7 +119,7 @@ const getSubtitleByIndexAndCourseID = async (req, res) => {
     console.log(query.index);
     const courses = await Course.find({ "_id": query.id })
     console.log(courses[0].Subtitles[query.index])
-    res.status(200).json(courses)
+    res.status(200).json(courses[0].Subtitles[query.index])
 }
 
 

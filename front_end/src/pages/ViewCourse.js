@@ -8,6 +8,8 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Modal from 'react-bootstrap/Modal';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import Alert from 'react-bootstrap/Alert';
+
 
 import Naavbar from "../components/Navbar"
 import Footer from "../components/Footer/Footer"
@@ -61,7 +63,7 @@ const ViewCourse = () => {
 
         console.log(json[0].Subtitles)
 
-        const data = { "Username": user.username, "CourseName": course.Title, "NumSubtitles": json[0].Subtitles.length }
+        const data = { "Username": user.username, "CourseName": course.Title, "NumSubtitles": json[0].Subtitles.length, "AmountPaid": json[0].DiscountedPrice }
 
         const response1 = await fetch('/api/users/addCourseToUser', {
             method: 'POST',
@@ -92,6 +94,9 @@ const ViewCourse = () => {
         })
 
 
+        setShow(false);
+        setShow1(true);
+        setShow2(false);
     }
 
 
@@ -101,7 +106,34 @@ const ViewCourse = () => {
     const handleShow = () => setShow(true);
 
 
+    const [show1, setShow1] = useState(false);
 
+    function AlertDismissibleExample() {
+      
+        if (show1) {
+          return (
+            <Alert variant="success" onClose={() => setShow1(false)} dismissible>
+              <Alert.Heading>Signed up for course</Alert.Heading>
+              <p>
+                Click on login to redirect to your profile.
+              </p>
+            </Alert>
+          );
+        }
+      }
+      
+
+
+      const [show2, setShow2] = useState(true);
+
+
+      function btn() {
+        if(show2){
+            return (
+            <Button style={{ width: "140px" }} className="btn-dark" type="submit" variant="dark" onClick={() => { handleShow() }}>Join Course</Button>
+            )
+        }
+      }
 
 
     return (
@@ -136,6 +168,7 @@ const ViewCourse = () => {
                 </Container>
             </Navbar>
             <div className="course__title__wrapper">
+                {AlertDismissibleExample()}
                 <br></br>
                 <br></br>
 
@@ -159,7 +192,7 @@ const ViewCourse = () => {
                             USD {course.DiscountedPrice} ({course.Discount}%)
                         </h6>
                         <br></br>
-                        <Button style={{ width: "140px" }} className="btn-dark" type="submit" variant="dark" onClick={() => { handleShow() }}>Join Course</Button>
+                        {btn()}
                         <br></br>
                         <br></br>
                         <h6>

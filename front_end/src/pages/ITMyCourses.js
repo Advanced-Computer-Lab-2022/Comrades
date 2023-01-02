@@ -156,6 +156,8 @@ const ITMyCourses = () => {
 
     }
 
+
+
     const { logout } = useLogout()
 
     const handleClickLogout = () => {
@@ -185,7 +187,7 @@ const ITMyCourses = () => {
 
     function AlertDismissibleExample2() {
 
-        if (show) {
+        if (show2) {
             return (
                 <Alert variant="success" onClose={() => setShow2(false)} dismissible>
                     <Alert.Heading>Certificate was emailed to your email address.</Alert.Heading>
@@ -238,7 +240,7 @@ const ITMyCourses = () => {
 
     function AlertDismissibleExample4() {
 
-        if (show2) {
+        if (show4) {
             return (
                 <Alert variant="success" onClose={() => setShow4(false)} dismissible>
                     <Alert.Heading>Problem have been reported!</Alert.Heading>
@@ -249,6 +251,24 @@ const ITMyCourses = () => {
             );
         }
     }
+
+    const sendCertificate = async (e, cid) => {
+        e.preventDefault();
+
+        const data = { Username: user.username, CourseID: cid }
+
+        const response = await fetch('/api/users/emailCertificate', {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+
+        console.log("MESSAGE");
+        setShow2(true);
+    }
+
 
     return (
         <div className="home">
@@ -282,7 +302,7 @@ const ITMyCourses = () => {
                     <br></br>
                     <br></br>
                     <AlertDismissibleExample />
-                    <AlertDismissibleExample2 />
+                    {AlertDismissibleExample2() }
                     <AlertDismissibleExample4 />
                     <br></br>
                     <br></br>
@@ -305,7 +325,7 @@ const ITMyCourses = () => {
                                     </Card.Header>
                                     <Card.Body>
                                         <Button style={{ marginRight: "10px" }} variant="dark" onClick={() => window.location.href = `/oc?userId=${course._id}`} >View Course</Button>
-                                        <Button variant="dark" onClick={() => window.location.href = `/vc?userId=${course._id}`} >Recieve Certificate Via Email </Button>
+                                        <Button variant="dark" onClick={(e) => sendCertificate(e, course.Title)} >Recieve Certificate Via Email </Button>
 
                                         <Button style={{ float: "right" }} variant="danger" onClick={(e) => handleSubmit3(e, course.Title)} > <ReportProblemIcon></ReportProblemIcon>  </Button>
 

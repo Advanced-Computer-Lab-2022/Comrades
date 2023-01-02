@@ -209,11 +209,14 @@ const changeBio = async (req, res) => {
 
 
 const emailCertificate = async (req, res) => {
-  const { Username, Email, CourseID } = req.body
+  const { Username, CourseID } = req.body
+
+  const users = await User.find({ "Username": Username });
+
 
   let options = {
     from: "acl-comrades-team-2022@outlook.com", // sender address
-    to: Email, // list of receivers
+    to: users[0].Email, // list of receivers
     subject: "Certificate of Course Completion", // Subject line
     text: CourseID, // plain text body
     html: "<h2>Click the following link to </h2>" +
@@ -229,6 +232,7 @@ const emailCertificate = async (req, res) => {
   })
 
 
+  res.status(200).json({ done: "done" })
 
 };
 
@@ -306,13 +310,13 @@ const userFinishSubtitle = async (req, res) => {
 
 const addCourseToUser = async (req, res) => {
 
-  const { Username, CourseName, NumSubtitles } = req.body
+  const { Username, CourseName, NumSubtitles, AmountPaid } = req.body
   console.log(CourseName);
   try {
     const users = await User.find({ "Username": Username });
 
     let courses = users[0].SignedCourses
-    courses.push({ CourseName: CourseName, NumSubtitles: NumSubtitles, MaxNumSubtitles: NumSubtitles })
+    courses.push({ CourseName: CourseName, NumSubtitles: NumSubtitles, MaxNumSubtitles: NumSubtitles, AmountPaid: AmountPaid})
     let doc = await User.findOneAndUpdate(
       { "Username": Username },
       { SignedCourses: courses },
