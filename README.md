@@ -27,12 +27,26 @@ The Code is in Perfect Status as we invested a lot of time in erros solving and 
 
 
 ## Code Style
-The Style we followed in this website was a simple white and black mix that looks good.
+We used camelCase for variables.
+
+Codes are formatted in VS Code using alt + shift + F.
+
+Indentation was used to assist in identifying control flow and blocks of code.
+
+Curley braces are used except for the case where the body of the loop/conditional statement is a single code.
+
+Spaces are not used rather than tabs.
+
+
+## Screenshots
+
+
+
 ## Tech Stack
 
-*Client:* React
+*Client:* React, Bootstrap & Material UI
 
-*Server:* Node, Express
+*Server:* Node, Express, MongoDB
 
 
 ## Features
