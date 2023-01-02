@@ -150,17 +150,15 @@ userSchema.statics.login = async function (username, password) {
 
 ## Installation
 
-Install my-project with npm
-
-bash
-  cd Front_end
-  npm Install
-  npm start
-
-
-bash
-  cd Back_End
-  npm Install
-  npm run dev
+Install required packages for frontend:
+```
+  cd front_end
+  npm install
+```
+Install required packages for backend:
+```
+  cd back_end
+  npm install my-project
+```
 
     
