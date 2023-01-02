@@ -82,8 +82,9 @@ const GetCoursesByInstructor = (prop) => {
 
 
     const fetchReviews = async () => {
-      const response = await fetch("/api/users/getReviewsInstructor");
+      const response = await fetch(`/api/users/getReviewsInstructor/{"instructor":"${user.username}"}`);
       const json = await response.json();
+      console.log("HI");
       if (response.ok) {
         setReviews(json);
         console.log(json);
@@ -93,6 +94,7 @@ const GetCoursesByInstructor = (prop) => {
     if (user !== null) {
       if (user.username !== null)
         fetchCourses();
+        fetchReviews();
     }
 
 
@@ -301,9 +303,26 @@ const GetCoursesByInstructor = (prop) => {
                   </Container>
                 )))}
               </Col>
+              <h2 style={{marginTop:"48px"}}> Reviews</h2>
+              {reviews &&
+                reviews.map((review) => (
+                  <>
+                    <br></br>
+                    <Card key={review._id} style={{ width: "40rem" }}>
+                      <Card.Body>
+                        <Card.Text>
+                          Reviewer: {review.Reviewer}
+                          <br></br>
+                          Review: {review.Review}
+                        </Card.Text>
+                      </Card.Body>
+                    </Card>
+                  </>
+                ))}
             </Row>
-            <hr></hr>
+            
           </Col>
+
         </Row>
         <Modal show={show} onHide={handleClose}>
           <Modal.Header closeButton>
@@ -344,31 +363,6 @@ const GetCoursesByInstructor = (prop) => {
         </Modal>
       </div>
 
-
-      <br></br>
-
-
-      <br></br>
-      <br></br>
-
-
-
-      <h2> Reviews</h2>
-      {reviews &&
-        reviews.map((review) => (
-          <>
-            <br></br>
-            <Card key={review._id} style={{ width: "40rem" }}>
-              <Card.Body>
-                <Card.Text>
-                  Reviewer: {review.Reviewer}
-                  <br></br>
-                  Review: {review.Review}
-                </Card.Text>
-              </Card.Body>
-            </Card>
-          </>
-        ))}
     </div>
   );
 };

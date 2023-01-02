@@ -115,10 +115,7 @@ const getCourseByName = async (req, res) => {
 
 const getSubtitleByIndexAndCourseID = async (req, res) => {
     let query = JSON.parse(req.params.query)
-    console.log(query.id);
-    console.log(query.index);
     const courses = await Course.find({ "_id": query.id })
-    console.log(courses[0].Subtitles[query.index])
     res.status(200).json(courses[0].Subtitles[query.index])
 }
 

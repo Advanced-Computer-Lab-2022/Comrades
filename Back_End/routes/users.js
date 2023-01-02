@@ -16,6 +16,7 @@ const {
   requestRefund,
   emailCertificate,
   changePasswordNoToken,
+  reviewInstructor,
 
   loginUser,
   signupUser
@@ -35,6 +36,7 @@ router.post('/signup', signupUser)
 
 
 
+router.post('/reviewInstructor', reviewInstructor)
 
 
 router.post('/emailCertificate', emailCertificate)
@@ -55,7 +57,7 @@ router.post('/issueRefund', issueRefund)
 
 
 // Get Reviews of Instructor by ID
-router.get('/getReviewsInstructor',getReviewsInstructor)
+router.get('/getReviewsInstructor/:query',getReviewsInstructor)
 
 
 // Get Instructor by ID

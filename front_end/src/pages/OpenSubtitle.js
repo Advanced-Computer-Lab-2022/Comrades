@@ -8,6 +8,9 @@ import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
+import { jsPDF } from "jspdf";
+
+
 import AdminSideNav from "./Admin/AdminSideNav"
 
 import Container from 'react-bootstrap/Container';
@@ -17,8 +20,18 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import Naavbar from '../components/Navbar';
 
 
+import { useAuthContext } from "../hooks/useAuthContext"
+import { useLogout } from '../hooks/useLogout'
+
+
 
 const OpenSubtitle = () => {
+    const { user } = useAuthContext()
+
+    const [Notes, setNotes] = useState("");
+
+
+
     const [subtitle, setSubtitle] = useState([])
     const [exercise, setExercise] = useState([])
     const [link, setLink] = useState([])
@@ -31,10 +44,10 @@ const OpenSubtitle = () => {
 
     const [show2, setShow2] = useState(false);
 
-  const handleClose = () =>{
-    setShow1(false)
-    setShow2(false);
-  }
+    const handleClose = () => {
+        setShow1(false)
+        setShow2(false);
+    }
 
 
 
@@ -45,6 +58,8 @@ const OpenSubtitle = () => {
     const all = params.get('userId');
     const index = all.charAt(all.length - 1)
     const u = all.slice(0, -1);
+
+
 
     console.log(u)
     // console.log(index)
@@ -57,7 +72,7 @@ const OpenSubtitle = () => {
 
         if (sol1 === ans.toString()) {
             setShow1(true)
-            setCounter(counter+10)
+            setCounter(counter + 10)
 
 
         }
@@ -109,7 +124,7 @@ const OpenSubtitle = () => {
                                 <br></br>
 
 
-                                <Button style={{ marginRight: "10px" }} variant="dark"  onClick={() => handleSubmit(exercise[idx].arr.CorrectAnswer)} >Submit Answer</Button>
+                                <Button style={{ marginRight: "10px" }} variant="dark" onClick={() => handleSubmit(exercise[idx].arr.CorrectAnswer)} >Submit Answer</Button>
                                 <br></br>
                                 <br></br>
 
@@ -158,20 +173,60 @@ const OpenSubtitle = () => {
 
 
                 setExercise(exe);
-                let result = subtitle.link.substr(16)
-                setLink(result)
+                // let result = subtitle.link.substr(16)
+                // setLink(result)
+
+
+
+                const response3 = await fetch("/api/courses/getCourseById/{\"id\": \"" + u + "\"}")
+                const json3 = await response3.json()
+
+
+
+                const data = { Username: user.username, CourseID: json3[0].Title, SubtitleID: json._id }
+
+                const response2 = await fetch('/api/users/userFinishSubtitle', {
+                    method: 'POST',
+                    body: JSON.stringify(data),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+
+
 
 
             }
         }
-        getSubtitleByIndexAndCourseID()
 
-    }, [])
+
+        if (user !== null) {
+            if (user.username !== null) {
+                getSubtitleByIndexAndCourseID()
+            }
+        }
+
+
+
+
+
+
+    }, [user])
 
     // console.log(exercise)
     console.log(subtitle)
- 
 
+
+    const handleNotes = (e) => {
+        e.preventDefault();
+
+        const doc = new jsPDF();
+        var splitText = doc.splitTextToSize(Notes, 180);
+        doc.text(15, 20, splitText);
+        doc.save("Notes.pdf");
+
+
+    }
 
 
 
@@ -184,22 +239,61 @@ const OpenSubtitle = () => {
 
             <Container>
 
-                
-                
-                
-            &nbsp;&nbsp;&nbsp;<h2 style={{ margin: "30px 0px 0px 300px" }}>Tutorial {index} : {subtitle.Name}</h2>
 
-            <br></br>
+
+
+                &nbsp;&nbsp;&nbsp;<h2 style={{ margin: "30px 0px 0px 300px" }}>Tutorial {index} : {subtitle.Name}</h2>
+
+                <br></br>
                 <hr style={{ margin: "0px 300px" }}></hr>
                 <br></br>
 
-            <iframe width="560" height="315" src={`https://www.youtube.com/embed/${link}`} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <iframe width="560" height="315" src={`https://www.youtube.com/embed/${subtitle.Link}`} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
+                <br></br>
+                <br></br>
+                <Form style={{marginLeft:"-40px"}}>
+                    <Form.Group as={Row} className="mb-3" controlId="formPlaintextEmail">
+                        <Form.Label column sm="2">
+                            Write notes
+                        </Form.Label>
+                        <Col sm="2">
+                            <Form.Control
+                                className="input"
+                                as="textarea" rows={3}
+                                placeholder="Notes"
+                                onChange={(e) => setNotes(e.target.value)}
+                                value={Notes}
+                            />
+                        </Col>
+                    </Form.Group>
+                    <Col sm="10">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;
+                        <Button
+                            type="submit"
+                            variant="dark"
+                            onClick={handleNotes}
+                        >
+                            Download Notes
+                        </Button>
+                    </Col>
+                </Form>
+                <br></br>
+                <br></br>
+                <br></br>
 
-            <h4>
-                        Curriculum:
-                    </h4>
-        </Container><br></br><Container>
+                <h4>
+                    Curriculum:
+                </h4>
+            </Container><br></br><Container>
                 &nbsp;&nbsp;&nbsp;<h4>Now Lets Practice</h4>
 
                 {exercise.map((exer => (
@@ -233,10 +327,10 @@ const OpenSubtitle = () => {
                 </Modal.Body>
 
             </Modal>
-            </div>
-            </>
+        </div>
+        </>
 
-        
+
 
 
 

@@ -171,10 +171,34 @@ const getRatingsInstructor = async (req, res) => {
   res.status(200).json(users)
 }
 
+
+const reviewInstructor = async (req, res) => {
+  const { Reviewer, Review, Instructor } = req.body
+
+
+  const user = await User.find({ "Username": Instructor });
+
+
+  let js = {Reviewer: Reviewer, Review: Review}
+  user[0].Reviews.push(js)
+
+  console.log(user[0].Reviews);
+
+  let doc = await User.findOneAndUpdate(
+    { Username: Instructor },
+    { Reviews: user[0].Reviews },
+    {
+      new: true
+    }
+  )
+  res.status(200).json({ done: doc })
+
+};
+
 const getReviewsInstructor = async (req, res) => {
-  // let query = JSON.parse(req.params.query);
-  // console.log(query.query);
-  const reviews = await User.find({ "Username": 'xx' }, 'Reviews')
+  let query = JSON.parse(req.params.query);
+  console.log(query);
+  const reviews = await User.find({ "Username": query.instructor }, 'Reviews')
   console.log(reviews);
   console.log(reviews[0].Reviews)
   res.status(200).json(reviews[0].Reviews)
@@ -271,6 +295,7 @@ const userFinishSubtitle = async (req, res) => {
   for (let i = 0; i < user.SignedCourses.length; i++) {
     if (user.SignedCourses[i].CourseName == CourseID) {
       let isFound = false;
+      console.log(user.SignedCourses[i].CourseName);
       for (let j = 0; j < user.SignedCourses[i].CompletedSubtitles.length; j++) {
         if (user.SignedCourses[i].CompletedSubtitles[j].SubtitleID === SubtitleID) {
           isFound = true;
@@ -435,6 +460,7 @@ module.exports = {
   requestRefund,
   emailCertificate,
   changePasswordNoToken,
+  reviewInstructor,
 
   loginUser,
   signupUser
