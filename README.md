@@ -340,7 +340,7 @@ http
   
 | Parameter | Type     | Description                       |
 | :-------- | :------- | :-------------------------------- |
-| `         `| `  `    | Get All Requests |
+| `         `| `array`    | Get All Requests |
 
 
 #### Update  Request
