@@ -40,8 +40,7 @@ Spaces are not used rather than tabs.
 
 ## Screenshots
 
-![Alt vmware](https://github.com/liangxiao3/redhat_note/raw/master/pic/basic_vmware.jpg)
-
+![Alt AllCourses](https://github.com/Advanced-Computer-Lab-2022/Comrades/blob/main/allcourses.PNG)
 
 
 
