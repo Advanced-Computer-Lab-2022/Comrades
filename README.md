@@ -24,6 +24,7 @@ The Code is in Perfect Status as we invested a lot of time in erros solving and 
  it too easy for other developers to edit 
  the code and reshape it in the way they are willing too.
 
+The project needs more development in the direction of becoming mobile-friendly.
 
 
 ## Code Style
@@ -54,38 +55,96 @@ Spaces are not used rather than tabs.
 
 ## Features
 
-- Fullscreen mode
-- Cross platform
-- Money Refund 
-- problems handling
+- Simple in colors.
+- The information are easily stated on the page for better user experience.
   
+## Code Examples
+
+Below is an example of how to login using on our platform.
+
+### Frontend:
+#### React Component Code:
+```
+<Form onSubmit={handleSubmit}>
+    <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label>Username</Form.Label>
+        <Form.Control type="username" placeholder="Enter your username" onChange={(e) => setUsername(e.target.value)} value={username} />
+    </Form.Group>
+
+    <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Label>Password</Form.Label>
+        <Form.Control type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} value={password} />
+    </Form.Group>
+    <Button onClick={handleShow} variant="link" style={{ marginLeft: "-10px" }}>
+        Forgot your password?
+    </Button>
+    <Button disabled={isLoading} variant="dark" type="submit">
+        Login
+    </Button>
+    <Button href="/" variant="danger" style={{ marginLeft: "10px", borderRadius: "0px" }}>
+        Cancel
+    </Button>
+    {error && <div className="error">{error}</div>}
+</Form>
+```
+
+#### handleSubmit Method:
+```
+const handleSubmit = async (e) => {
+    e.preventDefault()
+    await login(username.toLowerCase(), password)
+}
+```
+
+#### useLogin Hook login Method
+```
+const login = async (username, password) => {
+    setIsLoading(true)
+    setError(null)
+
+    const response = await fetch('/api/users/login', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ username, password })
+    })
+    const json = await response.json()
+
+    if (!response.ok) {
+      setIsLoading(false)
+      setError(json.error)
+    }
+    if (response.ok) {
+      // save the user to local storage
+      localStorage.setItem('user', JSON.stringify(json))
+
+      // update the auth context
+      dispatch({type: 'LOGIN', payload: json})
+
+      // update loading state
+      setIsLoading(false)
+    }
+  }
+```
 
 
-## API Reference
-
-
-#### Course
-
-
-#### Get all items
-
-http
-  GET /api/courses
-
-
-| Parameter | Type     | Description                |
-| :-------- | :------- | :------------------------- |
-| `api_key` | `array` | *Required*. Your API key |
-
-#### Get item
-
-http
-  GET /api/courses/${id}
-
-
-| Parameter | Type     | Description                       |
-| :-------- | :------- | :-------------------------------- |
-| `id`      | `array` | *Required*. Id of item to fetch |
+### Backend:
+#### User Model Method
+```
+userSchema.statics.login = async function (username, password) {
+    if (!username || !password) {
+        throw Error('All fields must be filled')
+    }
+    const user = await this.findOne({ Username: username })
+    if (!user) {
+        throw Error('Incorrect username')
+    }
+    const match = await bcrypt.compare(password, user.Password)
+    if (!match) {
+        throw Error('Incorrect password')
+    }
+    return user
+}
+```
 
 
 
