@@ -109,7 +109,7 @@ const OpenSubtitle = () => {
                                 <br></br>
 
 
-                                <Button  onClick={() => handleSubmit(exercise[idx].arr.CorrectAnswer)} >Submit Answer</Button>
+                                <Button style={{ marginRight: "10px" }} variant="dark"  onClick={() => handleSubmit(exercise[idx].arr.CorrectAnswer)} >Submit Answer</Button>
                                 <br></br>
                                 <br></br>
 
@@ -170,6 +170,7 @@ const OpenSubtitle = () => {
 
     // console.log(exercise)
     console.log(subtitle)
+ 
 
 
 
@@ -177,25 +178,28 @@ const OpenSubtitle = () => {
 
 
     return (
-        <div>
+        <><div>
             <Naavbar />
 
 
             <Container>
-                &nbsp;&nbsp;&nbsp;<h2>Tutorial {index} : {subtitle.Name}</h2>
-                <br></br>
-                <br></br>
 
-                <iframe width="560" height="315" src={`https://www.youtube.com/embed/${link}`} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                
+                
+                
+            &nbsp;&nbsp;&nbsp;<h2 style={{ margin: "30px 0px 0px 300px" }}>Tutorial {index} : {subtitle.Name}</h2>
 
-
-                <p>Explanation : {subtitle.Subtitle_description}</p>
-            </Container>
             <br></br>
+                <hr style={{ margin: "0px 300px" }}></hr>
+                <br></br>
+
+            <iframe width="560" height="315" src={`https://www.youtube.com/embed/${link}`} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 
-
-            <Container>
+            <h4>
+                        Curriculum:
+                    </h4>
+        </Container><br></br><Container>
                 &nbsp;&nbsp;&nbsp;<h4>Now Lets Practice</h4>
 
                 {exercise.map((exer => (
@@ -206,35 +210,33 @@ const OpenSubtitle = () => {
 
 
 
-            </Container>
+            </Container><>
 
-            <>
+                <Modal show={show1} onHide={handleClose}>
+                    <Modal.Header closeButton>
 
-      <Modal show={show1} onHide={handleClose}>
-        <Modal.Header closeButton>
+                    </Modal.Header>
+                    <Modal.Body>  ✔ Your Answer Is Correct!
+                        <br></br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Your Score : 10/10 .
+                    </Modal.Body>
 
-        </Modal.Header>
-        <Modal.Body>  ✔ Your Answer Is Correct!
-            <br></br>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Your Score : 10/10 .
-        </Modal.Body>
+                </Modal>
 
-      </Modal>
+            </><Modal show={show2} onHide={handleClose}>
+                <Modal.Header closeButton>
 
-    </>
+                </Modal.Header>
+                <Modal.Body> ❌ Incorrect Answer, The Answer Was Choice Number {CorrectAnswer}.
+                    <br></br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Your Score : 0/10 .
+                </Modal.Body>
 
-    <Modal show={show2} onHide={handleClose}>
-        <Modal.Header closeButton>
+            </Modal>
+            </div>
+            </>
 
-        </Modal.Header>
-        <Modal.Body> ❌ Incorrect Answer, The Answer Was Choice Number {CorrectAnswer}.
-        <br></br>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Your Score : 0/10 .
-        </Modal.Body>
-
-      </Modal>
-
-        </div>
+        
 
 
 

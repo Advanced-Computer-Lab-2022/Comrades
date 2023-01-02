@@ -122,7 +122,6 @@ const getSubtitleByIndexAndCourseID = async (req, res) => {
     res.status(200).json(courses[0].Subtitles[query.index])
 }
 
-
 const getCourseReviewsById = async (req, res) => {
     let query = JSON.parse(req.params.query)
     console.log(query.id);
