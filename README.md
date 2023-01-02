@@ -41,6 +41,7 @@ Spaces are not used rather than tabs.
 ## Screenshots
 
 ![Alt AllCourses](https://github.com/Advanced-Computer-Lab-2022/Comrades/blob/main/allcourses.PNG)
+![Alt Home](https://github.com/Advanced-Computer-Lab-2022/Comrades/blob/main/homepage.PNG)
 
 
 
