@@ -168,7 +168,7 @@ Install required packages for backend:
 ## Course
 
 
-## Get Courses
+#### Get Courses
 http
   GET /api/courses/getCourses
 
