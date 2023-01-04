@@ -164,7 +164,7 @@ Install required packages for backend:
 # API Reference
 
 Please visit the following link for the full API references documentation:
-[link](https://omarshokeir.github.io/comrades-docs/)
+[Comrades API Documentation](https://omarshokeir.github.io/comrades-docs/)
 
 
 
