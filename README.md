@@ -1,4 +1,4 @@
-# Project Title
+# Comrades Online Learning Platform
 
 Comarades is a online Learning Website where you can subscribe to many Interesting Courses and learn so much under Supervision of the Best Instructors. 
 
