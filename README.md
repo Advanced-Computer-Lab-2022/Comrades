@@ -1,6 +1,6 @@
 # Project Title
 
-Comarades is a online Learning Website where you can subscribe to many Intresting Courses and learn so much under Supervision of the Best Instructors. 
+Comarades is a online Learning Website where you can subscribe to many Interesting Courses and learn so much under Supervision of the Best Instructors. 
 
 
 ## Authors
