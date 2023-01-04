@@ -438,7 +438,7 @@ npm start
 Please note that npm run_dev only for development mode.
 ```
 cd back_end
-npm run_dev
+npm run dev
 ```
 
 
