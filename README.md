@@ -11,25 +11,6 @@ Implementation of a fully functional online learning platform through the use of
 ![alt text](https://camo.githubusercontent.com/4590c0af4aeb1b75233885f86e80c1da8cb2afd401173a40e41370f5cad5db20/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f4a57542d626c61636b3f7374796c653d666f722d7468652d6261646765266c6f676f3d4a534f4e253230776562253230746f6b656e73)
 ![alt text](https://camo.githubusercontent.com/f6d50128cb007f85916b7a899da5d94f654dce35a37331c8d28573aef46f4274/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f6769746875622d2532333132313031312e7376673f7374796c653d666f722d7468652d6261646765266c6f676f3d676974687562266c6f676f436f6c6f723d7768697465)
 
-## Table of Contents :scroll:	
-
-| Title | :gear:	|
-| - | :-: |
-| [Motivation](#Motivation) | :white_check_mark:	 |
-| [Build Status](Build Status) | :white_check_mark:	 |
-| [Code Style](Code Style) | :white_check_mark:	 |
-| [Screenshots](Screenshots) | :white_check_mark:	 |
-| [Tech Stack](Tech Stack) | :white_check_mark:	 |
-| [Features](Features) | :white_check_mark:	 |
-| [Code Example](Code Example) | :white_check_mark:	 |
-| [Installation](Installation) | :white_check_mark:	 |
-| [API Reference](API Reference) | :white_check_mark:	 |
-| [Tests](Tests) | :white_check_mark:	 |
-| [How to use?](How to use?) | :white_check_mark:	 |
-| [Contributing](Contributing ) | :white_check_mark:	 |
-| [Credits](Credits) | :white_check_mark:	 |
-| [License](License) | :white_check_mark:	 |
-
 
 ## Motivation :muscle:
 
