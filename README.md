@@ -12,7 +12,7 @@ Comarades is a online Learning Website where you can subscribe to many Interesti
 - [@Youssef Ibrahim]
 
 
-## Motivation
+## Motivation | [top](#people--body) | :muscle: | `:muscle:` | :mechanical_arm: | `:mechanical_arm:` | [top](#table-of-contents) |
 
 The project was built as a capstone for "Advanced Computer Lab" Course at the GUC.
 The idea was to offer Intersting and helpfull courses to any body who want to develop his skills.
