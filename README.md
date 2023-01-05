@@ -15,7 +15,7 @@ Implementation of a fully functional online learning platform through the use of
 
 | Title | :gear:	|
 | - | :-: |
-| [Motivation](Motivation) | :white_check_mark:	 |
+| [Motivation](#Motivation) | :white_check_mark:	 |
 | [Build Status](Build Status) | :white_check_mark:	 |
 | [Code Style](Code Style) | :white_check_mark:	 |
 | [Screenshots](Screenshots) | :white_check_mark:	 |
