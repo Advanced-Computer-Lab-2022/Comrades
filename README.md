@@ -18,7 +18,7 @@ The project was built as a capstone for "Advanced Computer Lab" Course at the GU
 The idea was to offer Intersting and helpfull courses to any body who want to develop his skills.
 You can Easily watch your lessons, solve exercises and reieve your certificate after finishing your course without any need to schools or colleges.  
 
-## Build status :gear:	
+## Build Status :gear:	
 
 The Code is in Perfect Status as we invested a lot of time in erros solving and explainning our functions and concepts which makes
  it too easy for other developers to edit 
