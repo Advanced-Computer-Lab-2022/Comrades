@@ -37,7 +37,7 @@ The project needs more development in the direction of becoming mobile-friendly.
 
 - Indentation was used to assist in identifying control flow and blocks of code.
 
-- Curley braces are used except for the case where the body of the loop/conditional statement is a single code.
+- Curley braces are used except for the case where the body of the loop/conditional statement is a single line of code.
 
 - Spaces are not used rather than tabs.
 
