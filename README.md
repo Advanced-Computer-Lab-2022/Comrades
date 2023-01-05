@@ -282,6 +282,7 @@ Contributions are always welcomed, make sure to reach out for us by email: omars
 ## License :balance_scale:	
 
 [MIT](https://choosealicense.com/licenses/mit/)
+
 [ExchangeRate-API](https://www.exchangerate-api.com/terms)
 
 
