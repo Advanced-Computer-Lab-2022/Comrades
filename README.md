@@ -14,17 +14,16 @@ Implementation of a fully functional online learning platform through the use of
 
 ## Motivation :muscle:
 
-The project was built as a capstone for "Advanced Computer Lab" Course at the GUC.
-The idea was to offer Intersting and helpfull courses to any body who want to develop his skills.
-You can Easily watch your lessons, solve exercises and reieve your certificate after finishing your course without any need to schools or colleges.  
+The goal of this project is to provide a valuable resource for people seeking to enhance their skills and understanding. It offers a convenient and accessible method for individuals to learn new things and achieve their goals through online courses and exercises. By providing the opportunity for students to practice and apply their learning, the project aids them in not only gaining new information, but also evaluating their comprehension and retaining it for longer periods of time. The project is committed to being the best it can be and continues to work towards this aim.
 
-## Build Status :gear:	
+## Build status :gear:	
+[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
+* Project is still in development
+* Further improvents to UI/UX
+* Implementing a payment gateway
+* Unit Tests to be added
 
-The Code is in Perfect Status as we invested a lot of time in erros solving and explainning our functions and concepts which makes
- it too easy for other developers to edit 
- the code and reshape it in the way they are willing too.
 
-The project needs more development in the direction of becoming mobile-friendly.
 
 
 ## Code Style :closed_book:
@@ -37,7 +36,7 @@ The project needs more development in the direction of becoming mobile-friendly.
 
 - Indentation was used to assist in identifying control flow and blocks of code.
 
-- Curley braces are used except for the case where the body of the loop/conditional statement is a single line of code.
+- Curley braces are used except for the case where the body of the loop/conditional statement is a single code.
 
 - Spaces are not used rather than tabs.
 
@@ -165,7 +164,7 @@ npm install -g npm
 
 ### Make sure Node.JS is installed, you can get it through this [link](https://nodejs.org/en/download/).
 
-### Install the required packages for frontend and backend.
+### Install the required packages for frontend and backend as mentioned before in the installation section.
 
 #### Install required packages for frontend:
 ```
@@ -257,8 +256,6 @@ Contributions are always welcomed, make sure to reach out for us by email: omars
 ## License :balance_scale:	
 
 [MIT](https://choosealicense.com/licenses/mit/)
-
-[ExchangeRate-API](https://www.exchangerate-api.com/terms)
 
 
     
