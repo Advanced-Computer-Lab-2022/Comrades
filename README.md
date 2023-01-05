@@ -60,8 +60,68 @@ The goal of this project is to provide a valuable resource for people seeking to
 
 ## Screenshots :camera:	
 
-![Alt AllCourses](https://github.com/Advanced-Computer-Lab-2022/Comrades/blob/main/allcourses.PNG)
-![Alt Home](https://github.com/Advanced-Computer-Lab-2022/Comrades/blob/main/homepage.PNG)
+<details>
+  <summary>All Courses</summary>
+  
+  ![Alt AllCourses](https://github.com/Advanced-Computer-Lab-2022/Comrades/blob/main/allcourses.PNG)
+  
+</details>
+
+<details>
+  <summary>Landing Page</summary>
+  
+  ![Alt Home](https://github.com/Advanced-Computer-Lab-2022/Comrades/blob/main/homepage.PNG)
+  
+</details>
+
+<details>
+  <summary>Admin View</summary>
+  
+  ![Alt AdminView](https://github.com/Advanced-Computer-Lab-2022/Comrades/blob/main/adminview.PNG)
+  
+</details>
+
+<details>
+  <summary>Course Preview</summary>
+  
+  ![Alt Preview](https://github.com/Advanced-Computer-Lab-2022/Comrades/blob/main/viewCousre.PNG)
+  
+</details>
+
+<details>
+  <summary>Course Promotions</summary>
+  
+  ![Alt CoursePromotions](https://github.com/Advanced-Computer-Lab-2022/Comrades/blob/main/promotions.PNG)
+  
+</details>
+
+<details>
+  <summary>My Courses</summary>
+  
+  ![Alt AdminView](https://github.com/Advanced-Computer-Lab-2022/Comrades/blob/main/myCourses.PNG)
+  
+</details>
+
+<details>
+  <summary>Login</summary>
+  
+  ![Alt Login](https://github.com/Advanced-Computer-Lab-2022/Comrades/blob/main/login.PNG)
+  
+</details>
+
+<details>
+  <summary>Instructor's Courses</summary>
+  
+  ![Alt InstructorView](https://github.com/Advanced-Computer-Lab-2022/Comrades/blob/main/instructorView.PNG)
+  
+</details>
+
+
+
+
+
+
+
 
 
 
