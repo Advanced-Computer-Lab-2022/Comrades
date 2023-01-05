@@ -1,26 +1,24 @@
 # Comrades Online Learning Platform
 
-Implementation of a fully functional online learning platform through the use of MERN stack!
-
-![alt text](https://camo.githubusercontent.com/c839570bc71901106b11b8411d9277a6a8356a9431e4a16d6c26db82caab7d62/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f4d6f6e676f44422d2532333465613934622e7376673f7374796c653d666f722d7468652d6261646765266c6f676f3d6d6f6e676f6462266c6f676f436f6c6f723d7768697465)
-![alt text](https://camo.githubusercontent.com/8286a45a106e1a3c07489f83a38159981d888518a740b59c807ffc1b7b1e2f7b/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f657870726573732e6a732d2532333430346435392e7376673f7374796c653d666f722d7468652d6261646765266c6f676f3d65787072657373266c6f676f436f6c6f723d253233363144414642)
-![alt text](https://camo.githubusercontent.com/268ac512e333b69600eb9773a8f80b7a251f4d6149642a50a551d4798183d621/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f52656163742d3230323332413f7374796c653d666f722d7468652d6261646765266c6f676f3d7265616374266c6f676f436f6c6f723d363144414642)
-![alt text](https://camo.githubusercontent.com/7d7b100e379663ee40a20989e6c61737e6396c1dafc3a7c6d2ada8d4447eb0e4/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f6e6f64652e6a732d3644413535463f7374796c653d666f722d7468652d6261646765266c6f676f3d6e6f64652e6a73266c6f676f436f6c6f723d7768697465)
-![alt text](https://camo.githubusercontent.com/4590c0af4aeb1b75233885f86e80c1da8cb2afd401173a40e41370f5cad5db20/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f4a57542d626c61636b3f7374796c653d666f722d7468652d6261646765266c6f676f3d4a534f4e253230776562253230746f6b656e73)
-![alt text](https://camo.githubusercontent.com/f6d50128cb007f85916b7a899da5d94f654dce35a37331c8d28573aef46f4274/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f6769746875622d2532333132313031312e7376673f7374796c653d666f722d7468652d6261646765266c6f676f3d676974687562266c6f676f436f6c6f723d7768697465)
+Comarades is a online Learning Website where you can subscribe to many Interesting Courses and learn so much under Supervision of the Best Instructors. 
 
 
+## Authors
+
+- [@Omar Wael]
+- [@Mohammed Saad]
+- [@Abdelrahman Koussy]
+- [@Yehia Tawfik]
+- [@Youssef Ibrahim]
 
 
-
-
-## Motivation
+## Motivation :muscle:
 
 The project was built as a capstone for "Advanced Computer Lab" Course at the GUC.
 The idea was to offer Intersting and helpfull courses to any body who want to develop his skills.
 You can Easily watch your lessons, solve exercises and reieve your certificate after finishing your course without any need to schools or colleges.  
 
-## Build status
+## Build status :gear:	
 
 The Code is in Perfect Status as we invested a lot of time in erros solving and explainning our functions and concepts which makes
  it too easy for other developers to edit 
@@ -29,40 +27,41 @@ The Code is in Perfect Status as we invested a lot of time in erros solving and 
 The project needs more development in the direction of becoming mobile-friendly.
 
 
-## Code Style
-The architecture for the features is MVC(Model View Controller) [Learn More Here](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller)
+## Code Style :closed_book:
+![MongoDB](https://img.shields.io/badge/camelCase-Convention-brightgreen)
+- The architecture for the features is MVC (Model View Controller) [Learn More Here](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller).
 
-We used camelCase for variables.
+- We used camelCase for variables.
 
-Codes are formatted in VS Code using alt + shift + F.
+- Codes are formatted in VS Code using alt + shift + F.
 
-Indentation was used to assist in identifying control flow and blocks of code.
+- Indentation was used to assist in identifying control flow and blocks of code.
 
-Curley braces are used except for the case where the body of the loop/conditional statement is a single code.
+- Curley braces are used except for the case where the body of the loop/conditional statement is a single code.
 
-Spaces are not used rather than tabs.
+- Spaces are not used rather than tabs.
 
 
-## Screenshots
+## Screenshots :camera:	
 
 ![Alt AllCourses](https://github.com/Advanced-Computer-Lab-2022/Comrades/blob/main/allcourses.PNG)
 ![Alt Home](https://github.com/Advanced-Computer-Lab-2022/Comrades/blob/main/homepage.PNG)
 
 
 
-## Tech Stack
+## Tech Stack :computer:	
 
 *Client:* React, Bootstrap & Material UI
 
 *Server:* Node, Express, MongoDB
 
 
-## Features
+## Features :page_with_curl:	
 
 - Simple in colors.
 - The information are easily stated on the page for better user experience.
   
-## Code Examples
+## Code Examples :floppy_disk:	
 
 Below is an example of how to login using on our platform.
 
@@ -152,55 +151,7 @@ userSchema.statics.login = async function (username, password) {
 
 
 
-## Installation
-
-Install required packages for frontend:
-```
-  cd front_end
-  npm install
-```
-Install required packages for backend:
-```
-  cd back_end
-  npm install my-project
-```
-
-# API Reference
-
-Please visit the following link for the full API references documentation(Preferably don't use a mobile although its supported):
-[Comrades API Documentation](https://omarshokeir.github.io/comrades-docs/)
-
-
-
-
-
-
-
-
-
-
-
-## Tests
-
-Below is an example on how to test a GET request:
-```
-describe("GET getCoursesInstructor/:query", () => {
-    test("Get courses of instructor by ID", (done) => {
-      request(app)
-        .get("/api/users/getCoursesInstructor/63a21cbdd7dcdba272cadbb6")
-        .expect(200)
-        .expect((res) => {
-          res.body.Username = "testingituser";
-        })
-        .end((err, res) => {
-          if (err) return done(err);
-          return done();
-        });
-    });
-  });
-```
-
-# How to use?
+## Installation :electric_plug:	
 
 ### Clone the repo using:
 ```
@@ -251,20 +202,59 @@ cd back_end
 npm run dev
 ```
 
+## API Reference :books:	
 
-## Contributing
+Please visit the following link for the full API references documentation(Preferably don't use a mobile although its supported):
+[Comrades API Documentation](https://omarshokeir.github.io/comrades-docs/)
 
-Contributions are not welcomed.
 
 
-## Credits
+
+
+
+
+
+
+
+
+## Tests :pencil2:	
+
+Below is an example on how to test a GET request:
+```
+describe("GET getCoursesInstructor/:query", () => {
+    test("Get courses of instructor by ID", (done) => {
+      request(app)
+        .get("/api/users/getCoursesInstructor/63a21cbdd7dcdba272cadbb6")
+        .expect(200)
+        .expect((res) => {
+          res.body.Username = "testingituser";
+        })
+        .end((err, res) => {
+          if (err) return done(err);
+          return done();
+        });
+    });
+  });
+```
+
+# How to use? :clapper:	
+
+
+
+
+## Contributing :handshake:	
+
+Contributions are always welcomed, make sure to reach out for us by email: omarshokeir2@gmail.com
+
+
+## Credits :moneybag:	
 
  - [Net Ninja MERN Stack Course](https://www.youtube.com/watch?v=98BzS5Oz5E4&list=PL4cUxeGkcC9iJ_KkrkBZWZRHVwnzLIoUE)
  - [Net Ninja Auth Course](https://www.youtube.com/watch?v=SnoAwLP1a-0&list=PL4cUxeGkcC9iqqESP8335DA5cRFp8loyp)
 
 
 
-## License
+## License :balance_scale:	
 
 [MIT](https://choosealicense.com/licenses/mit/)
 
