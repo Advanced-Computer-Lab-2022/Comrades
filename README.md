@@ -165,7 +165,7 @@ npm install -g npm
 
 ### Make sure Node.JS is installed, you can get it through this [link](https://nodejs.org/en/download/).
 
-### Install the required packages for frontend and backend as mentioned before in the installation section.
+### Install the required packages for frontend and backend.
 
 #### Install required packages for frontend:
 ```
