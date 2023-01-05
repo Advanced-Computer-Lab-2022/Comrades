@@ -271,6 +271,7 @@ npm run dev
 ## API Reference :books:	
 
 Please visit the following link for the full API references documentation(Preferably don't use a mobile although its supported):
+
 [Comrades API Documentation](https://omarshokeir.github.io/comrades-docs/)
 
 
