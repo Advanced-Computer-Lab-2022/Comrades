@@ -74,8 +74,17 @@ The goal of this project is to provide a valuable resource for people seeking to
 
 ## Features :page_with_curl:	
 
-- Simple in colors.
-- The information are easily stated on the page for better user experience.
+There are four different types of users for the system: Administrators, Instructors, Individual Trainees, and Corporate Trainees.
+
+As an Administrator, you can add instructors and corporate trainees to the system, view and resolve reported problems, view and grant access requests from corporate trainees, and view refund requests from individual trainees.
+
+As an Instructor, you can create and edit draft courses, publish draft courses for trainees to enroll in, close a published course to prevent further enrollment, view your settlements and update your profile, and add promotions for a specific period.
+
+As an Individual Trainee, you can search and filter courses, pay for a course, report problems, watch videos and solve exercises from your courses, see your progress, receive a certificate by mail, request a refund, and rate a course and its instructor.
+
+As a Corporate Trainee, you can search and filter courses, send access requests for specific courses, watch videos and solve exercises from your courses, see your progress, receive a certificate by mail, and rate a course and its instructor.
+
+As a Guest, you can sign up as an individual trainee and search and filter courses.
   
 ## Code Examples :floppy_disk:	
 
