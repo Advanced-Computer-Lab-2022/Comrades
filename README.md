@@ -12,18 +12,43 @@ Implementation of a fully functional online learning platform through the use of
 ![alt text](https://camo.githubusercontent.com/f6d50128cb007f85916b7a899da5d94f654dce35a37331c8d28573aef46f4274/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f6769746875622d2532333132313031312e7376673f7374796c653d666f722d7468652d6261646765266c6f676f3d676974687562266c6f676f436f6c6f723d7768697465)
 
 
+## Table of Contents :scroll:	
+
+
+
+
+| Title | :gear:	|
+| - | :-: |
+| [Motivation](Motivation) | :white_check_mark:	 |
+| [Build Status](Build Status) | :white_check_mark:	 |
+| [Code Style](Code Style) | :white_check_mark:	 |
+| [Screenshots](Screenshots) | :white_check_mark:	 |
+| [Tech Stack](Tech Stack) | :white_check_mark:	 |
+| [Features](Features) | :white_check_mark:	 |
+| [Code Example](Code Example) | :white_check_mark:	 |
+| [Installation](Installation) | :white_check_mark:	 |
+| [API Reference](API Reference) | :white_check_mark:	 |
+| [Tests](Tests) | :white_check_mark:	 |
+| [How to use?](How to use?) | :white_check_mark:	 |
+| [Contributing](Contributing ) | :white_check_mark:	 |
+| [Credits](Credits) | :white_check_mark:	 |
+| [License](License) | :white_check_mark:	 |
+
+
+
 ## Motivation :muscle:
 
-The goal of this project is to provide a valuable resource for people seeking to enhance their skills and understanding. It offers a convenient and accessible method for individuals to learn new things and achieve their goals through online courses and exercises. By providing the opportunity for students to practice and apply their learning, the project aids them in not only gaining new information, but also evaluating their comprehension and retaining it for longer periods of time. The project is committed to being the best it can be and continues to work towards this aim.
+The project was built as a capstone for "Advanced Computer Lab" Course at the GUC.
+The idea was to offer Intersting and helpfull courses to any body who want to develop his skills.
+You can Easily watch your lessons, solve exercises and reieve your certificate after finishing your course without any need to schools or colleges.  
 
-## Build status :gear:	
-[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
-* Project is still in development
-* Further improvents to UI/UX
-* Implementing a payment gateway
-* Unit Tests to be added
+## Build Status :gear:	
 
+The Code is in Perfect Status as we invested a lot of time in erros solving and explainning our functions and concepts which makes
+ it too easy for other developers to edit 
+ the code and reshape it in the way they are willing too.
 
+The project needs more development in the direction of becoming mobile-friendly.
 
 
 ## Code Style :closed_book:
@@ -36,7 +61,7 @@ The goal of this project is to provide a valuable resource for people seeking to
 
 - Indentation was used to assist in identifying control flow and blocks of code.
 
-- Curley braces are used except for the case where the body of the loop/conditional statement is a single code.
+- Curley braces are used except for the case where the body of the loop/conditional statement is a single line of code.
 
 - Spaces are not used rather than tabs.
 
@@ -60,7 +85,7 @@ The goal of this project is to provide a valuable resource for people seeking to
 - Simple in colors.
 - The information are easily stated on the page for better user experience.
   
-## Code Examples :floppy_disk:	
+## Code Example :floppy_disk:	
 
 Below is an example of how to login using on our platform.
 
@@ -164,7 +189,7 @@ npm install -g npm
 
 ### Make sure Node.JS is installed, you can get it through this [link](https://nodejs.org/en/download/).
 
-### Install the required packages for frontend and backend as mentioned before in the installation section.
+### Install the required packages for frontend and backend.
 
 #### Install required packages for frontend:
 ```
@@ -256,6 +281,8 @@ Contributions are always welcomed, make sure to reach out for us by email: omars
 ## License :balance_scale:	
 
 [MIT](https://choosealicense.com/licenses/mit/)
+
+[ExchangeRate-API](https://www.exchangerate-api.com/terms)
 
 
     
