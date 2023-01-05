@@ -28,6 +28,8 @@ The project needs more development in the direction of becoming mobile-friendly.
 
 
 ## Code Style
+The architecture for the features is MVC(Model View Controller) [Learn More Here](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller)
+
 We used camelCase for variables.
 
 Codes are formatted in VS Code using alt + shift + F.
@@ -260,8 +262,9 @@ Contributions are not welcomed.
 
 
 
+## License
 
-
+[MIT](https://choosealicense.com/licenses/mit/)
 
 
     
