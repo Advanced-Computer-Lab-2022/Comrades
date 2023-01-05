@@ -28,17 +28,17 @@ The project needs more development in the direction of becoming mobile-friendly.
 
 
 ## Code Style
-The architecture for the features is MVC(Model View Controller) [Learn More Here](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller)
+- The architecture for the features is MVC(Model View Controller) [Learn More Here](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller)
 
-We used camelCase for variables.
+- We used camelCase for variables.
 
-Codes are formatted in VS Code using alt + shift + F.
+- Codes are formatted in VS Code using alt + shift + F.
 
-Indentation was used to assist in identifying control flow and blocks of code.
+- Indentation was used to assist in identifying control flow and blocks of code.
 
-Curley braces are used except for the case where the body of the loop/conditional statement is a single code.
+- Curley braces are used except for the case where the body of the loop/conditional statement is a single code.
 
-Spaces are not used rather than tabs.
+- Spaces are not used rather than tabs.
 
 
 ## Screenshots
