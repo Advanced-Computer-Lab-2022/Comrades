@@ -36,8 +36,8 @@ function generate_token(length) {
 // Get instructor by ID
 const getInstructorByID = async (req, res) => {
   let json = JSON.parse(req.params.query);
-
-  const users = await User.find({ "Username": json.query },);
+  console.log(json.RequestID);
+  const users = await User.find({ "Username": json.RequestID },);
   console.log(users[0]);
   res.status(200).json(users[0])
 }

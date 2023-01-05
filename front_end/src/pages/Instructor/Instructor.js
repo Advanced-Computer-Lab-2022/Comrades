@@ -24,7 +24,7 @@ const Instructor = () => {
   useEffect(() => {
 
     const fetchInstructor = async () => {
-      const response = await fetch("/api/users/getInstructorByID/{\"query\": \"" + user.username + "\"}");
+      const response = await fetch("/api/users/getInstructorByID/{\"RequestID\": \"" + user.username + "\"}");
       const json = await response.json();
       if (response.ok) {
         setInstructor(json);
@@ -187,6 +187,7 @@ const Instructor = () => {
               <Button variant="dark" onClick={handleShow}>
                 Change Password
               </Button>
+              <p> Please make sure to change your password at least once.</p>
 
             </Container>
           </Row>

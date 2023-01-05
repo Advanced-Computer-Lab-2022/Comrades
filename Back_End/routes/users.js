@@ -56,6 +56,10 @@ router.post('/addCourseToUser', addCourseToUser)
 router.post('/issueRefund', issueRefund)
 
 
+// Rate Instructor
+router.post('/reviewInstructor', reviewInstructor)
+
+
 // Get Reviews of Instructor by ID
 router.get('/getReviewsInstructor/:query',getReviewsInstructor)
 

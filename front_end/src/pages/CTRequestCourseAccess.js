@@ -67,14 +67,11 @@ const CTRequestCourseAccess = () => {
             const response = await fetch("/api/users/getInstructorByID/{\"RequestID\": \"" + user.username + "\"}")
 
             const json = await response.json()
+            console.log(json);
             setData(json);
             for (let i = 0; i < json.SignedCourses.length; i++) {
                 userCourses.push(json.SignedCourses[i].CourseName);
             }
-        }
-        if (user !== null) {
-            if (user.username !== null)
-                fetchUser();
         }
         const fetchCourses = async () => {
             const response = await fetch('/api/courses/getCourses')
@@ -91,7 +88,13 @@ const CTRequestCourseAccess = () => {
                 setCourses(json2)
             }
         }
-        fetchCourses()
+
+        if (user !== null) {
+            if (user.username !== null){
+                fetchUser();
+                fetchCourses()
+            }
+        }
     }, [user])
 
     function AlertDismissibleExample() {

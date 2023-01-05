@@ -20,6 +20,8 @@ import { useLogout } from '../hooks/useLogout'
 
 
 const NewCourse = () => {
+    const { user } = useAuthContext()
+
     const [title, setTitle] = useState('')
     const [subtitles, setSubtitles] = useState([])
     const [subject, setSubject] = useState('')
@@ -64,7 +66,7 @@ const NewCourse = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-        const newCourse = { "Title": title, "Subject": subject, "Subtitles": subtitles, "Instructor": instructor, "Price": price, "CreditHours": creditHours, "Discount": discount, "Description": description, "Preview": preview }
+        const newCourse = { "Title": title, "Subject": subject, "Subtitles": subtitles, "Instructor": user.username, "Price": price, "CreditHours": creditHours, "Discount": discount, "Description": description, "Preview": preview }
         const response = await fetch('/api/courses/createCourse', {
             method: 'POST',
             body: JSON.stringify(newCourse),
@@ -102,9 +104,9 @@ const NewCourse = () => {
 
     const { logout } = useLogout()
 
-const handleClickLogout = () => {
-    logout()
-}
+    const handleClickLogout = () => {
+        logout()
+    }
 
 
 
@@ -152,6 +154,12 @@ const handleClickLogout = () => {
                                 <Form.Label style={{ paddingLeft: "0px" }}>
                                     Preview
                                 </Form.Label>
+                                <p style={{ marginLeft: "-14px" }}>
+                                    Please only submit the highlighted part:
+                                </p>
+                                <p style={{ marginLeft: "-14px", display: 'inline' }}>
+                                    https://www.youtube.com/watch?v=<span style={{fontWeight:"600"}}>S65LMDQNP5Q</span>
+                                </p>
                                 <Form.Control className="input" type="text" placeholder="Preview" onChange={(x) => setPreview(x.target.value)} value={preview} />
                             </Form.Group>
                             <br></br>
@@ -182,6 +190,12 @@ const handleClickLogout = () => {
                             <br></br>
                             <Form.Group as={Row} controlId="exampleForm.ControlTextarea1" >
                                 <Form.Label style={{ paddingLeft: "0px" }}>Link</Form.Label>
+                                <p style={{ marginLeft: "-14px" }}>
+                                    Please only submit the highlighted part:
+                                </p>
+                                <p style={{ marginLeft: "-14px", display: 'inline' }}>
+                                    https://www.youtube.com/watch?v=<span style={{fontWeight:"600"}}>S65LMDQNP5Q</span>
+                                </p>
                                 <Form.Control
                                     className="input2" type="text" placeholder="Link"
                                     onChange={(x) => setLink(x.target.value)} value={link}
@@ -199,7 +213,7 @@ const handleClickLogout = () => {
                             </Form.Group>
                             <hr></hr>
                             <Form.Group as={Row}
-                                
+
                                 controlId="exampleForm.ControlTextarea1"
                             >
                                 <h3 style={{ paddingLeft: "0px", marginBottom: "20px" }}>Add Exercise</h3>
@@ -294,7 +308,7 @@ const handleClickLogout = () => {
                                     Course Instructor
                                 </Form.Label>
                                 <Col sm="10">
-                                    <Form.Control className="input" type="text" placeholder="instructor" onChange={(e) => setInstructor(e.target.value)} value={instructor} />
+                                    <Form.Control disabled className="input" type="text" placeholder="instructor" onChange={(e) => setInstructor(e.target.value)} value={instructor} />
                                 </Col>
                             </Form.Group>
                             <br></br>
@@ -345,8 +359,8 @@ const handleClickLogout = () => {
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <Button style={{ marginLeft: "-10px" }} type="submit"
                                 variant="dark" >Add Course</Button>
-                                                            <br></br>
-                                                            <br></br>
+                            <br></br>
+                            <br></br>
 
 
                         </Form>

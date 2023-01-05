@@ -93,7 +93,7 @@ const OpenSubtitle = () => {
         // if (exercise[idx].id === cid) {
         return (
             <>
-                <Container >
+                <Container style={{ marginLeft: "360px" }}>
                     <Card style={{ width: "40rem" }}>
                         <Card.Header>Exercise {exercise[idx].index}</Card.Header>
 
@@ -233,41 +233,50 @@ const OpenSubtitle = () => {
 
 
     return (
-        <><div>
+        <>
+        <div style={{overflowX:"hidden"}}>
             <Naavbar />
 
 
-            <Container>
 
 
 
 
-                &nbsp;&nbsp;&nbsp;<h2 style={{ margin: "30px 0px 0px 300px" }}>Tutorial {index} : {subtitle.Name}</h2>
+            &nbsp;&nbsp;&nbsp;<h2 style={{ margin: "30px 0px 0px 300px" }}>Tutorial {index} : {subtitle.Name}</h2>
 
-                <br></br>
-                <hr style={{ margin: "0px 300px" }}></hr>
-                <br></br>
+            <br></br>
+            <hr style={{ margin: "0px 300px" }}></hr>
+            <br></br>
 
-                <iframe width="560" height="315" src={`https://www.youtube.com/embed/${subtitle.Link}`} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <iframe width="560" height="315" src={`https://www.youtube.com/embed/${subtitle.Link}`} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-                <br></br>
-                <br></br>
-                <Form style={{marginLeft:"-40px"}}>
-                    <Form.Group as={Row} className="mb-3" controlId="formPlaintextEmail">
-                        <Form.Label column sm="2">
-                            Write notes
-                        </Form.Label>
-                        <Col sm="2">
-                            <Form.Control
-                                className="input"
-                                as="textarea" rows={3}
-                                placeholder="Notes"
-                                onChange={(e) => setNotes(e.target.value)}
-                                value={Notes}
-                            />
-                        </Col>
-                    </Form.Group>
-                    <Col sm="10">
+            <br></br>
+            <br></br>
+
+            <Form style={{ marginLeft: "380px" }}>
+                <Form.Group as={Row} className="mb-3" controlId="formPlaintextEmail">
+                    <Form.Label column sm="2">
+                        Write notes
+                    </Form.Label>
+                    <Col sm="2">
+                        <Form.Control
+                            className="input"
+                            as="textarea" rows={3}
+                            placeholder="Notes"
+                            onChange={(e) => setNotes(e.target.value)}
+                            value={Notes}
+                        />
+                    </Col>
+                </Form.Group>
+                <Col sm="10">
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -277,34 +286,30 @@ const OpenSubtitle = () => {
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     &nbsp;&nbsp;
-                        <Button
-                            type="submit"
-                            variant="dark"
-                            onClick={handleNotes}
-                        >
-                            Download Notes
-                        </Button>
-                    </Col>
-                </Form>
-                <br></br>
-                <br></br>
-                <br></br>
+                    <Button
+                        type="submit"
+                        variant="dark"
+                        onClick={handleNotes}
+                    >
+                        Download Notes
+                    </Button>
+                </Col>
+            </Form>
+            <br></br>
+            <br></br>
+            <br></br>
 
-                <h4>
-                    Curriculum:
-                </h4>
-            </Container><br></br><Container>
-                &nbsp;&nbsp;&nbsp;<h4>Now Lets Practice</h4>
+            <h4 style={{ marginLeft: "380px" }}>Now Lets Practice</h4>
 
-                {exercise.map((exer => (
-                    renderExercises(exer.index, u)
-                )))}
+            {exercise.map((exer => (
+                renderExercises(exer.index, u)
+            )))}
 
 
 
 
 
-            </Container><>
+            <>
 
                 <Modal show={show1} onHide={handleClose}>
                     <Modal.Header closeButton>

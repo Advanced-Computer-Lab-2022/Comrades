@@ -38,7 +38,7 @@ const CTHome = () => {
     useEffect(() => {
         const fetchUser = async () => {
             const data = { "Username": user.username }
-            const response = await fetch("/api/users/getInstructorByID/{\"query\": \"" + user.username + "\"}")
+            const response = await fetch("/api/users/getInstructorByID/{\"RequestID\": \"" + user.username + "\"}")
 
             const json = await response.json()
             setData(json);

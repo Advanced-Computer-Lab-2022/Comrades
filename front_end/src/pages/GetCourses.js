@@ -169,7 +169,7 @@ const GetCourses = () => {
                                 <NavDropdown.Item href="#action/3.4">Business</NavDropdown.Item>
                             </NavDropdown>
                         </Nav>
-                        <Nav className="d-flex gap-2">
+                        {/* <Nav className="d-flex gap-2">
                             <Form className="d-flex" >
 
                                 <Button href="/home" variant="outline-light" >Login </Button>
@@ -179,7 +179,7 @@ const GetCourses = () => {
                                 <Button href="/home" variant="light" >Sign Up </Button>
                             </Form>
 
-                        </Nav>
+                        </Nav> */}
 
                     </Navbar.Collapse>
                 </Container>

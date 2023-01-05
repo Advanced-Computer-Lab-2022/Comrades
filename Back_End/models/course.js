@@ -96,6 +96,18 @@ const courseSchema = new Schema({
         type: Number,
         required: true
     },
+    Reviews: [
+        {
+            Reviewer: {
+                type: String,
+                required: true
+            },
+            Review: {
+                type: String,
+                required: true
+            },
+        }
+    ],
     TotalRatings: {
         type: Number,
         required: true

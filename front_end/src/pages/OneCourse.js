@@ -7,6 +7,7 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Breadcrumb from 'react-bootstrap/Breadcrumb';
+import Alert from 'react-bootstrap/Alert';
 
 
 import AdminSideNav from "./Admin/AdminSideNav"
@@ -19,6 +20,8 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 
 
 import { Rating } from '@mui/material';
+import { useAuthContext } from "../hooks/useAuthContext"
+
 
 
 
@@ -28,6 +31,7 @@ import { useLogout } from '../hooks/useLogout'
 
 
 const OneCourse = () => {
+    const { user } = useAuthContext()
     const params = new URLSearchParams(window.location.search);
     const userId = params.get('userId');
     // console.log(userId);
@@ -39,6 +43,8 @@ const OneCourse = () => {
     const [value2, setValue2] = useState(Number);
     const [exercise, setExercise] = useState([]);
     const [inst, setInst] = useState()
+    const [reviewInstructor, setReviewInstructor] = useState("")
+    const [reviewCourse, setReviewCourse] = useState("")
 
 
 
@@ -56,8 +62,21 @@ const OneCourse = () => {
 
 
 
+        setShow3(true);
+
     }
     const submitInsRate = async (event) => {
+        event.preventDefault();
+
+        const data = { Reviewer: user.username, Review: reviewInstructor, Instructor: course.Instructor }
+
+        const response1 = await fetch('/api/users/reviewInstructor', {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
 
 
         const response = await fetch("/api/users/rateInstructor/{\"name\":\"" + inst + "\",\"Rating\":\"" + value2 + "\"}", {
@@ -70,8 +89,8 @@ const OneCourse = () => {
 
         // console.log("/api/users/rateInstructor/{\"name\":\"" + inst + "\",\"Rating\":\"" + value2 + "\"}")
 
-
-
+        setShow(false);
+        setShow3(true);
 
 
     }
@@ -119,6 +138,19 @@ const OneCourse = () => {
     const handleClickLogout = () => {
         logout()
     }
+
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
+    const [show2, setShow2] = useState(false);
+
+    const handleClose2 = () => setShow2(false);
+    const handleShow2 = () => setShow2(true);
+
+    const [show3, setShow3] = useState(false);
+
 
 
 
@@ -168,6 +200,17 @@ const OneCourse = () => {
     }, [])
 
 
+    function AlertDismissibleExample() {
+
+        if (show3) {
+            return (
+                <Alert variant="success" onClose={() => setShow3(false)} dismissible>
+                    <Alert.Heading>Ratings & Review was submitted.</Alert.Heading>
+                </Alert>
+            );
+        }
+    }
+
 
 
     return (
@@ -195,12 +238,13 @@ const OneCourse = () => {
                 </Container>
             </Navbar>
             <div>
-                <Breadcrumb style={{margin:"10px 0px 0px 10px"}}>
+                <Breadcrumb style={{ margin: "10px 0px 0px 10px" }}>
                     <Breadcrumb.Item href="/home">
                         My Courses
                     </Breadcrumb.Item>
                     <Breadcrumb.Item active>{course.Title}</Breadcrumb.Item>
                 </Breadcrumb>
+                <AlertDismissibleExample/>
 
 
                 <h2 style={{ margin: "30px 0px 0px 300px" }}>{course.Title}</h2>
@@ -236,7 +280,7 @@ const OneCourse = () => {
                         </Row>
 
                         <Row sm={4}>
-                            &nbsp;&nbsp;&nbsp;<Button onClick={submitInsRate} variant="dark">
+                            &nbsp;&nbsp;&nbsp;<Button onClick={handleShow} variant="dark">
                                 Rate Instructor
                             </Button>
                         </Row>
@@ -271,6 +315,34 @@ const OneCourse = () => {
 
 
 
+                <Modal show={show} onHide={handleClose}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Review Instructor</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                    <Form>
+                        <Container>
+
+                            <Form.Group controlId="formPlaintextEmail">
+                                <Form.Label>
+                                    Write your review for this instructor
+                                </Form.Label>
+                                <br></br>
+                                <Form.Control className="input" type="text" placeholder="Instuctor Review" onChange={(e) => setReviewInstructor(e.target.value)} value={reviewInstructor} />
+                            </Form.Group>
+                        </Container>
+                    </Form>
+
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={handleClose}>
+                            Close
+                        </Button>
+                        <Button variant="primary" onClick={submitInsRate}>
+                            Save Changes
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
 
 
             </div>

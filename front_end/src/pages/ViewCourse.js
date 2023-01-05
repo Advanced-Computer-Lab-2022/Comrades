@@ -99,6 +99,61 @@ const ViewCourse = () => {
         setShow2(false);
     }
 
+    const handleSubmit10 = async (e) => {
+        e.preventDefault();
+
+
+        const response0 = await fetch("/api/courses/getCourseById/{\"id\": \"" + userId + "\"}")
+        const json = await response0.json()
+
+        console.log(json[0].Subtitles)
+
+        const data = { "Username": user.username, "CourseName": course.Title, "NumSubtitles": json[0].Subtitles.length, "AmountPaid": json[0].DiscountedPrice }
+
+        const response1 = await fetch('/api/users/addCourseToUser', {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+
+        const data3 = { "CourseID": course.Title }
+
+        const response3 = await fetch('/api/courses/incrementPopularity', {
+            method: 'POST',
+            body: JSON.stringify(data3),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+
+        const data4 = { "Username": course.Instructor, "Amount": (course.DiscountedPrice)*0.5 }
+
+        const response4 = await fetch('/api/users/issueRefund', {
+            method: 'POST',
+            body: JSON.stringify(data4),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+
+        const data5 = { "Username": user.username, "Amount": (course.DiscountedPrice)*-1 }
+
+        const response5 = await fetch('/api/users/issueRefund', {
+            method: 'POST',
+            body: JSON.stringify(data5),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+
+
+        setShow(false);
+        setShow1(true);
+        setShow2(false);
+    }
+
 
     const [show, setShow] = useState(false);
 
@@ -282,6 +337,10 @@ const ViewCourse = () => {
                                             <span class="ps-3" onClick={handleSubmit}>Pay ${course.DiscountedPrice}</span>
                                             <span class="fas fa-arrow-right"></span>
                                         </div>
+                                        <br></br>
+                                        <button class="btn btn-dark mb-3" onClick={handleSubmit10}>
+                                            Pay by wallet
+                                        </button>
                                     </div>
                                 </div>
                             </div>
