@@ -329,7 +329,7 @@ Please visit the following link for the full API references documentation(Prefer
 <details>
   <summary>Rating an instructor</summary>
   
-    ```
+  ```
      describe('POST /rateInstructor', () => {
       test('it should rate the instructor and return the updated user object', async () => {
         const res = await request(app).post('/API/Users/rateInstructor').send({
@@ -341,13 +341,14 @@ Please visit the following link for the full API references documentation(Prefer
         expect(res.body).toHaveProperty('Rating', 5);
       });
     });
-    ```
+  ```
   
 </details>
 
 <details>
   <summary>Receiving an email to change password</summary>
   
+  ```
 describe('POST /recieveEmailToChangePassword', () => {
   test('it should send an email to the specified address', async () => {
     const res = await request(app).post('/API/Users/recieveEmailToChangePassword').send({
@@ -357,14 +358,14 @@ describe('POST /recieveEmailToChangePassword', () => {
     expect(res.statusCode).toBe(200);
   });
 });
-
-
+  ```
   
 </details>
 
 <details>
   <summary>Changing a password without Token</summary>
   
+  ```
 describe('POST /changePasswordNoToken', () => {
   test('it should change the password for the specified username and return the updated user object', async () => {
     const res = await request(app).post('/API/Users/changePasswordNoToken').send({
@@ -376,15 +377,14 @@ describe('POST /changePasswordNoToken', () => {
     expect(res.body).toHaveProperty('Password', 'newPassword');
   });
 });
-
-
-
+```
   
 </details>
 
 <details>
   <summary>Changing password with a Token</summary>
   
+  ```
 describe('POST /changePassword', () => {
   test('it should change the password for the specified username and return the updated user object', async () => {
     const res = await request(app).post('/API/Users/changePassword').send({
@@ -395,12 +395,14 @@ describe('POST /changePassword', () => {
     expect(res.body).toHaveProperty('Password', 'newPassword');
   });
 });
+  ```
   
 </details>
 
 <details>
   <summary>Get ratings of an instructor</summary>
   
+  ```
 describe('GET /getRatingsInstructor', () => {
   test('it should return the user object for the specified instructor', async () => {
     const res = await request(app).get('/API/Users/getRatingsInstructor?name=testInstructor&Rating=5');
@@ -409,12 +411,14 @@ describe('GET /getRatingsInstructor', () => {
     expect(res.body).toHaveProperty('Rating', 5);
   });
 });
+  ```
   
 </details>
 
 <details>
   <summary>Review Instructor</summary>
   
+  ```
 describe('POST /reviewInstructor', () => {
   test('it should post a review about the instructor and return the updated user object', async () => {
     const res = await request(app).post('/API/Users/reviewInstructor').send({
@@ -427,12 +431,14 @@ describe('POST /reviewInstructor', () => {
     expect(res.body).toHaveProperty('Reviews', ['This instructor was great!']);
   });
 });
+  ```
   
 </details>
 
 <details>
   <summary>Get reviews of an instructor</summary>
   
+  ```
 describe('GET /getReviewsInstructor', () => {
   test('it should return an array of reviews for the specified instructor', async () => {
     const res = await request(app).get('/API/Users/getReviewsInstructor?instructor=testInstructor');
@@ -440,12 +446,14 @@ describe('GET /getReviewsInstructor', () => {
     expect(res.body).toEqual(['This instructor was great!']);
   });
 });
+  ```
   
 </details>
 
 <details>
   <summary>Change an Email</summary>
   
+  ```
 describe('POST /changeEmail', () => {
   test('it should change the email for the specified user', async () => {
     const res = await request(app).post('/API/Users/changeEmail').send({
@@ -455,12 +463,14 @@ describe('POST /changeEmail', () => {
     expect(res.statusCode).toBe(200);
   });
 });
+  ```
   
 </details>
 
 <details>
   <summary>Changing a user's bio</summary>
   
+  ```
 describe('POST /changeBio', () => {
   test('it should change the bio for the specified user', async () => {
     const res = await request(app).post('/API/Users/changeBio').send({
@@ -470,12 +480,14 @@ describe('POST /changeBio', () => {
     expect(res.statusCode).toBe(200);
   });
 });
+  ```
   
 </details>
 
 <details>
   <summary>Email a certificate</summary>
   
+  ```
 describe('POST /emailCertificate', () => {
   test('it should send an email with a link to the user's certificate', async () => {
     const res = await request(app).post('/API/Users/emailCertificate').send({
@@ -486,12 +498,14 @@ describe('POST /emailCertificate', () => {
     expect(res.body).toEqual({ done: 'done' });
   });
 });
+  ```
   
 </details>
 
 <details>
   <summary>Requesting a refund</summary>
   
+  ```
 describe('POST /requestRefund', () => {
   test('it should refund the specified course and return the updated user object', async () => {
     const res = await request(app).post('/API/Users/requestRefund').send({
@@ -503,12 +517,14 @@ describe('POST /requestRefund', () => {
     expect(res.body.done).toHaveProperty('Username', 'testUser');
   });
 });
+  ```
   
 </details>
 
 <details>
   <summary>Marking a user as finished subtitle</summary>
   
+  ```
 describe('POST /userFinishSubtitle', () => {
   test('it should store data about the user finishing the specified subtitle and return the updated user object', async () => {
     const res = await request(app).post('/API/Users/userFinishSubtitle').send({
@@ -521,12 +537,14 @@ describe('POST /userFinishSubtitle', () => {
     expect(res.body.done).toHaveProperty('Username', 'testUser');
   });
 });
+  ```
   
 </details>
 
 <details>
   <summary>Signing a user up for a course</summary>
   
+  ```
 describe('POST /addCourseToUser', () => {
   test('it should sign the user up for the specified course and return a success message', async () => {
     const res = await request(app).post('/API/Users/addCourseToUser').send({
@@ -539,12 +557,14 @@ describe('POST /addCourseToUser', () => {
     expect(res.body).toEqual({ done: 'Done' });
   });
 });
+  ```
   
 </details>
 
 <details>
   <summary>Issue a refund for a user</summary>
   
+  ```
 describe('POST /issueRefund', () => {
   test('it should add money to the user's wallet and return a success message', async () => {
     const res = await request(app).post('/API/Users/issueRefund').send({
@@ -555,12 +575,14 @@ describe('POST /issueRefund', () => {
     expect(res.body).toEqual({ done: 'Done' });
   });
 });
-
+```
+  
 </details>
 
 <details>
   <summary>Admin creating a user</summary>
   
+  ```
 describe('POST /createUserByAdmin', () => {
   test('it should create a new user and return the user object', async () => {
     const res = await request(app).post('/API/Users/createUserByAdmin').send({
@@ -576,12 +598,14 @@ describe('POST /createUserByAdmin', () => {
     expect(res.body).toHaveProperty('UserType', 'Student');
   });
 });
-
+```
+  
 </details>
 
 <details>
   <summary>Signup a user</summary>
   
+  ```
 describe('POST /createUserByAdmin', () => {
   test('it should create a new user and return the user object', async () => {
     const res = await request(app).post('/API/Users/createUserByAdmin').send({
@@ -597,12 +621,14 @@ describe('POST /createUserByAdmin', () => {
     expect(res.body).toHaveProperty('UserType', 'Student');
   });
 });
-
+```
+  
 </details>
 
 <details>
   <summary>Rate a course</summary>
   
+  ```
 describe('POST /rateCourse', () => {
   test('it should rate the specified course and return the updated course object', async () => {
     const res = await request(app).post('/API/Courses/rateCourse').send({
@@ -614,12 +640,14 @@ describe('POST /rateCourse', () => {
     expect(res.body).toHaveProperty('Rating', 4);
   });
 });
+  ```
 
 </details>
 
 <details>
   <summary>Create a course</summary>
   
+  ```
 describe('POST /createCourse', () => {
   test('it should create a new course and return the course object', async () => {
     const res = await request(app).post('/API/Courses/createCourse').send({
@@ -645,12 +673,14 @@ describe('POST /createCourse', () => {
     expect(res.body).toHaveProperty('Description', 'This is a test course.');
   });
 });
+  ```
   
 </details>
 
 <details>
   <summary>Get a currency</summary>
   
+  ```
 describe('GET /getCurrency', () => {
   test('it should return the rate for converting dollars to the specified currency', async () => {
     const res = await request(app).get('/API/Courses/getCurrency').query({
@@ -661,12 +691,14 @@ describe('GET /getCurrency', () => {
     expect(res.body).toHaveProperty('rate');
   });
 });
+  ```
   
 </details>
 
 <details>
   <summary>Get all courses</summary>
   
+  ```
 describe('GET /getCourses', () => {
   test('it should return all courses', async () => {
     const res = await request(app).get('/API/Courses/getCourses');
@@ -674,12 +706,14 @@ describe('GET /getCourses', () => {
     expect(res.body).toBeInstanceOf(Array);
   });
 });
+  ```
   
 </details>
 
 <details>
   <summary>Searching for a course</summary>
   
+  ```
 describe('POST /search', () => {
   test('it should search for courses based on the provided query and return the matching courses', async () => {
     const res = await request(app).post('/API/Courses/search').send({
@@ -689,12 +723,14 @@ describe('POST /search', () => {
     expect(res.body).toBeInstanceOf(Array);
   });
 });
+  ```
   
 </details>
 
 <details>
   <summary>Get a course by ID</summary>
   
+  ```
 describe('GET /getCourseById', () => {
   test('it should return the course with the specified ID', async () => {
     const res = await request(app).get('/API/Courses/getCourseById').query({
@@ -704,12 +740,14 @@ describe('GET /getCourseById', () => {
     expect(res.body).toHaveProperty('id', 'testCourse');
   });
 });
+  ```
   
 </details>
 
 <details>
   <summary>Get a course by Name</summary>
   
+  ```
 describe('GET /getCourseByName', () => {
   test('it should return the course with the specified name', async () => {
     const res = await request(app).get('/API/Courses/getCourseByName').query({
@@ -719,12 +757,14 @@ describe('GET /getCourseByName', () => {
     expect(res.body).toHaveProperty('Name', 'testTitle');
   });
 });
+  ```
   
 </details>
 
 <details>
   <summary>Get a subtitle by index and course ID</summary>
   
+  ```
 describe('GET /getSubtitleByIndexAndCourseID', () => {
   test('it should return the specified subtitle for the specified course', async () => {
     const res = await request(app).get('/API/Courses/getSubtitleByIndexAndCourseID').query({
@@ -735,12 +775,14 @@ describe('GET /getSubtitleByIndexAndCourseID', () => {
     expect(res.body).toHaveProperty('Index', 1);
   });
 });
+  ```
   
 </details>
 
 <details>
   <summary>Get reviews of a course by ID</summary>
   
+  ```
 describe('GET /getCourseReviewsById', () => {
   it('should return an array of course reviews for the specified course id', () => {
     // Make a GET request to the API with a course id
@@ -761,12 +803,14 @@ describe('GET /getCourseReviewsById', () => {
     expect(res.statusCode).toBe(400);
   });
 });
+  ```
   
 </details>
 
 <details>
   <summary>Get a list of countries</summary>
   
+  ```
 describe('GET /getCountries', () => {
   it('should return an array of countries', () => {
     // Make a GET request to the API
@@ -779,12 +823,14 @@ describe('GET /getCountries', () => {
     expect(Array.isArray(res.body)).toBe(true);
   });
 });
+  ```
   
 </details>
 
 <details>
   <summary>Search as an instructor in your own courses</summary>
   
+  ```
 describe('GET /searchInstructor', () => {
   it('should return an array of courses matching the search criteria', () => {
     // Make a GET request to the API with instructor and search parameters
@@ -805,12 +851,14 @@ describe('GET /searchInstructor', () => {
     expect(res.statusCode).toBe(400);
   });
 });
+  ```
   
 </details>
 
 <details>
   <summary>Filter courses by subject as an instructor</summary>
   
+  ```
 describe('GET /filterCoursesBySubjectInstructor', () => {
   it('should return an array of courses matching the subject and instructor criteria', () => {
     // Make a GET request to the API with instructor and subject parameters
@@ -831,11 +879,14 @@ describe('GET /filterCoursesBySubjectInstructor', () => {
     expect(res.statusCode).toBe(400);
   });
 });  
+  ```
+  
 </details>
 
 <details>
   <summary>Filter courses by price as an instructor</summary>
   
+  ```
 describe('GET /filterCoursesByPriceInstructor', () => {
   it('should return an array of courses matching the price and instructor criteria', () => {
     // Make a GET request to the API with instructor and price parameters
@@ -856,13 +907,14 @@ describe('GET /filterCoursesByPriceInstructor', () => {
     expect(res.statusCode).toBe(400);
   });
 });
-
+```
   
 </details>
 
 <details>
   <summary>Filter courses by price as a user</summary>
   
+  ```
 describe('GET /filterCoursesByPrice', () => {
   it('should return an array of courses matching the price criteria', () => {
     // Make a GET request to the API with a price query parameter
@@ -883,7 +935,7 @@ describe('GET /filterCoursesByPrice', () => {
     expect(res.statusCode).toBe(400);
   });
 });
-
+  ```
   
 </details>
 
