@@ -284,23 +284,51 @@ Please visit the following link for the full API references documentation(Prefer
 
 ## Tests :pencil2:	
 
-Below is an example on how to test a GET request:
-```
-describe("GET getCoursesInstructor/:query", () => {
-    test("Get courses of instructor by ID", (done) => {
-      request(app)
-        .get("/api/users/getCoursesInstructor/63a21cbdd7dcdba272cadbb6")
-        .expect(200)
-        .expect((res) => {
-          res.body.Username = "testingituser";
-        })
-        .end((err, res) => {
-          if (err) return done(err);
-          return done();
-        });
+<details>
+  <summary>Getting courses of an instructor</summary>
+  
+  ```
+  describe("GET getCoursesInstructor/:query", () => {
+      test("Get courses of instructor by ID", (done) => {
+        request(app)
+          .get("/api/users/getCoursesInstructor/63a21cbdd7dcdba272cadbb6")
+          .expect(200)
+          .expect((res) => {
+            res.body[0].Username = "testingituser";
+          })
+          .end((err, res) => {
+            if (err) return done(err);
+            return done();
+          });
+      });
     });
-  });
-```
+  ```  
+  
+</details>
+
+<details>
+  <summary>Getting an instructor by ID</summary>
+  
+    ```
+    describe("GET getInstructorByID/:query", () => {
+        test("Get an instructor by ID", (done) => {
+          request(app)
+            .get("/api/users/getInstructorByID/63a21cbdd7dcdba272cadbb6")
+            .expect(200)
+            .expect((res) => {
+              res.body.Username = "testingituser";
+            })
+            .end((err, res) => {
+              if (err) return done(err);
+              return done();
+            });
+        });
+      });
+    ```
+
+  
+</details>
+
 
 
 
