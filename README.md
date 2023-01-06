@@ -309,6 +309,7 @@ Please visit the following link for the full API references documentation(Prefer
 <details>
   <summary>Getting an instructor by ID</summary>
   
+    ```
     describe("GET getInstructorByID/:query", () => {
         test("Get an instructor by ID", (done) => {
           request(app)
@@ -323,6 +324,7 @@ Please visit the following link for the full API references documentation(Prefer
             });
         });
       });
+  ```
 
   
 </details>
@@ -330,6 +332,7 @@ Please visit the following link for the full API references documentation(Prefer
 <details>
   <summary>Rating an instructor</summary>
   
+    ```
     describe('POST /rateInstructor', () => {
   test('it should rate the instructor and return the updated user object', async () => {
     const res = await request(app).post('/API/Users/rateInstructor').send({
@@ -341,8 +344,7 @@ Please visit the following link for the full API references documentation(Prefer
     expect(res.body).toHaveProperty('Rating', 5);
   });
 });
-
-
+    ```
   
 </details>
 
