@@ -309,7 +309,6 @@ Please visit the following link for the full API references documentation(Prefer
 <details>
   <summary>Getting an instructor by ID</summary>
   
-    ```
     describe("GET getInstructorByID/:query", () => {
         test("Get an instructor by ID", (done) => {
           request(app)
@@ -324,7 +323,6 @@ Please visit the following link for the full API references documentation(Prefer
             });
         });
       });
-    ```
 
   
 </details>
