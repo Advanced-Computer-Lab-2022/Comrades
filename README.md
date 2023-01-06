@@ -304,9 +304,6 @@ describe("GET getCoursesInstructor/:query", () => {
   });
 ```
 
-## How to use? :clapper:	
-
-
 
 
 ## Contributing :handshake:	
