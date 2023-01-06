@@ -311,6 +311,12 @@ Contributions are always welcomed, make sure to reach out for us by email: omars
 
 ## Credits :moneybag:	
 
+
+
+ - [Mongoose Documentation](https://mongoosejs.com/docs/)
+ - [Express Documentation](https://expressjs.com/en/4x/api.html)
+ - [React Documentation](https://reactjs.org/tutorial/tutorial.html)
+ - [NodeJS Documentation](https://nodejs.org/en/docs/)
  - [Net Ninja MERN Stack Course](https://www.youtube.com/watch?v=98BzS5Oz5E4&list=PL4cUxeGkcC9iJ_KkrkBZWZRHVwnzLIoUE)
  - [Net Ninja Auth Course](https://www.youtube.com/watch?v=SnoAwLP1a-0&list=PL4cUxeGkcC9iqqESP8335DA5cRFp8loyp)
 
