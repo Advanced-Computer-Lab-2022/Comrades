@@ -207,7 +207,7 @@ const getReviewsInstructor = async (req, res) => {
 
 //change email
 
-const changeEmail = async (req, res) => {
+const changeEmail = async (req, res) => {}
   let query = JSON.parse(req.params.query);
   let doc = await User.findOneAndUpdate(
     { Username: query.User },
@@ -216,7 +216,6 @@ const changeEmail = async (req, res) => {
       new: true
     }
   )
-};
 
 
 const changeBio = async (req, res) => {
