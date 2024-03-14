@@ -946,7 +946,7 @@ describe('GET /filterCoursesByPrice', () => {
 
 ## Contributing :handshake:	
 
-Contributions are always welcomed, make sure to reach out for us by email: omarshokeir2@gmail.com
+Contributions are always welcomed, make sure to reach out for us by email: akoussy24@gmail.com
 
 
 ## Credits :moneybag:	
